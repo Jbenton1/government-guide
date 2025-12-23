@@ -8,644 +8,1091 @@
     <meta property="og:title" content="How the U.S. Government & Budget Process Works">
     <meta property="og:description" content="An interactive visual guide explaining the federal budget process, how bills become law, and why continuing resolutions happen.">
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="How the U.S. Government & Budget Process Works">
-    <meta name="twitter:description" content="An interactive visual guide to understanding federal government operations.">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .tab-active { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
-        .card-glow:hover { box-shadow: 0 0 30px rgba(59, 130, 246, 0.15); }
-        .step-connector { background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(to bottom, #0f172a, #1e293b);
+            color: #e2e8f0;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #334155;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        header h1 {
+            text-align: center;
+            font-size: 1.5rem;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        header p {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        @media (min-width: 768px) {
+            header h1 { font-size: 2rem; }
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+        
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tab-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.75rem;
+            background: #334155;
+            color: #cbd5e1;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tab-btn:hover {
+            background: #475569;
+            color: #fff;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .card {
+            background: rgba(51, 65, 85, 0.5);
+            border: 1px solid #475569;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card > p {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .branches-grid {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .branches-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+        }
+        
+        .branch-card {
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+        
+        .branch-card.legislative {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.5), rgba(30, 64, 175, 0.3));
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+        
+        .branch-card.executive {
+            background: linear-gradient(135deg, rgba(127, 29, 29, 0.5), rgba(153, 27, 27, 0.3));
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+        
+        .branch-card.judicial {
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.5), rgba(107, 33, 168, 0.3));
+            border: 1px solid rgba(168, 85, 247, 0.5);
+        }
+        
+        .branch-card .icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .branch-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .branch-card.legislative h3 { color: #93c5fd; }
+        .branch-card.executive h3 { color: #fca5a5; }
+        .branch-card.judicial h3 { color: #d8b4fe; }
+        
+        .branch-card .subtitle {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+        }
+        
+        .branch-card .description {
+            font-size: 0.875rem;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+        
+        .branch-detail {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            text-align: left;
+        }
+        
+        .branch-detail strong {
+            display: block;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .branch-detail span {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+        
+        .checks-grid {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .checks-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .check-card {
+            background: rgba(51, 65, 85, 0.3);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            border-left: 4px solid;
+        }
+        
+        .check-card.blue { border-left-color: #3b82f6; }
+        .check-card.red { border-left-color: #ef4444; }
+        .check-card.purple { border-left-color: #a855f7; }
+        .check-card.yellow { border-left-color: #eab308; }
+        
+        .check-card h4 {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .check-card.blue h4 { color: #93c5fd; }
+        .check-card.red h4 { color: #fca5a5; }
+        .check-card.purple h4 { color: #d8b4fe; }
+        .check-card.yellow h4 { color: #fde047; }
+        
+        .check-card p, .check-card li {
+            font-size: 0.875rem;
+            color: #cbd5e1;
+        }
+        
+        .check-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .check-card li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .check-card li::before {
+            content: "• ";
+            color: #64748b;
+        }
+        
+        .step-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-btn {
+            width: 2.25rem;
+            height: 2.25rem;
+            border: none;
+            border-radius: 50%;
+            background: #475569;
+            color: #cbd5e1;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .step-btn:hover {
+            background: #64748b;
+        }
+        
+        .step-btn.active {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: #fff;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        .step-detail {
+            background: rgba(71, 85, 105, 0.5);
+            border: 1px solid #64748b;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+        }
+        
+        .step-detail .icon {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .step-detail h3 {
+            text-align: center;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .step-detail .description {
+            color: #e2e8f0;
+            margin-bottom: 1rem;
+        }
+        
+        .analogy-box {
+            background: rgba(30, 58, 138, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .analogy-box p {
+            font-size: 0.875rem;
+            color: #bfdbfe;
+        }
+        
+        .warning-box {
+            background: rgba(127, 29, 29, 0.3);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+        }
+        
+        .warning-box p {
+            font-size: 0.875rem;
+            color: #fecaca;
+        }
+        
+        .step-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: #475569;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .nav-btn:hover:not(:disabled) {
+            background: #64748b;
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .step-counter {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+        
+        .flow-diagram {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            padding: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .flow-item {
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+        
+        .flow-arrow {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        
+        .flow-green { background: linear-gradient(135deg, #166534, #15803d); }
+        .flow-blue { background: linear-gradient(135deg, #1e40af, #1d4ed8); }
+        .flow-purple { background: linear-gradient(135deg, #6b21a8, #7c3aed); }
+        .flow-yellow { background: linear-gradient(135deg, #a16207, #ca8a04); }
+        .flow-red { background: linear-gradient(135deg, #b91c1c, #dc2626); }
+        .flow-emerald { background: linear-gradient(135deg, #059669, #10b981); font-weight: 600; }
+        
+        .budget-step {
+            display: flex;
+            gap: 1rem;
+            background: rgba(71, 85, 105, 0.5);
+            border: 1px solid rgba(100, 116, 139, 0.5);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .budget-step .icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+        
+        .budget-step h3 {
+            color: #93c5fd;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .budget-step .description {
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .budget-step .detail {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            font-style: italic;
+        }
+        
+        .bills-grid {
+            display: grid;
+            gap: 0.75rem;
+        }
+        
+        @media (min-width: 640px) {
+            .bills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .bills-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .bill-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            background: rgba(71, 85, 105, 0.5);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+        }
+        
+        .bill-item.highlight {
+            background: rgba(30, 58, 138, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+        
+        .bill-item .icon {
+            font-size: 1.5rem;
+        }
+        
+        .bill-item strong {
+            display: block;
+            font-size: 0.9rem;
+        }
+        
+        .bill-item.highlight strong {
+            color: #bfdbfe;
+        }
+        
+        .bill-item span {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6, #ef4444);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: -2.5rem;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .timeline-marker.blue { background: #2563eb; box-shadow: 0 0 15px rgba(37, 99, 235, 0.5); }
+        .timeline-marker.purple { background: #7c3aed; box-shadow: 0 0 15px rgba(124, 58, 237, 0.5); }
+        .timeline-marker.red { background: #dc2626; box-shadow: 0 0 15px rgba(220, 38, 38, 0.5); animation: pulse 2s infinite; }
+        .timeline-marker.green { background: #16a34a; box-shadow: 0 0 15px rgba(22, 163, 74, 0.5); }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .timeline-content {
+            background: rgba(71, 85, 105, 0.5);
+            border: 1px solid rgba(100, 116, 139, 0.5);
+            border-radius: 0.75rem;
+            padding: 1rem;
+        }
+        
+        .timeline-content.deadline {
+            background: rgba(127, 29, 29, 0.3);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+        
+        .timeline-content h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content h4.blue { color: #93c5fd; }
+        .timeline-content h4.purple { color: #c4b5fd; }
+        .timeline-content h4.red { color: #fca5a5; }
+        .timeline-content h4.green { color: #86efac; }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+        
+        .option-card {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        
+        .option-card.yellow {
+            background: rgba(161, 98, 7, 0.5);
+            border: 1px solid rgba(234, 179, 8, 0.5);
+        }
+        
+        .option-card.red {
+            background: rgba(127, 29, 29, 0.5);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+        
+        .option-card strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+        
+        .option-card.yellow strong { color: #fde047; }
+        .option-card.red strong { color: #fca5a5; }
+        
+        .option-card span {
+            font-size: 0.75rem;
+            color: #cbd5e1;
+        }
+        
+        .alert {
+            background: rgba(161, 98, 7, 0.2);
+            border: 1px solid rgba(234, 179, 8, 0.5);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-top: 2rem;
+        }
+        
+        .alert h4 {
+            color: #fde047;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .alert p {
+            color: #cbd5e1;
+        }
+        
+        .alert p strong {
+            color: #fff;
+        }
+        
+        .situation-card {
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .situation-card.blue {
+            background: rgba(30, 58, 138, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+        
+        .situation-card.red {
+            background: rgba(127, 29, 29, 0.3);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+        
+        .situation-card.purple {
+            background: rgba(88, 28, 135, 0.3);
+            border: 1px solid rgba(168, 85, 247, 0.5);
+        }
+        
+        .situation-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .situation-card.blue h3 { color: #93c5fd; }
+        .situation-card.red h3 { color: #fca5a5; }
+        .situation-card.purple h3 { color: #d8b4fe; }
+        
+        .situation-card p {
+            color: #cbd5e1;
+        }
+        
+        .situation-card strong {
+            color: #fff;
+        }
+        
+        .impact-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.5rem;
+        }
+        
+        .impact-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #cbd5e1;
+        }
+        
+        .impact-list .check { color: #4ade80; }
+        .impact-list .x { color: #f87171; }
+        
+        footer {
+            border-top: 1px solid #334155;
+            padding: 1.5rem 1rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        footer p {
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer p:last-child {
+            font-size: 0.75rem;
+        }
+        
+        .text-center { text-align: center; }
+        .text-muted { color: #94a3b8; }
+        .text-sm { font-size: 0.875rem; }
+        .mt-1 { margin-top: 0.25rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mb-3 { margin-bottom: 0.75rem; }
     </style>
 </head>
-<body class="bg-slate-900 text-white min-h-screen">
-    <div id="root"></div>
+<body>
+    <header>
+        <h1>How the U.S. Government Works</h1>
+        <p>An interactive, plain-English guide with real-world analogies</p>
+    </header>
 
-    <script type="text/babel">
-        const { useState } = React;
+    <main>
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="structure">🏛️ Structure</button>
+            <button class="tab-btn" data-tab="bill">📜 Bills → Laws</button>
+            <button class="tab-btn" data-tab="budget">💰 Budget Process</button>
+            <button class="tab-btn" data-tab="timeline">📅 Timeline</button>
+            <button class="tab-btn" data-tab="current">⚡ Current Situation</button>
+        </div>
 
-        const GovernmentExplainer = () => {
-            const [activeTab, setActiveTab] = useState('structure');
-            const [activeStep, setActiveStep] = useState(0);
-
-            const tabs = [
-                { id: 'structure', label: '🏛️ Government Structure', shortLabel: 'Structure' },
-                { id: 'bill', label: '📜 How a Bill Becomes Law', shortLabel: 'Bills' },
-                { id: 'budget', label: '💰 The Budget Process', shortLabel: 'Budget' },
-                { id: 'timeline', label: '📅 Budget Timeline', shortLabel: 'Timeline' },
-                { id: 'current', label: '⚡ Current Situation', shortLabel: 'Now' }
-            ];
-
-            const billSteps = [
-                {
-                    title: "1. The Idea",
-                    description: "Anyone can have an idea for a law—citizens, the President, interest groups, or members of Congress themselves. But only a Member of Congress can officially introduce it as a bill.",
-                    analogy: "Think of it like suggesting a new rule for your neighborhood HOA. Anyone can suggest it, but only a board member can put it on the official agenda.",
-                    icon: "💡",
-                    deathRate: null
-                },
-                {
-                    title: "2. Bill is Introduced",
-                    description: "A Representative (House) or Senator drops the bill in the 'hopper' (literally a box). It gets a number: H.R. for House bills, S. for Senate bills.",
-                    analogy: "Like submitting a formal proposal with a tracking number so everyone can reference it.",
-                    icon: "📝",
-                    deathRate: null
-                },
-                {
-                    title: "3. Sent to Committee",
-                    description: "The bill goes to a specialized committee (Armed Services, Appropriations, etc.) where subject-matter experts review it. Committee chairs have enormous power here.",
-                    analogy: "Like sending a business proposal to the relevant department. If the department head isn't interested, it sits in a drawer forever.",
-                    icon: "👥",
-                    deathRate: "~90% of bills die here, never getting a hearing"
-                },
-                {
-                    title: "4. Committee Hearing & Markup",
-                    description: "If the committee likes it, they hold hearings where experts and stakeholders testify. Then they 'mark up' the bill—debating and amending it line by line.",
-                    analogy: "Like a working group reviewing a draft proposal, making edits with red pens, arguing about every detail.",
-                    icon: "🔍",
-                    deathRate: null
-                },
-                {
-                    title: "5. Committee Vote",
-                    description: "The committee votes on whether to advance the bill. If it passes, they write a detailed report explaining the bill and their reasoning, then send it to the full chamber.",
-                    analogy: "The department approves and sends it up to the executive team with their recommendation.",
-                    icon: "✅",
-                    deathRate: null
-                },
-                {
-                    title: "6. Rules Committee (House Only)",
-                    description: "In the House, the Rules Committee decides HOW the bill will be debated: how long, what amendments allowed, etc. This is a major power chokepoint.",
-                    analogy: "Like deciding the agenda and ground rules for a big meeting before it happens.",
-                    icon: "📋",
-                    deathRate: null
-                },
-                {
-                    title: "7. Floor Debate",
-                    description: "The full House or Senate debates the bill publicly. In the House, debate time is strictly limited. In the Senate, unlimited debate allows 'filibusters'—talking a bill to death unless 60 senators vote to stop it (called 'cloture').",
-                    analogy: "The full board meeting. In one room (House), everyone gets 5 minutes max. In the other (Senate), someone can literally talk for 12 hours straight.",
-                    icon: "🎤",
-                    deathRate: null
-                },
-                {
-                    title: "8. Floor Vote",
-                    description: "The chamber votes. Simple majority wins in the House (218 of 435). The Senate needs 51 for final passage, but often needs 60 just to END debate and GET to a vote.",
-                    analogy: "Majority rules—but the Senate has a special rule where you need a supermajority just to stop talking and actually vote.",
-                    icon: "🗳️",
-                    deathRate: null
-                },
-                {
-                    title: "9. Sent to Other Chamber",
-                    description: "If it passes, it goes to the other chamber and repeats the ENTIRE process—committee, markup, floor debate, vote. The other chamber often makes significant changes.",
-                    analogy: "Like needing approval from both the board AND the shareholders—and they often want completely different things.",
-                    icon: "🔄",
-                    deathRate: "Many bills pass one chamber but die in the other"
-                },
-                {
-                    title: "10. Conference Committee",
-                    description: "If both chambers pass DIFFERENT versions, a 'conference committee' of members from both chambers meets to negotiate ONE final version that can pass both.",
-                    analogy: "Representatives from both groups sit in a room and hammer out a compromise everyone can live with.",
-                    icon: "🤝",
-                    deathRate: null
-                },
-                {
-                    title: "11. Final Vote in Both Chambers",
-                    description: "The identical, compromise bill must pass BOTH the House and Senate again. No more changes allowed—it's take it or leave it.",
-                    analogy: "Everyone has to sign off on the exact same final document. No more edits.",
-                    icon: "✍️",
-                    deathRate: null
-                },
-                {
-                    title: "12. President's Desk",
-                    description: "The President has three choices: SIGN it (becomes law immediately), VETO it (sends it back to Congress with objections), or do nothing for 10 days. If Congress is in session, doing nothing = it becomes law. If Congress has adjourned, doing nothing = 'pocket veto' (bill dies).",
-                    analogy: "The CEO either approves, rejects with reasons, or ignores it (and ignoring usually means approval, unless everyone's gone home).",
-                    icon: "🏛️",
-                    deathRate: null
-                },
-                {
-                    title: "13. Veto Override (if needed)",
-                    description: "If the President vetoes, Congress can override with a 2/3 supermajority vote in BOTH chambers. This requires 290 House votes and 67 Senate votes—extremely rare.",
-                    analogy: "If the CEO says no, the combined boards can overrule—but it takes a supermajority willing to publicly oppose the CEO.",
-                    icon: "⚖️",
-                    deathRate: "Only ~4% of all bills introduced ever become law"
-                }
-            ];
-
-            const budgetSteps = [
-                {
-                    title: "February: President's Budget Request",
-                    description: "The President submits a massive, detailed budget proposal to Congress—thousands of pages covering every agency, program, and dollar. However, this is just a 'wish list.' Congress can follow it, modify it, or ignore it entirely.",
-                    detail: "The Constitution gives Congress, not the President, the 'power of the purse.' The President proposes; Congress disposes.",
-                    icon: "📊"
-                },
-                {
-                    title: "March-April: Budget Resolution",
-                    description: "Congress is supposed to pass a 'budget resolution' setting overall spending limits—how much total for defense, how much for domestic programs, etc. This is a blueprint that guides the detailed work to come.",
-                    detail: "The budget resolution is NOT a law—the President doesn't sign it. It's an internal agreement between the House and Senate on spending targets.",
-                    icon: "📐"
-                },
-                {
-                    title: "April-September: Appropriations Process",
-                    description: "This is where the real work happens. 12 subcommittees each write their spending bills, deciding exactly how much money goes to each program, agency, and activity. Hearings, negotiations, amendments, votes—for each of the 12 bills.",
-                    detail: "Appropriations committees are considered the most powerful in Congress because they control the money.",
-                    icon: "💰"
-                },
-                {
-                    title: "October 1: Fiscal Year Deadline",
-                    description: "The new fiscal year begins. If all 12 appropriations bills aren't signed into law by midnight on September 30, the government either shuts down OR operates under a Continuing Resolution (CR) that extends last year's funding levels.",
-                    detail: "Since 1977, Congress has passed all 12 bills on time only 4 times. Operating under CRs has become the norm, not the exception.",
-                    icon: "📅"
-                },
-                {
-                    title: "Throughout the Year: Budget Execution",
-                    description: "Once funded, agencies spend the money according to what Congress appropriated. They cannot legally spend more than authorized, spend it on unauthorized purposes, or (usually) move money between accounts without approval.",
-                    detail: "This is when contracts get signed, projects move forward, and the government actually operates.",
-                    icon: "⚙️"
-                }
-            ];
-
-            return (
-                <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
-                    {/* Header */}
-                    <header className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
-                        <div className="max-w-6xl mx-auto px-4 py-4">
-                            <h1 className="text-2xl md:text-3xl font-bold text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                                How the U.S. Government Works
-                            </h1>
-                            <p className="text-slate-400 text-center text-sm md:text-base mt-1">An interactive, plain-English guide with real-world analogies</p>
+        <div id="structure" class="tab-content active">
+            <div class="card">
+                <h2>The Three Branches of Government</h2>
+                <p>The Founders split power three ways so no single person or group could become too powerful.</p>
+                
+                <div class="branches-grid">
+                    <div class="branch-card legislative">
+                        <div class="icon">🏛️</div>
+                        <h3>Legislative Branch</h3>
+                        <div class="subtitle">CONGRESS</div>
+                        <div class="description">Makes the laws and controls all federal spending</div>
+                        <div class="branch-detail">
+                            <strong>Senate</strong>
+                            <span>100 members (2 per state) • 6-year terms</span>
                         </div>
-                    </header>
-
-                    <main className="max-w-6xl mx-auto px-4 py-6">
-                        {/* Tab Navigation */}
-                        <div className="flex flex-wrap justify-center gap-2 mb-8">
-                            {tabs.map(tab => (
-                                <button
-                                    key={tab.id}
-                                    onClick={() => setActiveTab(tab.id)}
-                                    className={`px-3 md:px-5 py-2 md:py-2.5 rounded-xl font-medium transition-all duration-200 text-sm md:text-base ${
-                                        activeTab === tab.id 
-                                            ? 'tab-active text-white shadow-lg shadow-blue-500/25' 
-                                            : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
-                                    }`}
-                                >
-                                    <span className="hidden md:inline">{tab.label}</span>
-                                    <span className="md:hidden">{tab.shortLabel}</span>
-                                </button>
-                            ))}
+                        <div class="branch-detail">
+                            <strong>House of Representatives</strong>
+                            <span>435 members (by population) • 2-year terms</span>
                         </div>
-
-                        {/* Government Structure Tab */}
-                        {activeTab === 'structure' && (
-                            <div className="space-y-6">
-                                <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700">
-                                    <h2 className="text-2xl font-bold mb-2 text-center">The Three Branches of Government</h2>
-                                    <p className="text-slate-400 mb-6 text-center max-w-2xl mx-auto">
-                                        The Founders split power three ways so no single person or group could become too powerful. Each branch can check the others.
-                                    </p>
-                                    
-                                    <div className="grid md:grid-cols-3 gap-4 md:gap-6">
-                                        {/* Legislative */}
-                                        <div className="bg-gradient-to-br from-blue-900/50 to-blue-950/50 rounded-xl p-5 border border-blue-700/50 card-glow transition-all duration-300">
-                                            <div className="text-5xl text-center mb-3">🏛️</div>
-                                            <h3 className="text-xl font-bold text-center text-blue-300">Legislative Branch</h3>
-                                            <p className="text-sm text-center text-blue-200/80 mb-4">CONGRESS</p>
-                                            <p className="text-slate-300 text-sm mb-4 text-center">Makes the laws and controls all federal spending</p>
-                                            <div className="space-y-3">
-                                                <div className="bg-slate-900/50 rounded-lg p-3">
-                                                    <p className="font-semibold text-blue-200">Senate</p>
-                                                    <p className="text-xs text-slate-400">100 members (2 per state)</p>
-                                                    <p className="text-xs text-slate-400">6-year terms</p>
-                                                </div>
-                                                <div className="bg-slate-900/50 rounded-lg p-3">
-                                                    <p className="font-semibold text-blue-200">House of Representatives</p>
-                                                    <p className="text-xs text-slate-400">435 members (based on population)</p>
-                                                    <p className="text-xs text-slate-400">2-year terms</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Executive */}
-                                        <div className="bg-gradient-to-br from-red-900/50 to-red-950/50 rounded-xl p-5 border border-red-700/50 card-glow transition-all duration-300">
-                                            <div className="text-5xl text-center mb-3">🦅</div>
-                                            <h3 className="text-xl font-bold text-center text-red-300">Executive Branch</h3>
-                                            <p className="text-sm text-center text-red-200/80 mb-4">THE PRESIDENT</p>
-                                            <p className="text-slate-300 text-sm mb-4 text-center">Enforces the laws and runs the federal government</p>
-                                            <div className="space-y-3">
-                                                <div className="bg-slate-900/50 rounded-lg p-3">
-                                                    <p className="font-semibold text-red-200">President</p>
-                                                    <p className="text-xs text-slate-400">4-year term</p>
-                                                    <p className="text-xs text-slate-400">Maximum of 2 terms</p>
-                                                </div>
-                                                <div className="bg-slate-900/50 rounded-lg p-3">
-                                                    <p className="font-semibold text-red-200">Executive Departments</p>
-                                                    <p className="text-xs text-slate-400">DoD, State, Treasury, DOE, etc.</p>
-                                                    <p className="text-xs text-slate-400">Plus independent agencies</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Judicial */}
-                                        <div className="bg-gradient-to-br from-purple-900/50 to-purple-950/50 rounded-xl p-5 border border-purple-700/50 card-glow transition-all duration-300">
-                                            <div className="text-5xl text-center mb-3">⚖️</div>
-                                            <h3 className="text-xl font-bold text-center text-purple-300">Judicial Branch</h3>
-                                            <p className="text-sm text-center text-purple-200/80 mb-4">THE COURTS</p>
-                                            <p className="text-slate-300 text-sm mb-4 text-center">Interprets laws and determines constitutionality</p>
-                                            <div className="space-y-3">
-                                                <div className="bg-slate-900/50 rounded-lg p-3">
-                                                    <p className="font-semibold text-purple-200">Supreme Court</p>
-                                                    <p className="text-xs text-slate-400">9 Justices</p>
-                                                    <p className="text-xs text-slate-400">Lifetime appointments</p>
-                                                </div>
-                                                <div className="bg-slate-900/50 rounded-lg p-3">
-                                                    <p className="font-semibold text-purple-200">Federal Courts</p>
-                                                    <p className="text-xs text-slate-400">13 Courts of Appeals</p>
-                                                    <p className="text-xs text-slate-400">94 District Courts</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Checks and Balances */}
-                                <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700">
-                                    <h2 className="text-xl font-bold mb-4 text-center">Checks and Balances: Everyone Watches Everyone</h2>
-                                    <div className="grid md:grid-cols-2 gap-4">
-                                        <div className="bg-slate-700/30 rounded-xl p-4 border-l-4 border-blue-500">
-                                            <p className="font-semibold text-blue-300 mb-2">Congress Checks the President</p>
-                                            <ul className="text-slate-300 text-sm space-y-1">
-                                                <li>• Can override presidential vetoes (2/3 vote)</li>
-                                                <li>• Controls all federal spending ("power of the purse")</li>
-                                                <li>• Can impeach and remove the President</li>
-                                                <li>• Senate confirms Cabinet and judges</li>
-                                            </ul>
-                                        </div>
-                                        <div className="bg-slate-700/30 rounded-xl p-4 border-l-4 border-red-500">
-                                            <p className="font-semibold text-red-300 mb-2">President Checks Congress</p>
-                                            <ul className="text-slate-300 text-sm space-y-1">
-                                                <li>• Can veto any bill Congress passes</li>
-                                                <li>• Proposes the annual budget</li>
-                                                <li>• Enforces (or chooses not to prioritize) laws</li>
-                                                <li>• Commander-in-Chief of military</li>
-                                            </ul>
-                                        </div>
-                                        <div className="bg-slate-700/30 rounded-xl p-4 border-l-4 border-purple-500">
-                                            <p className="font-semibold text-purple-300 mb-2">Courts Check Both</p>
-                                            <ul className="text-slate-300 text-sm space-y-1">
-                                                <li>• Can declare laws unconstitutional</li>
-                                                <li>• Can strike down executive actions</li>
-                                                <li>• Interpret what laws actually mean</li>
-                                                <li>• Lifetime tenure = independence</li>
-                                            </ul>
-                                        </div>
-                                        <div className="bg-slate-700/30 rounded-xl p-4 border-l-4 border-yellow-500">
-                                            <p className="font-semibold text-yellow-300 mb-2">The "Power of the Purse" 💰</p>
-                                            <p className="text-slate-300 text-sm">
-                                                This is Congress's most powerful tool. The President cannot spend a single dollar without Congressional approval. 
-                                                This is why budget fights matter so much—it's Congress's ultimate leverage over the executive branch.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* How a Bill Becomes Law Tab */}
-                        {activeTab === 'bill' && (
-                            <div className="space-y-6">
-                                <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700">
-                                    <h2 className="text-2xl font-bold mb-2 text-center">How a Bill Becomes Law</h2>
-                                    <p className="text-slate-400 text-center mb-6">Click each step to learn more. Only about 4% of bills introduced ever become law.</p>
-                                    
-                                    {/* Step Navigator */}
-                                    <div className="flex flex-wrap justify-center gap-2 mb-6">
-                                        {billSteps.map((step, idx) => (
-                                            <button
-                                                key={idx}
-                                                onClick={() => setActiveStep(idx)}
-                                                className={`w-9 h-9 md:w-10 md:h-10 rounded-full font-bold transition-all duration-200 text-sm ${
-                                                    activeStep === idx 
-                                                        ? 'bg-gradient-to-br from-blue-500 to-purple-600 text-white scale-110 shadow-lg shadow-blue-500/30' 
-                                                        : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
-                                                }`}
-                                            >
-                                                {idx + 1}
-                                            </button>
-                                        ))}
-                                    </div>
-
-                                    {/* Active Step Detail */}
-                                    <div className="bg-slate-700/50 rounded-xl p-6 border border-slate-600">
-                                        <div className="text-5xl text-center mb-4">{billSteps[activeStep].icon}</div>
-                                        <h3 className="text-xl font-bold text-center mb-4">{billSteps[activeStep].title}</h3>
-                                        <p className="text-slate-200 mb-4 leading-relaxed">{billSteps[activeStep].description}</p>
-                                        
-                                        <div className="bg-blue-900/30 border border-blue-700/50 rounded-lg p-4 mb-4">
-                                            <p className="text-sm text-blue-200">
-                                                <span className="font-semibold">💡 Real-World Analogy:</span> {billSteps[activeStep].analogy}
-                                            </p>
-                                        </div>
-
-                                        {billSteps[activeStep].deathRate && (
-                                            <div className="bg-red-900/30 border border-red-700/50 rounded-lg p-3">
-                                                <p className="text-sm text-red-200">
-                                                    <span className="font-semibold">⚠️ Reality Check:</span> {billSteps[activeStep].deathRate}
-                                                </p>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Navigation */}
-                                    <div className="flex justify-between mt-4">
-                                        <button
-                                            onClick={() => setActiveStep(Math.max(0, activeStep - 1))}
-                                            disabled={activeStep === 0}
-                                            className="px-4 py-2 bg-slate-700 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-600 transition-colors"
-                                        >
-                                            ← Previous
-                                        </button>
-                                        <span className="text-slate-400 self-center">{activeStep + 1} of {billSteps.length}</span>
-                                        <button
-                                            onClick={() => setActiveStep(Math.min(billSteps.length - 1, activeStep + 1))}
-                                            disabled={activeStep === billSteps.length - 1}
-                                            className="px-4 py-2 bg-slate-700 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-600 transition-colors"
-                                        >
-                                            Next →
-                                        </button>
-                                    </div>
-                                </div>
-
-                                {/* Visual Flow */}
-                                <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700">
-                                    <h3 className="text-lg font-bold mb-4 text-center">The Journey at a Glance</h3>
-                                    <div className="overflow-x-auto pb-2">
-                                        <div className="flex items-center justify-start md:justify-center gap-1 md:gap-2 text-xs min-w-max px-2">
-                                            <div className="bg-gradient-to-r from-green-700 to-green-600 px-2 md:px-3 py-2 rounded-lg whitespace-nowrap">💡 Idea</div>
-                                            <span className="text-slate-500">→</span>
-                                            <div className="bg-gradient-to-r from-blue-700 to-blue-600 px-2 md:px-3 py-2 rounded-lg whitespace-nowrap">📝 Introduced</div>
-                                            <span className="text-slate-500">→</span>
-                                            <div className="bg-gradient-to-r from-blue-700 to-blue-600 px-2 md:px-3 py-2 rounded-lg whitespace-nowrap">👥 Committee</div>
-                                            <span className="text-slate-500">→</span>
-                                            <div className="bg-gradient-to-r from-blue-700 to-blue-600 px-2 md:px-3 py-2 rounded-lg whitespace-nowrap">🗳️ House Vote</div>
-                                            <span className="text-slate-500">→</span>
-                                            <div className="bg-gradient-to-r from-purple-700 to-purple-600 px-2 md:px-3 py-2 rounded-lg whitespace-nowrap">🔄 Senate</div>
-                                            <span className="text-slate-500">→</span>
-                                            <div className="bg-gradient-to-r from-yellow-700 to-yellow-600 px-2 md:px-3 py-2 rounded-lg whitespace-nowrap">🤝 Conference</div>
-                                            <span className="text-slate-500">→</span>
-                                            <div className="bg-gradient-to-r from-red-700 to-red-600 px-2 md:px-3 py-2 rounded-lg whitespace-nowrap">🏛️ President</div>
-                                            <span className="text-slate-500">→</span>
-                                            <div className="bg-gradient-to-r from-green-600 to-emerald-500 px-2 md:px-3 py-2 rounded-lg font-bold whitespace-nowrap">✅ LAW</div>
-                                        </div>
-                                    </div>
-                                    <p className="text-center text-slate-400 text-sm mt-4">
-                                        ⚠️ A bill can die at ANY of these stages. Committee chairs can simply refuse to schedule a vote, killing bills silently.
-                                    </p>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Budget Process Tab */}
-                        {activeTab === 'budget' && (
-                            <div className="space-y-6">
-                                <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700">
-                                    <h2 className="text-2xl font-bold mb-2 text-center">The Federal Budget Process</h2>
-                                    <p className="text-slate-400 text-center mb-6">Appropriations bills are how Congress exercises its constitutional "power of the purse."</p>
-                                    
-                                    <div className="space-y-4">
-                                        {budgetSteps.map((step, idx) => (
-                                            <div key={idx} className="bg-slate-700/50 rounded-xl p-5 flex gap-4 border border-slate-600/50 hover:border-slate-500/50 transition-colors">
-                                                <div className="text-4xl flex-shrink-0">{step.icon}</div>
-                                                <div className="flex-1">
-                                                    <h3 className="font-bold text-lg text-blue-200">{step.title}</h3>
-                                                    <p className="text-slate-300 mb-2">{step.description}</p>
-                                                    <p className="text-sm text-slate-400 italic">{step.detail}</p>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* The 12 Bills */}
-                                <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700">
-                                    <h3 className="text-xl font-bold mb-2 text-center">The 12 Appropriations Bills</h3>
-                                    <p className="text-slate-400 text-center mb-4 text-sm">Congress must pass all 12 each year—or use a Continuing Resolution</p>
-                                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                                        {[
-                                            { name: "Defense", icon: "🎖️", note: "DoD operations, weapons, personnel", highlight: true },
-                                            { name: "Energy & Water", icon: "⚡", note: "DOE, Army Corps of Engineers, nuclear", highlight: true },
-                                            { name: "Military Construction / VA", icon: "🏗️", note: "Military facilities, Veterans Affairs", highlight: true },
-                                            { name: "Homeland Security", icon: "🛡️", note: "CBP, ICE, TSA, FEMA, Coast Guard", highlight: false },
-                                            { name: "Labor / HHS / Education", icon: "📚", note: "Largest bill - NIH, CDC, schools", highlight: false },
-                                            { name: "Agriculture / FDA", icon: "🌾", note: "USDA, food safety, rural development", highlight: false },
-                                            { name: "Commerce / Justice / Science", icon: "🔬", note: "NASA, FBI, NOAA, federal prisons", highlight: false },
-                                            { name: "Financial Services", icon: "💵", note: "Treasury, IRS, federal courts", highlight: false },
-                                            { name: "Interior / Environment", icon: "🌲", note: "EPA, national parks, BLM", highlight: false },
-                                            { name: "State / Foreign Operations", icon: "🌍", note: "State Dept, USAID, embassies", highlight: false },
-                                            { name: "Transportation / HUD", icon: "✈️", note: "FAA, highways, housing programs", highlight: false },
-                                            { name: "Legislative Branch", icon: "🏛️", note: "Congress itself, Capitol Police", highlight: false },
-                                        ].map((bill, idx) => (
-                                            <div key={idx} className={`rounded-lg p-3 flex items-start gap-3 ${bill.highlight ? 'bg-blue-900/30 border border-blue-700/50' : 'bg-slate-700/50 border border-slate-600/30'}`}>
-                                                <span className="text-2xl">{bill.icon}</span>
-                                                <div>
-                                                    <p className={`font-semibold ${bill.highlight ? 'text-blue-200' : 'text-slate-200'}`}>{bill.name}</p>
-                                                    <p className="text-xs text-slate-400">{bill.note}</p>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <p className="text-center text-blue-400 text-sm mt-4">
-                                        💡 Blue highlighted bills are most relevant to defense and federal infrastructure
-                                    </p>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Timeline Tab */}
-                        {activeTab === 'timeline' && (
-                            <div className="space-y-6">
-                                <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700">
-                                    <h2 className="text-2xl font-bold mb-2 text-center">The Federal Budget Calendar</h2>
-                                    <p className="text-slate-400 text-center mb-6">The fiscal year runs October 1 → September 30 (not the calendar year)</p>
-                                    
-                                    <div className="relative">
-                                        {/* Timeline line */}
-                                        <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-red-500"></div>
-                                        
-                                        <div className="space-y-6 pl-14">
-                                            <div className="relative">
-                                                <div className="absolute -left-11 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold shadow-lg shadow-blue-500/30">1</div>
-                                                <div className="bg-slate-700/50 rounded-xl p-4 border border-slate-600/50">
-                                                    <p className="font-bold text-blue-300">First Monday in February</p>
-                                                    <p className="text-slate-300">President submits budget request to Congress</p>
-                                                    <p className="text-xs text-slate-400 mt-1">This is the President's "wish list" — Congress doesn't have to follow it</p>
-                                                </div>
-                                            </div>
-                                            
-                                            <div className="relative">
-                                                <div className="absolute -left-11 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold shadow-lg shadow-blue-500/30">2</div>
-                                                <div className="bg-slate-700/50 rounded-xl p-4 border border-slate-600/50">
-                                                    <p className="font-bold text-blue-300">April 15 (Target)</p>
-                                                    <p className="text-slate-300">Congress supposed to pass budget resolution</p>
-                                                    <p className="text-xs text-slate-400 mt-1">Sets overall spending caps — rarely happens on time</p>
-                                                </div>
-                                            </div>
-                                            
-                                            <div className="relative">
-                                                <div className="absolute -left-11 w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-sm font-bold shadow-lg shadow-purple-500/30">3</div>
-                                                <div className="bg-slate-700/50 rounded-xl p-4 border border-slate-600/50">
-                                                    <p className="font-bold text-purple-300">May – September</p>
-                                                    <p className="text-slate-300">Subcommittees draft, debate, and vote on 12 appropriations bills</p>
-                                                    <p className="text-xs text-slate-400 mt-1">Hearings, markups, floor votes, conference committees for each bill</p>
-                                                </div>
-                                            </div>
-                                            
-                                            <div className="relative">
-                                                <div className="absolute -left-11 w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-sm font-bold shadow-lg shadow-red-500/30 animate-pulse">!</div>
-                                                <div className="bg-red-900/30 border border-red-700/50 rounded-xl p-4">
-                                                    <p className="font-bold text-red-300">September 30 — DEADLINE ⏰</p>
-                                                    <p className="text-slate-300 mb-3">All 12 bills must be signed into law by midnight, or...</p>
-                                                    <div className="grid sm:grid-cols-2 gap-3">
-                                                        <div className="bg-yellow-900/50 rounded-lg p-3 border border-yellow-700/50">
-                                                            <p className="font-semibold text-yellow-300">Continuing Resolution (CR)</p>
-                                                            <p className="text-xs text-slate-300">Keep spending at last year's levels temporarily</p>
-                                                        </div>
-                                                        <div className="bg-red-900/50 rounded-lg p-3 border border-red-700/50">
-                                                            <p className="font-semibold text-red-300">Government Shutdown</p>
-                                                            <p className="text-xs text-slate-300">Non-essential operations stop, employees furloughed</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div className="relative">
-                                                <div className="absolute -left-11 w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-sm font-bold shadow-lg shadow-green-500/30">→</div>
-                                                <div className="bg-slate-700/50 rounded-xl p-4 border border-slate-600/50">
-                                                    <p className="font-bold text-green-300">October 1</p>
-                                                    <p className="text-slate-300">New fiscal year begins</p>
-                                                    <p className="text-xs text-slate-400 mt-1">Agencies start executing their new budgets (if they have them)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Reality Check */}
-                                    <div className="mt-8 bg-yellow-900/20 border border-yellow-700/50 rounded-xl p-5">
-                                        <h3 className="font-bold text-yellow-300 mb-2 flex items-center gap-2">
-                                            <span>⚠️</span> Reality Check
-                                        </h3>
-                                        <p className="text-slate-300">
-                                            Since 1977, Congress has passed all 12 appropriations bills on time only <span className="font-bold text-white">4 times</span>. 
-                                            The Department of Defense has started the fiscal year under a Continuing Resolution in <span className="font-bold text-white">11 of the last 12 years</span>. 
-                                            This dysfunction is now the norm, not the exception.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Current Situation Tab */}
-                        {activeTab === 'current' && (
-                            <div className="space-y-6">
-                                <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700">
-                                    <h2 className="text-2xl font-bold mb-2 text-center">Where We Are Now</h2>
-                                    <p className="text-slate-400 text-center mb-6">The current state of federal budget dysfunction</p>
-                                    
-                                    <div className="space-y-4">
-                                        <div className="bg-blue-900/30 border border-blue-700/50 rounded-xl p-5">
-                                            <h3 className="font-bold text-blue-300 text-lg mb-2">FY 2025 (Oct 2024 – Sept 2025)</h3>
-                                            <p className="text-slate-300">
-                                                Congress never passed real appropriations bills. Instead, the government operated under a 
-                                                <span className="font-semibold text-white"> full-year Continuing Resolution</span> passed in March 2025—the first time ever for the Pentagon.
-                                                This meant spending stayed at FY 2024 levels with limited adjustments.
-                                            </p>
-                                        </div>
-
-                                        <div className="bg-red-900/30 border border-red-700/50 rounded-xl p-5">
-                                            <h3 className="font-bold text-red-300 text-lg mb-2">FY 2026 (Oct 2025 – Sept 2026)</h3>
-                                            <p className="text-slate-300 mb-3">
-                                                Congress couldn't agree again. The government 
-                                                <span className="font-semibold text-white"> shut down on October 1, 2025</span> for 43 days—the longest in U.S. history.
-                                                About 900,000 federal employees were furloughed and 2 million more worked without pay.
-                                            </p>
-                                            <p className="text-slate-300">
-                                                The shutdown ended November 12, 2025 with a CR funding the government through 
-                                                <span className="font-semibold text-white"> January 30, 2026</span>.
-                                            </p>
-                                        </div>
-
-                                        <div className="bg-purple-900/30 border border-purple-700/50 rounded-xl p-5">
-                                            <h3 className="font-bold text-purple-300 text-lg mb-2">What This Means for Defense</h3>
-                                            <ul className="text-slate-300 space-y-2">
-                                                <li className="flex items-start gap-2">
-                                                    <span className="text-green-400">✓</span>
-                                                    <span>Defense is funded and operating (military is considered "essential")</span>
-                                                </li>
-                                                <li className="flex items-start gap-2">
-                                                    <span className="text-red-400">✗</span>
-                                                    <span>Cannot start new programs or increase production rates under a CR</span>
-                                                </li>
-                                                <li className="flex items-start gap-2">
-                                                    <span className="text-red-400">✗</span>
-                                                    <span>Long-term contracts and modernization efforts face uncertainty</span>
-                                                </li>
-                                                <li className="flex items-start gap-2">
-                                                    <span className="text-red-400">✗</span>
-                                                    <span>Ammunition production increases and new facility investments get delayed</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-slate-700">
-                                    <h3 className="text-xl font-bold mb-4 text-center">Why Can't They Agree?</h3>
-                                    <div className="grid md:grid-cols-2 gap-4">
-                                        <div className="bg-slate-700/50 rounded-xl p-4">
-                                            <p className="font-semibold text-slate-200 mb-2">🏛️ Structural Issues</p>
-                                            <ul className="text-slate-400 text-sm space-y-1">
-                                                <li>• Senate filibuster requires 60 votes</li>
-                                                <li>• Narrow majorities give holdouts power</li>
-                                                <li>• No real penalty for missing deadlines</li>
-                                                <li>• Using shutdowns as leverage is normalized</li>
-                                            </ul>
-                                        </div>
-                                        <div className="bg-slate-700/50 rounded-xl p-4">
-                                            <p className="font-semibold text-slate-200 mb-2">⚔️ Current Fights</p>
-                                            <ul className="text-slate-400 text-sm space-y-1">
-                                                <li>• Healthcare subsidies (ACA tax credits)</li>
-                                                <li>• Defense vs. non-defense spending levels</li>
-                                                <li>• Executive branch spending cuts (DOGE)</li>
-                                                <li>• Immigration and border enforcement</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </main>
-
-                    {/* Footer */}
-                    <footer className="border-t border-slate-800 mt-12 py-6">
-                        <div className="max-w-6xl mx-auto px-4 text-center">
-                            <p className="text-slate-500 text-sm mb-2">
-                                This is a simplified educational overview. The actual processes involve many more procedural details, rules, and exceptions.
-                            </p>
-                            <p className="text-slate-600 text-xs">
-                                Created as a public resource for understanding U.S. government operations
-                            </p>
+                    </div>
+                    
+                    <div class="branch-card executive">
+                        <div class="icon">🦅</div>
+                        <h3>Executive Branch</h3>
+                        <div class="subtitle">THE PRESIDENT</div>
+                        <div class="description">Enforces the laws and runs the federal government</div>
+                        <div class="branch-detail">
+                            <strong>President</strong>
+                            <span>4-year term • Maximum of 2 terms</span>
                         </div>
-                    </footer>
+                        <div class="branch-detail">
+                            <strong>Executive Departments</strong>
+                            <span>DoD, State, Treasury, DOE, etc.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="branch-card judicial">
+                        <div class="icon">⚖️</div>
+                        <h3>Judicial Branch</h3>
+                        <div class="subtitle">THE COURTS</div>
+                        <div class="description">Interprets laws and determines constitutionality</div>
+                        <div class="branch-detail">
+                            <strong>Supreme Court</strong>
+                            <span>9 Justices • Lifetime appointments</span>
+                        </div>
+                        <div class="branch-detail">
+                            <strong>Federal Courts</strong>
+                            <span>13 Courts of Appeals • 94 District Courts</span>
+                        </div>
+                    </div>
                 </div>
-            );
-        };
+            </div>
+            
+            <div class="card">
+                <h2>Checks and Balances</h2>
+                <p>Everyone watches everyone else</p>
+                
+                <div class="checks-grid">
+                    <div class="check-card blue">
+                        <h4>Congress Checks the President</h4>
+                        <ul>
+                            <li>Can override presidential vetoes (2/3 vote)</li>
+                            <li>Controls all federal spending ("power of the purse")</li>
+                            <li>Can impeach and remove the President</li>
+                            <li>Senate confirms Cabinet and judges</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="check-card red">
+                        <h4>President Checks Congress</h4>
+                        <ul>
+                            <li>Can veto any bill Congress passes</li>
+                            <li>Proposes the annual budget</li>
+                            <li>Enforces (or deprioritizes) laws</li>
+                            <li>Commander-in-Chief of military</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="check-card purple">
+                        <h4>Courts Check Both</h4>
+                        <ul>
+                            <li>Can declare laws unconstitutional</li>
+                            <li>Can strike down executive actions</li>
+                            <li>Interpret what laws actually mean</li>
+                            <li>Lifetime tenure = independence</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="check-card yellow">
+                        <h4>💰 The "Power of the Purse"</h4>
+                        <p>This is Congress's most powerful tool. The President cannot spend a single dollar without Congressional approval. This is why budget fights matter so much—it's Congress's ultimate leverage over the executive branch.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        ReactDOM.createRoot(document.getElementById('root')).render(<GovernmentExplainer />);
+        <div id="bill" class="tab-content">
+            <div class="card">
+                <h2>How a Bill Becomes Law</h2>
+                <p>Click each step to learn more. Only about 4% of bills introduced ever become law.</p>
+                
+                <div class="step-nav" id="stepNav"></div>
+                
+                <div class="step-detail" id="stepDetail"></div>
+                
+                <div class="step-nav-buttons">
+                    <button class="nav-btn" id="prevBtn">← Previous</button>
+                    <span class="step-counter" id="stepCounter">1 of 13</span>
+                    <button class="nav-btn" id="nextBtn">Next →</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>The Journey at a Glance</h2>
+                <div class="flow-diagram">
+                    <div class="flow-item flow-green">💡 Idea</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-item flow-blue">📝 Introduced</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-item flow-blue">👥 Committee</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-item flow-blue">🗳️ House Vote</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-item flow-purple">🔄 Senate</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-item flow-yellow">🤝 Conference</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-item flow-red">🏛️ President</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-item flow-emerald">✅ LAW</div>
+                </div>
+                <p class="text-center text-muted text-sm">⚠️ A bill can die at ANY of these stages. Committee chairs can simply refuse to schedule a vote.</p>
+            </div>
+        </div>
+
+        <div id="budget" class="tab-content">
+            <div class="card">
+                <h2>The Federal Budget Process</h2>
+                <p>Appropriations bills are how Congress exercises its constitutional "power of the purse."</p>
+                
+                <div class="budget-step">
+                    <div class="icon">📊</div>
+                    <div>
+                        <h3>February: President's Budget Request</h3>
+                        <p class="description">The President submits a massive, detailed budget proposal to Congress—thousands of pages covering every agency, program, and dollar. However, this is just a "wish list."</p>
+                        <p class="detail">The Constitution gives Congress, not the President, the "power of the purse." The President proposes; Congress disposes.</p>
+                    </div>
+                </div>
+                
+                <div class="budget-step">
+                    <div class="icon">📐</div>
+                    <div>
+                        <h3>March-April: Budget Resolution</h3>
+                        <p class="description">Congress is supposed to pass a "budget resolution" setting overall spending limits—how much for defense, how much for domestic programs, etc.</p>
+                        <p class="detail">The budget resolution is NOT a law—the President doesn't sign it. It's an internal agreement between the House and Senate.</p>
+                    </div>
+                </div>
+                
+                <div class="budget-step">
+                    <div class="icon">💰</div>
+                    <div>
+                        <h3>April-September: Appropriations Process</h3>
+                        <p class="description">This is where the real work happens. 12 subcommittees each write their spending bills, deciding exactly how much money goes to each program and agency.</p>
+                        <p class="detail">Appropriations committees are considered the most powerful in Congress because they control the money.</p>
+                    </div>
+                </div>
+                
+                <div class="budget-step">
+                    <div class="icon">📅</div>
+                    <div>
+                        <h3>October 1: Fiscal Year Deadline</h3>
+                        <p class="description">The new fiscal year begins. If all 12 appropriations bills aren't signed into law by midnight on September 30, the government either shuts down OR operates under a Continuing Resolution.</p>
+                        <p class="detail">Since 1977, Congress has passed all 12 bills on time only 4 times. CRs have become the norm.</p>
+                    </div>
+                </div>
+                
+                <div class="budget-step">
+                    <div class="icon">⚙️</div>
+                    <div>
+                        <h3>Throughout the Year: Budget Execution</h3>
+                        <p class="description">Once funded, agencies spend the money according to what Congress appropriated. They cannot legally spend more than authorized or spend it on unauthorized purposes.</p>
+                        <p class="detail">This is when contracts get signed, projects move forward, and the government actually operates.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>The 12 Appropriations Bills</h2>
+                <p>Congress must pass all 12 each year—or use a Continuing Resolution</p>
+                
+                <div class="bills-grid">
+                    <div class="bill-item highlight"><div class="icon">🎖️</div><div><strong>Defense</strong><span>DoD operations, weapons, personnel</span></div></div>
+                    <div class="bill-item highlight"><div class="icon">⚡</div><div><strong>Energy & Water</strong><span>DOE, Army Corps of Engineers, nuclear</span></div></div>
+                    <div class="bill-item highlight"><div class="icon">🏗️</div><div><strong>Military Construction / VA</strong><span>Military facilities, Veterans Affairs</span></div></div>
+                    <div class="bill-item"><div class="icon">🛡️</div><div><strong>Homeland Security</strong><span>CBP, ICE, TSA, FEMA, Coast Guard</span></div></div>
+                    <div class="bill-item"><div class="icon">📚</div><div><strong>Labor / HHS / Education</strong><span>Largest bill—NIH, CDC, schools</span></div></div>
+                    <div class="bill-item"><div class="icon">🌾</div><div><strong>Agriculture / FDA</strong><span>USDA, food safety, rural development</span></div></div>
+                    <div class="bill-item"><div class="icon">🔬</div><div><strong>Commerce / Justice / Science</strong><span>NASA, FBI, NOAA, federal prisons</span></div></div>
+                    <div class="bill-item"><div class="icon">💵</div><div><strong>Financial Services</strong><span>Treasury, IRS, federal courts</span></div></div>
+                    <div class="bill-item"><div class="icon">🌲</div><div><strong>Interior / Environment</strong><span>EPA, national parks, BLM</span></div></div>
+                    <div class="bill-item"><div class="icon">🌍</div><div><strong>State / Foreign Operations</strong><span>State Dept, USAID, embassies</span></div></div>
+                    <div class="bill-item"><div class="icon">✈️</div><div><strong>Transportation / HUD</strong><span>FAA, highways, housing programs</span></div></div>
+                    <div class="bill-item"><div class="icon">🏛️</div><div><strong>Legislative Branch</strong><span>Congress itself, Capitol Police</span></div></div>
+                </div>
+                
+                <p class="text-center text-sm mt-4" style="color: #60a5fa;">💡 Blue highlighted bills are most relevant to defense and federal infrastructure</p>
+            </div>
+        </div>
+
+        <div id="timeline" class="tab-content">
+            <div class="card">
+                <h2>The Federal Budget Calendar</h2>
+                <p>The fiscal year runs October 1 → September 30 (not the calendar year)</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker blue">1</div>
+                        <div class="timeline-content">
+                            <h4 class="blue">First Monday in February</h4>
+                            <p>President submits budget request to Congress</p>
+                            <p class="text-sm text-muted mt-1">This is the President's "wish list"—Congress doesn't have to follow it</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker blue">2</div>
+                        <div class="timeline-content">
+                            <h4 class="blue">April 15 (Target)</h4>
+                            <p>Congress supposed to pass budget resolution</p>
+                            <p class="text-sm text-muted mt-1">Sets overall spending caps—rarely happens on time</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker purple">3</div>
+                        <div class="timeline-content">
+                            <h4 class="purple">May – September</h4>
+                            <p>Subcommittees draft, debate, and vote on 12 appropriations bills</p>
+                            <p class="text-sm text-muted mt-1">Hearings, markups, floor votes, conference committees for each bill</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker red">!</div>
+                        <div class="timeline-content deadline">
+                            <h4 class="red">September 30 — DEADLINE ⏰</h4>
+                            <p class="mb-3">All 12 bills must be signed into law by midnight, or...</p>
+                            <div class="options-grid">
+                                <div class="option-card yellow">
+                                    <strong>Continuing Resolution</strong>
+                                    <span>Keep spending at last year's levels temporarily</span>
+                                </div>
+                                <div class="option-card red">
+                                    <strong>Government Shutdown</strong>
+                                    <span>Non-essential operations stop, employees furloughed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker green">→</div>
+                        <div class="timeline-content">
+                            <h4 class="green">October 1</h4>
+                            <p>New fiscal year begins</p>
+                            <p class="text-sm text-muted mt-1">Agencies start executing their new budgets (if they have them)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert">
+                    <h4>⚠️ Reality Check</h4>
+                    <p>Since 1977, Congress has passed all 12 appropriations bills on time only <strong>4 times</strong>. The Department of Defense has started the fiscal year under a Continuing Resolution in <strong>11 of the last 12 years</strong>. This dysfunction is now the norm, not the exception.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="current" class="tab-content">
+            <div class="card">
+                <h2>Where We Are Now</h2>
+                <p>The current state of federal budget dysfunction</p>
+                
+                <div class="situation-card blue">
+                    <h3>FY 2025 (Oct 2024 – Sept 2025)</h3>
+                    <p>Congress never passed real appropriations bills. Instead, the government operated under a <strong>full-year Continuing Resolution</strong> passed in March 2025—the first time ever for the Pentagon. This meant spending stayed at FY 2024 levels with limited adjustments.</p>
+                </div>
+                
+                <div class="situation-card red">
+                    <h3>FY 2026 (Oct 2025 – Sept 2026)</h3>
+                    <p class="mb-3">Congress couldn't agree again. The government <strong>shut down on October 1, 2025</strong> for 43 days—the longest in U.S. history. About 900,000 federal employees were furloughed and 2 million more worked without pay.</p>
+                    <p>The shutdown ended November 12, 2025 with a CR funding the government through <strong>January 30, 2026</strong>.</p>
+                </div>
+                
+                <div class="situation-card purple">
+                    <h3>What This Means for Defense</h3>
+                    <ul class="impact-list">
+                        <li><span class="check">✓</span> Defense is funded and operating (military is considered "essential")</li>
+                        <li><span class="x">✗</span> Cannot start new programs or increase production rates under a CR</li>
+                        <li><span class="x">✗</span> Long-term contracts and modernization efforts face uncertainty</li>
+                        <li><span class="x">✗</span> Ammunition production increases and new facility investments get delayed</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Why Can't They Agree?</h2>
+                <div class="checks-grid">
+                    <div class="check-card blue">
+                        <h4>🏛️ Structural Issues</h4>
+                        <ul>
+                            <li>Senate filibuster requires 60 votes</li>
+                            <li>Narrow majorities give holdouts power</li>
+                            <li>No real penalty for missing deadlines</li>
+                            <li>Using shutdowns as leverage is normalized</li>
+                        </ul>
+                    </div>
+                    <div class="check-card red">
+                        <h4>⚔️ Current Fights</h4>
+                        <ul>
+                            <li>Healthcare subsidies (ACA tax credits)</li>
+                            <li>Defense vs. non-defense spending levels</li>
+                            <li>Executive branch spending cuts (DOGE)</li>
+                            <li>Immigration and border enforcement</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>This is a simplified educational overview. The actual processes involve many more procedural details, rules, and exceptions.</p>
+        <p>Created as a public resource for understanding U.S. government operations</p>
+    </footer>
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.dataset.tab;
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Bill steps
+        const billSteps = [
+            { title: "1. The Idea", description: "Anyone can have an idea for a law—citizens, the President, interest groups, or members of Congress themselves. But only a Member of Congress can officially introduce it as a bill.", analogy: "Think of it like suggesting a new rule for your neighborhood HOA. Anyone can suggest it, but only a board member can put it on the official agenda.", icon: "💡", warning: null },
+            { title: "2. Bill is Introduced", description: "A Representative (House) or Senator drops the bill in the 'hopper' (literally a box). It gets a number: H.R. for House bills, S. for Senate bills.", analogy: "Like submitting a formal proposal with a tracking number so everyone can reference it.", icon: "📝", warning: null },
+            { title: "3. Sent to Committee", description: "The bill goes to a specialized committee (Armed Services, Appropriations, etc.) where subject-matter experts review it. Committee chairs have enormous power here.", analogy: "Like sending a business proposal to the relevant department. If the department head isn't interested, it sits in a drawer forever.", icon: "👥", warning: "~90% of bills die here, never getting a hearing" },
+            { title: "4. Committee Hearing & Markup", description: "If the committee likes it, they hold hearings where experts and stakeholders testify. Then they 'mark up' the bill—debating and amending it line by line.", analogy: "Like a working group reviewing a draft proposal, making edits with red pens, arguing about every detail.", icon: "🔍", warning: null },
+            { title: "5. Committee Vote", description: "The committee votes on whether to advance the bill. If it passes, they write a detailed report explaining the bill and their reasoning, then send it to the full chamber.", analogy: "The department approves and sends it up to the executive team with their recommendation.", icon: "✅", warning: null },
+            { title: "6. Rules Committee (House Only)", description: "In the House, the Rules Committee decides HOW the bill will be debated: how long, what amendments allowed, etc. This is a major power chokepoint.", analogy: "Like deciding the agenda and ground rules for a big meeting before it happens.", icon: "📋", warning: null },
+            { title: "7. Floor Debate", description: "The full House or Senate debates the bill publicly. In the House, debate time is strictly limited. In the Senate, unlimited debate allows 'filibusters'—talking a bill to death unless 60 senators vote to stop it.", analogy: "The full board meeting. In one room (House), everyone gets 5 minutes max. In the other (Senate), someone can literally talk for 12 hours straight.", icon: "🎤", warning: null },
+            { title: "8. Floor Vote", description: "The chamber votes. Simple majority wins in the House (218 of 435). The Senate needs 51 for final passage, but often needs 60 just to END debate and GET to a vote.", analogy: "Majority rules—but the Senate has a special rule where you need a supermajority just to stop talking and actually vote.", icon: "🗳️", warning: null },
+            { title: "9. Sent to Other Chamber", description: "If it passes, it goes to the other chamber and repeats the ENTIRE process—committee, markup, floor debate, vote. The other chamber often makes significant changes.", analogy: "Like needing approval from both the board AND the shareholders—and they often want completely different things.", icon: "🔄", warning: "Many bills pass one chamber but die in the other" },
+            { title: "10. Conference Committee", description: "If both chambers pass DIFFERENT versions, a 'conference committee' of members from both chambers meets to negotiate ONE final version that can pass both.", analogy: "Representatives from both groups sit in a room and hammer out a compromise everyone can live with.", icon: "🤝", warning: null },
+            { title: "11. Final Vote in Both Chambers", description: "The identical, compromise bill must pass BOTH the House and Senate again. No more changes allowed—it's take it or leave it.", analogy: "Everyone has to sign off on the exact same final document. No more edits.", icon: "✍️", warning: null },
+            { title: "12. President's Desk", description: "The President has three choices: SIGN it (becomes law immediately), VETO it (sends it back to Congress with objections), or do nothing for 10 days. If Congress is in session, doing nothing = it becomes law. If Congress has adjourned, doing nothing = 'pocket veto' (bill dies).", analogy: "The CEO either approves, rejects with reasons, or ignores it (and ignoring usually means approval, unless everyone's gone home).", icon: "🏛️", warning: null },
+            { title: "13. Veto Override (if needed)", description: "If the President vetoes, Congress can override with a 2/3 supermajority vote in BOTH chambers. This requires 290 House votes and 67 Senate votes—extremely rare.", analogy: "If the CEO says no, the combined boards can overrule—but it takes a supermajority willing to publicly oppose the CEO.", icon: "⚖️", warning: "Only ~4% of all bills introduced ever become law" }
+        ];
+        
+        let currentStep = 0;
+        
+        function renderStep() {
+            const step = billSteps[currentStep];
+            const nav = document.getElementById('stepNav');
+            const detail = document.getElementById('stepDetail');
+            
+            nav.innerHTML = billSteps.map((_, i) => 
+                '<button class="step-btn ' + (i === currentStep ? 'active' : '') + '" data-step="' + i + '">' + (i + 1) + '</button>'
+            ).join('');
+            
+            nav.querySelectorAll('.step-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentStep = parseInt(btn.dataset.step);
+                    renderStep();
+                });
+            });
+            
+            detail.innerHTML = '<div class="icon">' + step.icon + '</div>' +
+                '<h3>' + step.title + '</h3>' +
+                '<p class="description">' + step.description + '</p>' +
+                '<div class="analogy-box"><p><strong>💡 Real-World Analogy:</strong> ' + step.analogy + '</p></div>' +
+                (step.warning ? '<div class="warning-box"><p><strong>⚠️ Reality Check:</strong> ' + step.warning + '</p></div>' : '');
+            
+            document.getElementById('stepCounter').textContent = (currentStep + 1) + ' of ' + billSteps.length;
+            document.getElementById('prevBtn').disabled = currentStep === 0;
+            document.getElementById('nextBtn').disabled = currentStep === billSteps.length - 1;
+        }
+        
+        document.getElementById('prevBtn').addEventListener('click', () => { if (currentStep > 0) { currentStep--; renderStep(); } });
+        document.getElementById('nextBtn').addEventListener('click', () => { if (currentStep < billSteps.length - 1) { currentStep++; renderStep(); } });
+        
+        renderStep();
     </script>
 </body>
 </html>
