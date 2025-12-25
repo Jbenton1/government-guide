@@ -1,0 +1,2191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colors of Money | Federal Funding Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --siemens-teal: #009999;
+            --siemens-teal-light: #00b3b3;
+            --siemens-teal-dark: #007a7a;
+            --gold: #d4a574;
+            --gold-light: #e8c9a8;
+            --gold-dark: #b8956a;
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --bg-card: #1c2128;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --border-color: #30363d;
+            --border-light: #3d444d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Subtle grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 153, 153, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 153, 153, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 16px 0;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-logo {
+            width: 8px;
+            height: 32px;
+            background: linear-gradient(180deg, var(--siemens-teal), var(--gold));
+            border-radius: 4px;
+        }
+
+        .nav-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--siemens-teal-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 153, 153, 0.1);
+            border: 1px solid rgba(0, 153, 153, 0.3);
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--siemens-teal-light);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--siemens-teal);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--gold-light) 50%, var(--siemens-teal-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--siemens-teal), var(--siemens-teal-dark));
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 153, 153, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0, 153, 153, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--siemens-teal);
+            color: var(--siemens-teal-light);
+        }
+
+        .hero-visual {
+            position: absolute;
+            right: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .hero-visual svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 80px 0;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-intro {
+            margin-bottom: 32px;
+        }
+
+        .about-intro .section-title {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--siemens-teal-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-text p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .about-text p:first-of-type {
+            font-size: 19px;
+            color: var(--text-primary);
+        }
+
+        .about-text .about-cta {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        /* Why Colors Section */
+        #why-colors {
+            background: var(--bg-primary);
+        }
+
+        .colors-explainer {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .explainer-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .explainer-intro p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .explainer-intro strong {
+            color: var(--siemens-teal-light);
+        }
+
+        .three-rules {
+            margin-bottom: 60px;
+        }
+
+        .three-rules h3,
+        .colors-visual h3,
+        .why-matters h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--gold-light);
+        }
+
+        .rules-intro,
+        .visual-intro {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .rule-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .rule-card:hover {
+            border-color: var(--siemens-teal);
+            transform: translateY(-4px);
+        }
+
+        .rule-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .rule-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .rule-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .colors-visual {
+            margin-bottom: 60px;
+        }
+
+        .buckets-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .bucket {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .bucket:hover {
+            transform: translateY(-4px);
+            border-color: var(--bucket-color);
+        }
+
+        .bucket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .bucket-icon {
+            font-size: 24px;
+        }
+
+        .bucket-period {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--bucket-color);
+            background: rgba(255,255,255,0.05);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .bucket h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .bucket p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .bucket-bar {
+            height: 4px;
+            background: var(--bucket-color);
+            border-radius: 2px;
+            opacity: 0.7;
+        }
+
+        .why-matters {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .matters-content p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+
+        .matters-content ul {
+            list-style: none;
+        }
+
+        .matters-content li {
+            padding: 12px 0;
+            padding-left: 24px;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .matters-content li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20px;
+            width: 8px;
+            height: 8px;
+            background: var(--siemens-teal);
+            border-radius: 50%;
+        }
+
+        .matters-content li strong {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 900px) {
+            .buckets-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buckets-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .buckets-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--siemens-teal);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Funding Finder */
+        #finder {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .finder-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .finder-progress {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .progress-step {
+            width: 40px;
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .progress-step.active {
+            background: var(--siemens-teal);
+        }
+
+        .progress-step.completed {
+            background: var(--gold);
+        }
+
+        .finder-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 48px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .question-container {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .question-container.active {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            color: var(--siemens-teal);
+            margin-bottom: 12px;
+        }
+
+        .question-text {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            line-height: 1.3;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .option-btn:hover {
+            border-color: var(--siemens-teal);
+            background: rgba(0, 153, 153, 0.1);
+        }
+
+        .option-btn.selected {
+            border-color: var(--gold);
+            background: rgba(212, 165, 116, 0.1);
+        }
+
+        .option-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .option-content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .option-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Result Card */
+        .result-container {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-container.active {
+            display: block;
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .result-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, var(--siemens-teal), var(--gold));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .result-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--gold-light);
+        }
+
+        .result-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .result-stat {
+            text-align: center;
+            padding: 24px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+        }
+
+        .result-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--siemens-teal-light);
+            margin-bottom: 4px;
+        }
+
+        .result-stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .result-notes {
+            background: rgba(0, 153, 153, 0.1);
+            border-left: 3px solid var(--siemens-teal);
+            padding: 20px 24px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .result-notes h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--siemens-teal-light);
+            margin-bottom: 8px;
+        }
+
+        .result-notes p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .restart-btn {
+            margin-top: 32px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Reference Tabs */
+        #reference {
+            background: var(--bg-primary);
+        }
+
+        .tabs-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--siemens-teal);
+            color: var(--text-primary);
+        }
+
+        .tab-btn.active {
+            background: var(--siemens-teal);
+            border-color: var(--siemens-teal);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .ref-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .ref-header {
+            padding: 32px;
+            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .ref-header h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .ref-meta {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .ref-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ref-meta-label {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .ref-meta-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--siemens-teal-light);
+        }
+
+        .ref-body {
+            padding: 32px;
+        }
+
+        .ref-section {
+            margin-bottom: 32px;
+        }
+
+        .ref-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .ref-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin-bottom: 12px;
+        }
+
+        .ref-section p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .ref-list {
+            list-style: none;
+        }
+
+        .ref-list li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .ref-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 6px;
+            height: 6px;
+            background: var(--siemens-teal);
+            border-radius: 50%;
+        }
+
+        /* Timeline */
+        #timeline {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .timeline-wrapper {
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+
+        .timeline {
+            display: flex;
+            gap: 0;
+            min-width: max-content;
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--border-color);
+            transform: translateY(-50%);
+        }
+
+        .timeline-item {
+            flex: 0 0 220px;
+            position: relative;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--bg-tertiary);
+            border: 3px solid var(--border-light);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-dot,
+        .timeline-item.active .timeline-dot {
+            background: var(--siemens-teal);
+            border-color: var(--siemens-teal);
+            transform: scale(1.3);
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-content,
+        .timeline-item.active .timeline-content {
+            border-color: var(--siemens-teal);
+            transform: translateY(-4px);
+        }
+
+        .timeline-month {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--siemens-teal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Thresholds Table */
+        #thresholds {
+            background: var(--bg-primary);
+        }
+
+        .threshold-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .threshold-table th,
+        .threshold-table td {
+            padding: 20px 24px;
+            text-align: left;
+        }
+
+        .threshold-table thead {
+            background: var(--bg-tertiary);
+        }
+
+        .threshold-table th {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+        }
+
+        .threshold-table tbody tr {
+            border-top: 1px solid var(--border-color);
+            transition: background 0.2s ease;
+        }
+
+        .threshold-table tbody tr:hover {
+            background: rgba(0, 153, 153, 0.05);
+        }
+
+        .threshold-amount {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .threshold-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .threshold-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(0, 153, 153, 0.15);
+            color: var(--siemens-teal-light);
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0;
+        }
+
+        /* References Section */
+        #references {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .references-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .reference-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .reference-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin-bottom: 16px;
+        }
+
+        .reference-card ul {
+            list-style: none;
+        }
+
+        .reference-card li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .reference-card a {
+            color: var(--siemens-teal-light);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .reference-card a:hover {
+            color: var(--siemens-teal);
+            text-decoration: underline;
+        }
+
+        .references-note {
+            background: rgba(0, 153, 153, 0.1);
+            border-left: 3px solid var(--siemens-teal);
+            padding: 20px 24px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .references-note p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .references-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-brand h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .footer-meta {
+            text-align: right;
+        }
+
+        .footer-meta p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .footer-meta a {
+            color: var(--siemens-teal-light);
+            text-decoration: none;
+        }
+
+        .footer-meta a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .finder-card {
+                padding: 24px;
+            }
+
+            .question-text {
+                font-size: 22px;
+            }
+
+            .result-details {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs-container {
+                justify-content: flex-start;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 8px;
+            }
+
+            .tab-btn {
+                flex-shrink: 0;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-meta {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="nav-brand">
+                <div class="nav-logo"></div>
+                <span class="nav-title">Colors of Money</span>
+            </div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#why-colors">Why Colors?</a>
+                <a href="#finder">Funding Finder</a>
+                <a href="#reference">Reference</a>
+                <a href="#timeline">Budget Cycle</a>
+                <a href="#thresholds">Thresholds</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">Federal Funding Intelligence</div>
+                <h1>Colors of Money</h1>
+                <p class="hero-subtitle">Navigate DoD and USACE appropriations with confidence. Understand how federal projects get funded, from Congressional authorization to contract execution.</p>
+                <div class="hero-cta">
+                    <a href="#finder" class="btn btn-primary">
+                        <span>Find Your Funding</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#reference" class="btn btn-secondary">Explore Reference Guide</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <svg viewBox="0 0 400 400" fill="none">
+                <circle cx="200" cy="200" r="180" stroke="url(#grad1)" stroke-width="1" opacity="0.3"/>
+                <circle cx="200" cy="200" r="140" stroke="url(#grad1)" stroke-width="1" opacity="0.4"/>
+                <circle cx="200" cy="200" r="100" stroke="url(#grad1)" stroke-width="1" opacity="0.5"/>
+                <circle cx="200" cy="200" r="60" stroke="url(#grad1)" stroke-width="2" opacity="0.6"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#009999"/>
+                        <stop offset="100%" stop-color="#d4a574"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-intro">
+                    <p class="section-label">About</p>
+                    <h2 class="section-title">Jeremy Benton</h2>
+                </div>
+                <div class="about-text">
+                    <p>I spent 22 years in the military before retiring in March 2025. Now as a Federal Account Executive at Siemens Digital Industries, I help Army, Air Force, and USACE customers modernize industrial facilities, from ammunition production to water infrastructure.</p>
+                    <p>In my role, I help A&E firms, general contractors, distributors, and integrators win Army and USACE automation projects. I bring customer insight, program intelligence, and technical resources. My time in uniform gives me a deep understanding of Army vision and strategy.</p>
+                    <p>I also bring a strong portfolio of System and Control Integrators that can assist and fill requirements you may need for future proposals.</p>
+                    <p class="about-cta">I built these resources because understanding federal funding shouldn't require a decoder ring. If this helps you navigate your next project, it's done its job.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-colors">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">The Concept</p>
+                <h2 class="section-title">Why "Colors" of Money?</h2>
+                <p class="section-desc">In the private sector, budget dollars move freely between categories. Federal appropriations don't work that way.</p>
+            </div>
+
+            <div class="colors-explainer">
+                <div class="explainer-intro">
+                    <p>Congress doesn't hand the Department of Defense one big checkbook. Instead, they create <strong>separate, legally-restricted funding streams</strong>, each with its own rules for what it can buy, how long it's available, and how much can be spent.</p>
+                    <p>The term "colors of money" comes from this restriction. You can't paint a MILCON project with O&M dollars any more than you can pay for paint with Monopoly money. Wrong color = violation of federal law.</p>
+                </div>
+
+                <div class="three-rules">
+                    <h3>Three Unbreakable Rules</h3>
+                    <p class="rules-intro">Every federal dollar is bound by three legal constraints. Violating any of them triggers the Antideficiency Act, with consequences ranging from administrative action to criminal penalties.</p>
+                    <div class="rules-grid">
+                        <div class="rule-card">
+                            <div class="rule-icon">🎯</div>
+                            <h4>Purpose</h4>
+                            <p>Funds can only be used for what Congress specified. RDT&E dollars can't buy production items. O&M can't fund major construction. Each appropriation has boundaries.</p>
+                        </div>
+                        <div class="rule-card">
+                            <div class="rule-icon">⏱️</div>
+                            <h4>Time</h4>
+                            <p>Each appropriation has an obligation period: the window when funds can be committed to contracts. Miss the window, and those dollars expire. O&M gets 1 year. MILCON gets 5.</p>
+                        </div>
+                        <div class="rule-card">
+                            <div class="rule-icon">📊</div>
+                            <h4>Amount</h4>
+                            <p>Spending cannot exceed what Congress appropriated. No borrowing from next year. No creative accounting. The ceiling is the ceiling.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="colors-visual">
+                    <h3>The Five DoD Appropriations</h3>
+                    <p class="visual-intro">Think of these as five separate bank accounts. Each has its own balance, its own rules, and its own expiration date. Money cannot transfer between them without Congressional action.</p>
+                    <div class="buckets-grid">
+                        <div class="bucket" style="--bucket-color: #6366f1;">
+                            <div class="bucket-header">
+                                <span class="bucket-icon">🔬</span>
+                                <span class="bucket-period">2 Years</span>
+                            </div>
+                            <h4>RDT&E</h4>
+                            <p>Research, development, prototypes, testing</p>
+                            <div class="bucket-bar"></div>
+                        </div>
+                        <div class="bucket" style="--bucket-color: #f59e0b;">
+                            <div class="bucket-header">
+                                <span class="bucket-icon">⚙️</span>
+                                <span class="bucket-period">3 Years</span>
+                            </div>
+                            <h4>Procurement</h4>
+                            <p>Production items, weapons, vehicles, equipment</p>
+                            <div class="bucket-bar"></div>
+                        </div>
+                        <div class="bucket" style="--bucket-color: #10b981;">
+                            <div class="bucket-header">
+                                <span class="bucket-icon">📋</span>
+                                <span class="bucket-period">1 Year</span>
+                            </div>
+                            <h4>O&M</h4>
+                            <p>Operations, maintenance, services, minor repairs</p>
+                            <div class="bucket-bar"></div>
+                        </div>
+                        <div class="bucket" style="--bucket-color: #ec4899;">
+                            <div class="bucket-header">
+                                <span class="bucket-icon">🏗️</span>
+                                <span class="bucket-period">5 Years</span>
+                            </div>
+                            <h4>MILCON</h4>
+                            <p>Major construction, facilities, infrastructure</p>
+                            <div class="bucket-bar"></div>
+                        </div>
+                        <div class="bucket" style="--bucket-color: #8b5cf6;">
+                            <div class="bucket-header">
+                                <span class="bucket-icon">👤</span>
+                                <span class="bucket-period">1 Year</span>
+                            </div>
+                            <h4>MILPERS</h4>
+                            <p>Military pay, allowances, personnel costs</p>
+                            <div class="bucket-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="why-matters">
+                    <h3>Why This Matters For Your Project</h3>
+                    <div class="matters-content">
+                        <p>Understanding which color funds your project tells you:</p>
+                        <ul>
+                            <li><strong>Timeline expectations:</strong> A MILCON project takes 5-7 years from requirement to completion. An O&M service contract can move in months.</li>
+                            <li><strong>Who controls the money:</strong> Different appropriations flow through different program managers and contracting offices.</li>
+                            <li><strong>When to engage:</strong> Specifications for MILCON projects are written during the design phase, funded 1-2 years before construction dollars arrive.</li>
+                            <li><strong>What's at risk:</strong> Under a Continuing Resolution, new MILCON projects can't start. Understanding the budget cycle helps you anticipate delays.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="finder">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Interactive Tool</p>
+                <h2 class="section-title">Funding Finder</h2>
+                <p class="section-desc">Answer a few questions to identify the likely appropriation type for your project.</p>
+            </div>
+
+            <div class="finder-container">
+                <div class="finder-progress">
+                    <div class="progress-step active" data-step="1"></div>
+                    <div class="progress-step" data-step="2"></div>
+                    <div class="progress-step" data-step="3"></div>
+                    <div class="progress-step" data-step="4"></div>
+                </div>
+
+                <div class="finder-card">
+                    <!-- Question 1 -->
+                    <div class="question-container active" data-question="1">
+                        <span class="question-number">Question 01 of 04</span>
+                        <h3 class="question-text">What type of work is this?</h3>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="construction" data-next="2">
+                                <div class="option-icon">🏗️</div>
+                                <div class="option-content">
+                                    <h4>Construction or Facilities</h4>
+                                    <p>New buildings, renovations, infrastructure</p>
+                                </div>
+                            </button>
+                            <button class="option-btn" data-value="equipment" data-next="3">
+                                <div class="option-icon">⚙️</div>
+                                <div class="option-content">
+                                    <h4>Equipment or Systems</h4>
+                                    <p>Production items, automation, vehicles, weapons</p>
+                                </div>
+                            </button>
+                            <button class="option-btn" data-value="research" data-next="4">
+                                <div class="option-icon">🔬</div>
+                                <div class="option-content">
+                                    <h4>Research & Development</h4>
+                                    <p>Prototypes, testing, technology development</p>
+                                </div>
+                            </button>
+                            <button class="option-btn" data-value="services" data-next="result-om">
+                                <div class="option-icon">📋</div>
+                                <div class="option-content">
+                                    <h4>Services & Operations</h4>
+                                    <p>Maintenance, training, professional services</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 2: Construction -->
+                    <div class="question-container" data-question="2">
+                        <span class="question-number">Question 02 of 04</span>
+                        <h3 class="question-text">What's the estimated project cost?</h3>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="under750k" data-next="result-om">
+                                <div class="option-icon">💵</div>
+                                <div class="option-content">
+                                    <h4>Under $750,000</h4>
+                                    <p>Minor construction using O&M funds</p>
+                                </div>
+                            </button>
+                            <button class="option-btn" data-value="750k-9m" data-next="result-ummc">
+                                <div class="option-icon">💰</div>
+                                <div class="option-content">
+                                    <h4>$750,000 to $9 million</h4>
+                                    <p>Unspecified Minor MILCON range</p>
+                                </div>
+                            </button>
+                            <button class="option-btn" data-value="over9m" data-next="result-milcon">
+                                <div class="option-icon">🏦</div>
+                                <div class="option-content">
+                                    <h4>Over $9 million</h4>
+                                    <p>Major MILCON requiring Congressional authorization</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 3: Equipment -->
+                    <div class="question-container" data-question="3">
+                        <span class="question-number">Question 02 of 04</span>
+                        <h3 class="question-text">Is this equipment permanently installed in a facility?</h3>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="installed" data-next="2">
+                                <div class="option-icon">🔧</div>
+                                <div class="option-content">
+                                    <h4>Yes, permanently installed</h4>
+                                    <p>Building automation, integrated controls, fixed systems</p>
+                                </div>
+                            </button>
+                            <button class="option-btn" data-value="portable" data-next="3b">
+                                <div class="option-icon">📦</div>
+                                <div class="option-content">
+                                    <h4>No, portable or relocatable</h4>
+                                    <p>Can be moved between locations</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 3b: Equipment Cost -->
+                    <div class="question-container" data-question="3b">
+                        <span class="question-number">Question 03 of 04</span>
+                        <h3 class="question-text">What's the unit cost of the equipment?</h3>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="under250k" data-next="result-om">
+                                <div class="option-icon">💵</div>
+                                <div class="option-content">
+                                    <h4>Under $250,000 per unit</h4>
+                                    <p>Typically funded through O&M</p>
+                                </div>
+                            </button>
+                            <button class="option-btn" data-value="over250k" data-next="result-proc">
+                                <div class="option-icon">💰</div>
+                                <div class="option-content">
+                                    <h4>$250,000+ per unit</h4>
+                                    <p>Typically funded through Procurement</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 4: R&D -->
+                    <div class="question-container" data-question="4">
+                        <span class="question-number">Question 02 of 04</span>
+                        <h3 class="question-text">What stage is this R&D effort?</h3>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="basic" data-next="result-rdte-st">
+                                <div class="option-icon">🧪</div>
+                                <div class="option-content">
+                                    <h4>Basic or Applied Research</h4>
+                                    <p>6.1-6.3 Science & Technology</p>
+                                </div>
+                            </button>
+                            <button class="option-btn" data-value="advanced" data-next="result-rdte">
+                                <div class="option-icon">🚀</div>
+                                <div class="option-content">
+                                    <h4>System Development & Prototyping</h4>
+                                    <p>6.4-6.7 Development programs</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="result-container" data-result="result-om">
+                        <div class="result-header">
+                            <div class="result-icon">📋</div>
+                            <h3 class="result-title">Operations & Maintenance (O&M)</h3>
+                            <p class="result-subtitle">1-Year Obligation Period</p>
+                        </div>
+                        <div class="result-details">
+                            <div class="result-stat">
+                                <div class="result-stat-value">1 Year</div>
+                                <div class="result-stat-label">Obligation Period</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-value">$337.9B</div>
+                                <div class="result-stat-label">FY25 Request</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-value">40%</div>
+                                <div class="result-stat-label">of DoD Budget</div>
+                            </div>
+                        </div>
+                        <div class="result-notes">
+                            <h4>Key Considerations</h4>
+                            <p>O&M funds day-to-day operations, services, and minor construction under $1M. Includes FSRM for facility repairs. This has the shortest obligation window and must be obligated within the fiscal year. Works well for services contracts and equipment under $250K/unit.</p>
+                        </div>
+                        <button class="btn btn-secondary restart-btn" onclick="restartFinder()">Start Over</button>
+                    </div>
+
+                    <div class="result-container" data-result="result-ummc">
+                        <div class="result-header">
+                            <div class="result-icon">🏗️</div>
+                            <h3 class="result-title">Unspecified Minor MILCON</h3>
+                            <p class="result-subtitle">5-Year Obligation Period</p>
+                        </div>
+                        <div class="result-details">
+                            <div class="result-stat">
+                                <div class="result-stat-value">5 Years</div>
+                                <div class="result-stat-label">Obligation Period</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-value">$750K-$9M</div>
+                                <div class="result-stat-label">Project Range</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-value">Secretary</div>
+                                <div class="result-stat-label">Approval Required</div>
+                            </div>
+                        </div>
+                        <div class="result-notes">
+                            <h4>Key Considerations</h4>
+                            <p>Projects $750K-$4M require Secretary approval. Projects over $4M also require Congressional notification (14-day wait). Faster than full MILCON but still requires advance planning. Indo-Pacific projects have special authority up to $30M.</p>
+                        </div>
+                        <button class="btn btn-secondary restart-btn" onclick="restartFinder()">Start Over</button>
+                    </div>
+
+                    <div class="result-container" data-result="result-milcon">
+                        <div class="result-header">
+                            <div class="result-icon">🏛️</div>
+                            <h3 class="result-title">Military Construction (MILCON)</h3>
+                            <p class="result-subtitle">5-Year Obligation Period</p>
+                        </div>
+                        <div class="result-details">
+                            <div class="result-stat">
+                                <div class="result-stat-value">5 Years</div>
+                                <div class="result-stat-label">Obligation Period</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-value">$17.5B</div>
+                                <div class="result-stat-label">FY25 Budget</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-value">5-7 Years</div>
+                                <div class="result-stat-label">Typical Timeline</div>
+                            </div>
+                        </div>
+                        <div class="result-notes">
+                            <h4>Key Considerations</h4>
+                            <p>Major MILCON requires specific Congressional authorization AND appropriation. That's a two-step process. Plan for 5-7 years from requirement identification to construction completion. Enacted separately from Defense Appropriations Act. Design work (P&D) occurs 12-24 months before construction funding.</p>
+                        </div>
+                        <button class="btn btn-secondary restart-btn" onclick="restartFinder()">Start Over</button>
+                    </div>
+
+                    <div class="result-container" data-result="result-proc">
+                        <div class="result-header">
+                            <div class="result-icon">⚙️</div>
+                            <h3 class="result-title">Procurement</h3>
+                            <p class="result-subtitle">3-Year Obligation Period</p>
+                        </div>
+                        <div class="result-details">
+                            <div class="result-stat">
+                                <div class="result-stat-value">3 Years</div>
+                                <div class="result-stat-label">Obligation Period</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-value">$167.5B</div>
+                                <div class="result-stat-label">FY25 Request</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-value">$250K+</div>
+                                <div class="result-stat-label">Unit Cost Threshold</div>
+                            </div>
+                        </div>
+                        <div class="result-notes">
+                            <h4>Key Considerations</h4>
+                            <p>Requires full funding upfront. The entire cost must be appropriated before award. Includes production items, weapons systems, vehicles, and equipment over $250K/unit. Navy Shipbuilding has extended 5-year obligation period. Initial spares and production services also funded here.</p>
+                        </div>
+                        <button class="btn btn-secondary restart-btn" onclick="restartFinder()">Start Over</button>
+                    </div>
+
+                    <div class="result-container" data-result="result-rdte">
+                        <div class="result-header">
+                            <div class="result-icon">🚀</div>
+                            <h3 class="result-title">RDT&E (Development)</h3>
+                            <p class="result-subtitle">2-Year Obligation Period</p>
+                        </div>
+                        <div class="result-details">
+                            <div class="result-stat">
+                                <div class="result-stat-value">2 Years</div>
+                                <div class="result-stat-label">Obligation Period</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-value">6.4-6.7</div>
+                                <div class="result-stat-label">Budget Activities</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-value">Incremental</div>
+                                <div class="result-stat-label">Funding Allowed</div>
+                            </div>
+                        </div>
+                        <div class="result-notes">
+                            <h4>Key Considerations</h4>
+                            <p>System development and demonstration (6.5), advanced prototypes (6.4), and operational system upgrades (6.7). Unlike Procurement, RDT&E allows incremental funding. Transitions to Procurement at Milestone C for production. Software pilots use 6.8.</p>
+                        </div>
+                        <button class="btn btn-secondary restart-btn" onclick="restartFinder()">Start Over</button>
+                    </div>
+
+                    <div class="result-container" data-result="result-rdte-st">
+                        <div class="result-header">
+                            <div class="result-icon">🧪</div>
+                            <h3 class="result-title">RDT&E (Science & Technology)</h3>
+                            <p class="result-subtitle">2-Year Obligation Period</p>
+                        </div>
+                        <div class="result-details">
+                            <div class="result-stat">
+                                <div class="result-stat-value">2 Years</div>
+                                <div class="result-stat-label">Obligation Period</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-value">6.1-6.3</div>
+                                <div class="result-stat-label">Budget Activities</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-value">$21.5B</div>
+                                <div class="result-stat-label">S&T Budget</div>
+                            </div>
+                        </div>
+                        <div class="result-notes">
+                            <h4>Key Considerations</h4>
+                            <p>The "seed corn" for future capabilities. 6.1 Basic Research often flows to universities. 6.2 Applied Research develops useful materials and methods. 6.3 Advanced Technology Development matures prototypes. Pre-Milestone A work. DARPA and service labs are major performers.</p>
+                        </div>
+                        <button class="btn btn-secondary restart-btn" onclick="restartFinder()">Start Over</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reference">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Reference Guide</p>
+                <h2 class="section-title">Appropriation Deep Dive</h2>
+                <p class="section-desc">Detailed information on each appropriation category and its applications.</p>
+            </div>
+
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="rdte">RDT&E</button>
+                <button class="tab-btn" data-tab="proc">Procurement</button>
+                <button class="tab-btn" data-tab="om">O&M</button>
+                <button class="tab-btn" data-tab="milcon">MILCON</button>
+                <button class="tab-btn" data-tab="milpers">MILPERS</button>
+                <button class="tab-btn" data-tab="usace">USACE Civil Works</button>
+            </div>
+
+            <div class="tab-content active" data-tab="rdte">
+                <div class="ref-card">
+                    <div class="ref-header">
+                        <h3>Research, Development, Test & Evaluation</h3>
+                        <div class="ref-meta">
+                            <div class="ref-meta-item">
+                                <span class="ref-meta-label">Obligation Period:</span>
+                                <span class="ref-meta-value">2 Years</span>
+                            </div>
+                            <div class="ref-meta-item">
+                                <span class="ref-meta-label">FY25 Request:</span>
+                                <span class="ref-meta-value">$143.2 Billion (17%)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ref-body">
+                        <div class="ref-section">
+                            <h4>Overview</h4>
+                            <p>RDT&E funds the development of new capabilities, from basic scientific research through system testing. These funds support contractors and government laboratories working to develop equipment, materials, and software for defense applications. Unlike Procurement, RDT&E allows incremental funding.</p>
+                        </div>
+                        <div class="ref-section">
+                            <h4>Budget Activities</h4>
+                            <ul class="ref-list">
+                                <li><strong>6.1 Basic Research:</strong> Fundamental scientific study without specific applications</li>
+                                <li><strong>6.2 Applied Research:</strong> Systematic study to develop useful materials, devices, or methods</li>
+                                <li><strong>6.3 Advanced Technology Development:</strong> Prototype demonstrations and technology maturation</li>
+                                <li><strong>6.4 Advanced Component Development & Prototypes:</strong> Evaluating integrated technologies</li>
+                                <li><strong>6.5 System Development & Demonstration:</strong> Full-scale development for operational use</li>
+                                <li><strong>6.6 RDT&E Management Support:</strong> Test ranges, labs, supporting infrastructure</li>
+                                <li><strong>6.7 Operational System Development:</strong> Upgrades to fielded systems</li>
+                                <li><strong>6.8 Software & Digital Technology Pilot Programs:</strong> Agile software initiatives</li>
+                            </ul>
+                        </div>
+                        <div class="ref-section">
+                            <h4>Key Note</h4>
+                            <p><strong>Science & Technology (S&T)</strong> refers specifically to Budget Activities 6.1-6.3, representing the "seed corn" for future defense capabilities. This ~$21.5B portfolio funds breakthrough research at universities, labs, and contractors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" data-tab="proc">
+                <div class="ref-card">
+                    <div class="ref-header">
+                        <h3>Procurement</h3>
+                        <div class="ref-meta">
+                            <div class="ref-meta-item">
+                                <span class="ref-meta-label">Obligation Period:</span>
+                                <span class="ref-meta-value">3 Years (5 for Ships)</span>
+                            </div>
+                            <div class="ref-meta-item">
+                                <span class="ref-meta-label">FY25 Request:</span>
+                                <span class="ref-meta-value">$167.5 Billion (20%)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ref-body">
+                        <div class="ref-section">
+                            <h4>Overview</h4>
+                            <p>Procurement funds investment items: equipment approved for production that will be used operationally. This includes weapons systems, vehicles, aircraft, ships, ammunition, and other end items exceeding $250,000 unit cost. Initial spares and production-related services are also funded through Procurement.</p>
+                        </div>
+                        <div class="ref-section">
+                            <h4>Key Characteristics</h4>
+                            <ul class="ref-list">
+                                <li><strong>Full Funding Required:</strong> The entire cost must be appropriated upfront before contract award</li>
+                                <li><strong>Service-Specific Accounts:</strong> Aircraft Procurement Air Force, Missile Procurement Army, Shipbuilding and Conversion Navy, etc.</li>
+                                <li><strong>Extended Period for Ships:</strong> Navy Shipbuilding has a 5-year obligation period due to long construction timelines</li>
+                                <li><strong>Unit Cost Threshold:</strong> Items over $250,000 per unit typically require Procurement vs. O&M</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" data-tab="om">
+                <div class="ref-card">
+                    <div class="ref-header">
+                        <h3>Operations & Maintenance</h3>
+                        <div class="ref-meta">
+                            <div class="ref-meta-item">
+                                <span class="ref-meta-label">Obligation Period:</span>
+                                <span class="ref-meta-value">1 Year</span>
+                            </div>
+                            <div class="ref-meta-item">
+                                <span class="ref-meta-label">FY25 Request:</span>
+                                <span class="ref-meta-value">$337.9 Billion (40%)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ref-body">
+                        <div class="ref-section">
+                            <h4>Overview</h4>
+                            <p>O&M is the largest DoD appropriation, funding day-to-day operations and expenses. This covers civilian salaries, travel, training, base operations, depot maintenance, spare parts, and minor construction under $1 million.</p>
+                        </div>
+                        <div class="ref-section">
+                            <h4>FSRM Component</h4>
+                            <p><strong>Facilities Sustainment, Restoration & Modernization (FSRM)</strong> is a critical subcomponent of O&M. FSRM funds maintain existing facilities through regular maintenance, major repairs, and component replacements. FY2024 NDAA Section 2841 established new requirements for services to invest FSRM at increasing percentages of total Plant Replacement Value, reaching 4% by FY2030.</p>
+                        </div>
+                        <div class="ref-section">
+                            <h4>O&M vs. MILCON Boundary</h4>
+                            <ul class="ref-list">
+                                <li><strong>Under $1 million:</strong> Minor construction can use O&M funds</li>
+                                <li><strong>$1M - $9 million:</strong> Falls into Unspecified Minor MILCON</li>
+                                <li><strong>Over $9 million:</strong> Requires full MILCON authorization and appropriation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" data-tab="milcon">
+                <div class="ref-card">
+                    <div class="ref-header">
+                        <h3>Military Construction</h3>
+                        <div class="ref-meta">
+                            <div class="ref-meta-item">
+                                <span class="ref-meta-label">Obligation Period:</span>
+                                <span class="ref-meta-value">5 Years</span>
+                            </div>
+                            <div class="ref-meta-item">
+                                <span class="ref-meta-label">FY25 Budget:</span>
+                                <span class="ref-meta-value">$17.5 Billion (2%)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ref-body">
+                        <div class="ref-section">
+                            <h4>Overview</h4>
+                            <p>MILCON funds major construction projects: bases, facilities, schools, hospitals, and infrastructure. Unlike other appropriations which are part of the Defense Appropriations Act, MILCON is enacted separately through the Military Construction and Veterans Affairs Appropriations Act.</p>
+                        </div>
+                        <div class="ref-section">
+                            <h4>Approval Thresholds (FY2024 NDAA)</h4>
+                            <ul class="ref-list">
+                                <li><strong>Under $750,000:</strong> Can proceed without Secretary approval</li>
+                                <li><strong>$750,000 - $4 million:</strong> Requires Secretary approval (Unspecified Minor MILCON)</li>
+                                <li><strong>Over $4 million:</strong> Requires Secretary approval plus Congressional notification</li>
+                                <li><strong>Over $9 million:</strong> Requires specific Congressional authorization and appropriation</li>
+                                <li><strong>Indo-Pacific Command:</strong> Special authority allows projects up to $30 million</li>
+                            </ul>
+                        </div>
+                        <div class="ref-section">
+                            <h4>Timeline Reality</h4>
+                            <p>Major MILCON projects typically take <strong>5-7 years</strong> from requirements identification through construction completion. This includes requirements development, programming, Congressional authorization, appropriation, design, and construction phases. Design work (P&D) typically occurs 12-24 months before construction funding.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" data-tab="milpers">
+                <div class="ref-card">
+                    <div class="ref-header">
+                        <h3>Military Personnel</h3>
+                        <div class="ref-meta">
+                            <div class="ref-meta-item">
+                                <span class="ref-meta-label">Obligation Period:</span>
+                                <span class="ref-meta-value">1 Year</span>
+                            </div>
+                            <div class="ref-meta-item">
+                                <span class="ref-meta-label">FY25 Request:</span>
+                                <span class="ref-meta-value">$181.9 Billion (21%)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ref-body">
+                        <div class="ref-section">
+                            <h4>Overview</h4>
+                            <p>MILPERS funds military pay, allowances, bonuses, and personnel-related costs. This includes permanent change of station moves, subsistence, temporary lodging, and retired pay accrual.</p>
+                        </div>
+                        <div class="ref-section">
+                            <h4>Contractor Relevance</h4>
+                            <p>While MILPERS rarely directly impacts contractor work, understanding its 21% share of the DoD budget provides context for overall resource constraints. Personnel costs are relatively fixed and grow with end strength and pay raises, which can squeeze other accounts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" data-tab="usace">
+                <div class="ref-card">
+                    <div class="ref-header">
+                        <h3>USACE Civil Works</h3>
+                        <div class="ref-meta">
+                            <div class="ref-meta-item">
+                                <span class="ref-meta-label">Appropriation Act:</span>
+                                <span class="ref-meta-value">Energy & Water Development</span>
+                            </div>
+                            <div class="ref-meta-item">
+                                <span class="ref-meta-label">FY24/25 Budget:</span>
+                                <span class="ref-meta-value">$8.7 Billion</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ref-body">
+                        <div class="ref-section">
+                            <h4>Overview</h4>
+                            <p>USACE Civil Works operates under a <strong>separate appropriations structure</strong> from DoD military activities. Civil Works is funded through the Energy and Water Development Appropriations Act, not the Defense Appropriations Act.</p>
+                        </div>
+                        <div class="ref-section">
+                            <h4>The Five Civil Works Accounts</h4>
+                            <ul class="ref-list">
+                                <li><strong>Investigations:</strong> Funds feasibility studies for new water resource projects</li>
+                                <li><strong>Construction:</strong> Funds design and construction of authorized projects</li>
+                                <li><strong>Operation & Maintenance:</strong> The largest account. Covers ongoing operation of locks, dams, channels, harbors</li>
+                                <li><strong>Mississippi River & Tributaries (MR&T):</strong> Dedicated account for the Mississippi system</li>
+                                <li><strong>FUSRAP:</strong> Environmental cleanup of early atomic weapons sites</li>
+                            </ul>
+                        </div>
+                        <div class="ref-section">
+                            <h4>Authorization-Appropriation Split</h4>
+                            <p>USACE projects require both <strong>authorization</strong> (via WRDA, typically biennial) and <strong>appropriation</strong>. That's a two-step process. A project can be authorized but never funded, or funding can be delayed years after authorization. This creates planning uncertainty for A&E firms and contractors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Budget Cycle</p>
+                <h2 class="section-title">The PPBE Process</h2>
+                <p class="section-desc">How DoD translates strategy into funded programs through the annual budget cycle.</p>
+            </div>
+
+            <div class="timeline-wrapper">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-month">Jan - Mar</span>
+                            <h4 class="timeline-title">Planning Phase</h4>
+                            <p class="timeline-desc">USD Policy produces Defense Planning Guidance (DPG), translating National Defense Strategy into force development priorities.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-month">Apr - Jul</span>
+                            <h4 class="timeline-title">Programming Phase</h4>
+                            <p class="timeline-desc">Services develop Program Objective Memoranda (POMs). CAPE reviews and updates the 5-year FYDP.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-month">Aug - Dec</span>
+                            <h4 class="timeline-title">Budgeting Phase</h4>
+                            <p class="timeline-desc">Services submit Budget Estimate Submissions. Comptroller reviews. Final budget goes to OMB in December.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-month">February</span>
+                            <h4 class="timeline-title">President's Budget</h4>
+                            <p class="timeline-desc">Budget submitted to Congress. The public first sees DoD's funding priorities for the upcoming fiscal year.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-month">Mar - Sep</span>
+                            <h4 class="timeline-title">Congressional Action</h4>
+                            <p class="timeline-desc">Committees hold hearings, mark up bills. Authorization (NDAA) and Appropriations acts developed separately.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-month">October 1</span>
+                            <h4 class="timeline-title">New Fiscal Year</h4>
+                            <p class="timeline-desc">FY begins. If appropriations not enacted, Continuing Resolution (CR) provides temporary funding at prior-year levels.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-month">Ongoing</span>
+                            <h4 class="timeline-title">Execution Phase</h4>
+                            <p class="timeline-desc">Programs execute. Performance evaluated against plans. Results inform future planning cycles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="thresholds">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Quick Reference</p>
+                <h2 class="section-title">Key Thresholds</h2>
+                <p class="section-desc">The dollar amounts that determine which appropriation applies and what approvals are required.</p>
+            </div>
+
+            <table class="threshold-table">
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Significance</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="threshold-amount">$250,000</span></td>
+                        <td class="threshold-desc">Unit cost threshold for Procurement vs. O&M end items</td>
+                        <td><span class="threshold-tag">Procurement</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="threshold-amount">$750,000</span></td>
+                        <td class="threshold-desc">Secretary approval required for Unspecified Minor MILCON</td>
+                        <td><span class="threshold-tag">MILCON</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="threshold-amount">$1,000,000</span></td>
+                        <td class="threshold-desc">Typical O&M minor construction ceiling</td>
+                        <td><span class="threshold-tag">O&M</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="threshold-amount">$4,000,000</span></td>
+                        <td class="threshold-desc">Congressional notification required (14-day wait)</td>
+                        <td><span class="threshold-tag">MILCON</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="threshold-amount">$9,000,000</span></td>
+                        <td class="threshold-desc">Full MILCON authorization and appropriation required</td>
+                        <td><span class="threshold-tag">MILCON</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="threshold-amount">$30,000,000</span></td>
+                        <td class="threshold-desc">Indo-Pacific Command special minor MILCON authority</td>
+                        <td><span class="threshold-tag">INDOPACOM</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="references">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Sources</p>
+                <h2 class="section-title">References & Resources</h2>
+                <p class="section-desc">Primary sources for federal appropriations law and DoD budget guidance.</p>
+            </div>
+
+            <div class="references-grid">
+                <div class="reference-card">
+                    <h4>Legal Foundation</h4>
+                    <ul>
+                        <li><a href="https://uscode.house.gov/view.xhtml?path=/prelim@title31&edition=prelim" target="_blank">31 U.S.C. §§ 1301-1558</a>: Appropriations law, including the Antideficiency Act</li>
+                        <li><a href="https://www.gao.gov/products/gao-17-797sp" target="_blank">GAO Principles of Federal Appropriations Law (Red Book)</a>: Authoritative guidance on fiscal law</li>
+                    </ul>
+                </div>
+                <div class="reference-card">
+                    <h4>DoD Budget Guidance</h4>
+                    <ul>
+                        <li><a href="https://comptroller.defense.gov/FMR/" target="_blank">DoD Financial Management Regulation (FMR)</a>: DoD 7000.14-R, Volume 2A covers appropriations</li>
+                        <li><a href="https://comptroller.defense.gov/Budget-Materials/" target="_blank">DoD Budget Materials</a>: President's Budget justification documents (R-1, P-1, O-1, C-1, M-1 exhibits)</li>
+                        <li><a href="https://www.whitehouse.gov/omb/circulars_a11_current_year_a11_toc/" target="_blank">OMB Circular A-11</a>: Preparation, submission, and execution of the budget</li>
+                    </ul>
+                </div>
+                <div class="reference-card">
+                    <h4>MILCON & Facilities</h4>
+                    <ul>
+                        <li><a href="https://www.acq.osd.mil/eie/FIM/Library.html" target="_blank">UFC 1-200-01</a>: DoD Building Code and general building requirements</li>
+                        <li><a href="https://www.congress.gov/bill/118th-congress/house-bill/2670" target="_blank">FY2024 NDAA (P.L. 118-31)</a>: Current authorization including MILCON thresholds</li>
+                    </ul>
+                </div>
+                <div class="reference-card">
+                    <h4>USACE Civil Works</h4>
+                    <ul>
+                        <li><a href="https://www.usace.army.mil/Missions/Civil-Works/Budget/" target="_blank">USACE Civil Works Budget</a>: Annual budget justification and work plans</li>
+                        <li><a href="https://www.congress.gov/bill/117th-congress/house-bill/7776" target="_blank">WRDA 2022 (P.L. 117-263)</a>: Water Resources Development Act authorizations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="references-note">
+                <p>This guide synthesizes publicly available information for educational purposes. For specific project funding questions, consult your Contracting Officer or program office. Budget figures reflect FY2025 President's Budget Request and may differ from enacted appropriations.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Colors of Money</h3>
+                    <p>A federal funding reference by Jeremy Benton</p>
+                </div>
+                <div class="footer-meta">
+                    <p>Last updated December 2025</p>
+                    <p>Questions? <a href="https://www.linkedin.com/in/jeremymbenton" target="_blank">Connect on LinkedIn</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Funding Finder Logic
+        const answers = {};
+
+        document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const container = this.closest('.question-container');
+                const question = container.dataset.question;
+                const value = this.dataset.value;
+                const next = this.dataset.next;
+                
+                // Store answer
+                answers[question] = value;
+                
+                // Update progress
+                const currentStep = parseInt(question) || 1;
+                document.querySelectorAll('.progress-step').forEach((step, i) => {
+                    if (i < currentStep) step.classList.add('completed');
+                    if (i === currentStep) step.classList.add('active');
+                });
+                
+                // Hide current, show next
+                container.classList.remove('active');
+                
+                if (next.startsWith('result-')) {
+                    // Show result
+                    document.querySelector(`[data-result="${next}"]`).classList.add('active');
+                    // Mark all progress complete
+                    document.querySelectorAll('.progress-step').forEach(step => {
+                        step.classList.add('completed');
+                        step.classList.remove('active');
+                    });
+                } else {
+                    // Show next question
+                    document.querySelector(`[data-question="${next}"]`).classList.add('active');
+                }
+            });
+        });
+
+        function restartFinder() {
+            // Reset all
+            document.querySelectorAll('.question-container, .result-container').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelector('[data-question="1"]').classList.add('active');
+            document.querySelectorAll('.progress-step').forEach((step, i) => {
+                step.classList.remove('completed');
+                if (i === 0) step.classList.add('active');
+                else step.classList.remove('active');
+            });
+            // Clear answers
+            Object.keys(answers).forEach(key => delete answers[key]);
+        }
+
+        // Reference Tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tab = this.dataset.tab;
+                
+                // Update buttons
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update content
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelector(`.tab-content[data-tab="${tab}"]`).classList.add('active');
+            });
+        });
+
+        // Timeline hover effects
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                document.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
