@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeremy Benton | Federal Automation & Army Modernization</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --bg-card-hover: #222d42;
+            --accent-teal: #00a6a6;
+            --accent-teal-dim: rgba(0, 166, 166, 0.15);
+            --accent-gold: #d4a574;
+            --accent-gold-dim: rgba(212, 165, 116, 0.15);
+            --accent-red: #dc2626;
+            --accent-red-dim: rgba(220, 38, 38, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(0, 166, 166, 0.3);
+            --border-gold: rgba(212, 165, 116, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 166, 166, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 166, 166, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 15, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--accent-teal);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-teal);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent-teal-dim);
+            border: 1px solid var(--border-accent);
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-teal);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent-teal);
+        }
+
+        .hero h1 .highlight-gold {
+            color: var(--accent-gold);
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 540px;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.75rem;
+            background: var(--accent-teal);
+            color: var(--bg-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #00b8b8;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.75rem;
+            background: transparent;
+            border: 1px solid var(--border-accent);
+            color: var(--accent-teal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-teal-dim);
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 600;
+            color: var(--accent-teal);
+            line-height: 1;
+        }
+
+        .stat-number.gold {
+            color: var(--accent-gold);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+        }
+
+        /* Focus Areas Card */
+        .hero-visual {
+            position: relative;
+        }
+
+        .focus-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .focus-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-teal), var(--accent-gold));
+        }
+
+        .focus-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .focus-list {
+            list-style: none;
+        }
+
+        .focus-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .focus-list li:last-child {
+            border-bottom: none;
+        }
+
+        .focus-list li::before {
+            content: '→';
+            color: var(--accent-teal);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .focus-list li strong {
+            color: var(--text-primary);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-label.gold {
+            color: var(--accent-gold);
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-accent);
+            max-width: 100px;
+        }
+
+        .section-label.gold::after {
+            background: var(--border-gold);
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .section-intro {
+            max-width: 700px;
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            margin-top: 1rem;
+        }
+
+        /* Teaming Section */
+        #teaming {
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+
+        .teaming-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .teaming-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .teaming-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+        }
+
+        .teaming-card.priority {
+            border-color: var(--border-gold);
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212, 165, 116, 0.08) 100%);
+        }
+
+        .teaming-card.priority:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .teaming-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-gold-dim);
+            border-radius: 1rem;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .teaming-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .teaming-card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .teaming-details {
+            list-style: none;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .teaming-details li {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            padding: 0.375rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .teaming-details li::before {
+            content: '•';
+            color: var(--accent-teal);
+        }
+
+        .teaming-card.priority .teaming-details li::before {
+            color: var(--accent-gold);
+        }
+
+        /* About Section */
+        #about {
+            background: var(--bg-secondary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .about-content p:first-of-type::first-letter {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            float: left;
+            line-height: 1;
+            padding-right: 0.75rem;
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+
+        .credentials {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .credentials h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .credential-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .credential-item:last-child {
+            border-bottom: none;
+        }
+
+        .credential-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .credential-detail {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Resources Grid */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+        }
+
+        .resource-card.featured {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(0, 166, 166, 0.08) 100%);
+        }
+
+        .resource-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-teal-dim);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .resource-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .resource-card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .resource-arrow {
+            color: var(--accent-teal);
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover .resource-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .coming-soon {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-teal-dim);
+            border-radius: 1rem;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-teal);
+        }
+
+        /* Veteran Section */
+        #veterans {
+            background: var(--bg-secondary);
+        }
+
+        .veteran-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .veteran-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .veteran-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-gold);
+            transform: translateY(-4px);
+        }
+
+        .veteran-card .resource-icon {
+            background: var(--accent-gold-dim);
+        }
+
+        .veteran-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .veteran-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .veteran-card .coming-soon {
+            background: var(--accent-gold-dim);
+            color: var(--accent-gold);
+        }
+
+        /* Learning Section */
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .learning-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .learning-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+        }
+
+        .learning-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .learning-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* Connect Section */
+        #connect {
+            background: var(--bg-secondary);
+        }
+
+        .connect-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .connect-content p {
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .connect-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .connect-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .connect-btn:hover {
+            border-color: var(--border-accent);
+            background: var(--bg-card-hover);
+            transform: translateX(4px);
+        }
+
+        .connect-btn span:last-child {
+            color: var(--accent-teal);
+        }
+
+        .connect-form-area {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .connect-form-area h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .connect-form-area p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .teaming-interests {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .teaming-interests h4 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .interest-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .interest-tag {
+            padding: 0.5rem 1rem;
+            background: var(--accent-teal-dim);
+            border: 1px solid var(--border-accent);
+            border-radius: 2rem;
+            font-size: 0.8125rem;
+            color: var(--accent-teal);
+        }
+
+        .interest-tag.gold {
+            background: var(--accent-gold-dim);
+            border-color: var(--border-gold);
+            color: var(--accent-gold);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: var(--accent-teal);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .about-grid,
+            .connect-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .teaming-grid,
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .resource-card.featured {
+                grid-column: span 1;
+                grid-template-columns: 1fr;
+            }
+
+            .veteran-grid,
+            .learning-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">JEREMY<span>BENTON</span></a>
+            <ul class="nav-links">
+                <li><a href="#teaming">Teaming</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#veterans">Veterans</a></li>
+                <li><a href="#connect">Connect</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">Seeking Teaming Partners</div>
+                <h1>Federal Automation.<br><span class="highlight">Army Modernization.</span><br><span class="highlight-gold">Veteran Advocacy.</span></h1>
+                <p class="hero-subtitle">I help A&E firms, system integrators, and prime contractors win federal work, with a focus on Army and USACE programs. I bring total Siemens solutions to your projects: automation, controls, electrical, switchgear, and building systems. Looking for teaming partners who want to pursue OIB and DIB modernization and USACE infrastructure together.</p>
+                
+                <div class="hero-cta">
+                    <a href="#teaming" class="btn-primary">View Opportunities →</a>
+                    <a href="#connect" class="btn-secondary">Let's Talk</a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">22</div>
+                        <div class="stat-label">Years Army</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">38+</div>
+                        <div class="stat-label">USACE Districts</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number gold">OIB/DIB/USACE</div>
+                        <div class="stat-label">Modernization Focus</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="focus-card">
+                    <h3>What I Bring to the Table</h3>
+                    <ul class="focus-list">
+                        <li><strong>Customer Access:</strong> Active relationships across Army installations and growing presence across 38+ USACE districts</li>
+                        <li><strong>Program Intelligence:</strong> Insight into requirements before they hit the street</li>
+                        <li><strong>Total Siemens Solutions:</strong> Automation, controls, electrical, switchgear, building systems, and safety systems across your facility</li>
+                        <li><strong>Specification Influence:</strong> Relationships with A&E firms who write the specs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="teaming">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Active Opportunities</div>
+                <h2 class="section-title">Looking for Teaming Partners</h2>
+                <p class="section-intro">I'm actively pursuing opportunities within Army OIB and DIB modernization and USACE infrastructure programs. If you're a system integrator, A&E firm, or prime contractor in these spaces, let's talk about teaming.</p>
+            </div>
+            
+            <div class="teaming-grid">
+                <div class="teaming-card priority" style="grid-column: span 2;">
+                    <div class="teaming-badge">Who I'm Looking For</div>
+                    <h3>Ideal Teaming Partners</h3>
+                    <p>I bring customer relationships, program intelligence, and total Siemens solutions: automation, electrical, switchgear, and building systems. Looking to connect with:</p>
+                    <ul class="teaming-details" style="column-count: 2; column-gap: 2rem;">
+                        <li>System integrators with federal past performance</li>
+                        <li>A&E firms experienced in Army or USACE specifications</li>
+                        <li>Prime contractors looking to grow their federal portfolio</li>
+                        <li>Partners seeking ongoing automation expertise and support</li>
+                        <li>8(a), HUBZone, WOSB/EDWOSB, and SDVOSB businesses for collaboration</li>
+                        <li>Large primes and businesses looking to expand their federal influence</li>
+                        <li>Companies interested in co-authoring white papers and federal solicitation responses</li>
+                        <li>Partners pursuing Army innovative ideas, NEST, Defense Innovation Unit, C-UAS, and similar programs</li>
+                        <li>Partners who want to win</li>
+                    </ul>
+                </div>
+
+                <div class="teaming-card priority">
+                    <div class="teaming-badge">High Priority</div>
+                    <h3>Army OIB & DIB Modernization</h3>
+                    <p>The organic and defense industrial base is undergoing generational transformation. Munitions production, factory floor optimization, energetics handling, and advanced manufacturing are all in scope.</p>
+                    <ul class="teaming-details">
+                        <li>LAP line automation and controls</li>
+                        <li>Safety instrumented systems (SIL 3)</li>
+                        <li>SCADA and process control</li>
+                        <li>Factory floor optimization</li>
+                        <li>White papers and innovative ideas</li>
+                    </ul>
+                </div>
+
+                <div class="teaming-card priority">
+                    <div class="teaming-badge">High Priority</div>
+                    <h3>USACE Dams & Hydropower</h3>
+                    <p>Aging infrastructure across 709 dams and 75 hydropower plants. Control system modernization, gate automation, and safety upgrades are funded and moving.</p>
+                    <ul class="teaming-details">
+                        <li>Dam gate control systems</li>
+                        <li>Hydropower plant automation</li>
+                        <li>SCADA modernization</li>
+                        <li>Remote monitoring and telemetry</li>
+                        <li>Across 38+ USACE districts</li>
+                    </ul>
+                </div>
+
+                <div class="teaming-card">
+                    <h3>Water & Wastewater Treatment</h3>
+                    <p>Army installations and USACE civil works facilities need treatment plant upgrades. Process automation and compliance monitoring are key drivers.</p>
+                    <ul class="teaming-details">
+                        <li>Treatment plant controls</li>
+                        <li>Compliance monitoring systems</li>
+                        <li>Building automation integration</li>
+                        <li>Energy optimization</li>
+                    </ul>
+                </div>
+
+                <div class="teaming-card">
+                    <h3>A&E Firm Partnerships</h3>
+                    <p>If you're an A&E firm writing specs for Army or USACE projects, I can provide technical input on automation and controls to strengthen your designs.</p>
+                    <ul class="teaming-details">
+                        <li>Control system specifications</li>
+                        <li>Safety system requirements</li>
+                        <li>Network architecture design</li>
+                        <li>Vendor-neutral guidance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="section-container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <div class="section-header">
+                        <div class="section-label">Background</div>
+                        <h2 class="section-title">From Sergeant Major to Federal Industry</h2>
+                    </div>
+                    <p>Twenty-two years in the Army taught me how the government thinks and operates. As a Sergeant Major, I led across diverse operational environments, from Theater Sustainment Commands to joint and interagency missions at Naval Surface Warfare Centers. That exposure to the full lifecycle of requirements, procurement, and execution shapes how I approach federal industry today.</p>
+                    <p>Now at Siemens Digital Industries, I help industry win federal automation work. My approach is different: I work upstream with A&E firms and program offices to influence requirements before they hit the street, not downstream competing on published RFPs. That means building relationships that pay off across multiple projects, not chasing one solicitation at a time.</p>
+                    <p>The other half of what I do is paying it forward for the many who invested in my own transition. The transition from a military to civilian career can be challenging. If I can help you with yours, please reach out and let me know.</p>
+                </div>
+                
+                <div class="credentials">
+                    <h3>Credentials</h3>
+                    <div class="credential-item">
+                        <div class="credential-title">Federal Account Executive</div>
+                        <div class="credential-detail">Siemens Digital Industries</div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-title">U.S. Army Veteran</div>
+                        <div class="credential-detail">22 Years Service</div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-title">G1 Sergeant Major</div>
+                        <div class="credential-detail">Theater Sustainment Command</div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-title">Operations Sergeant Major</div>
+                        <div class="credential-detail">Naval Surface Warfare Center</div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-title">Lean Six Sigma Black Belt</div>
+                        <div class="credential-detail">Process Improvement Certified</div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-title">TS/SCI Clearance</div>
+                        <div class="credential-detail">Active</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resources">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Federal Resources</div>
+                <h2 class="section-title">Tools for Winning Federal Work</h2>
+            </div>
+            
+            <div class="resources-grid">
+                <a href="colors-of-money/" class="resource-card featured">
+                    <div>
+                        <div class="resource-icon">💰</div>
+                        <h3>Colors of Money Guide</h3>
+                        <p>Interactive guide to DoD and USACE appropriations. Understand RDT&E, Procurement, O&M, MILCON, and Civil Works funding. Includes a Funding Finder tool to identify which appropriation applies to your project.</p>
+                    </div>
+                    <div class="resource-arrow">→</div>
+                </a>
+                
+                <a href="index-original.html" class="resource-card">
+                    <div class="resource-icon">📊</div>
+                    <h3>Federal Budget Process</h3>
+                    <p>How the government plans, programs, budgets, and executes. The PPBE cycle explained for industry.</p>
+                </a>
+                
+                <a href="#" class="resource-card">
+                    <div class="resource-icon">🏗️</div>
+                    <h3>USACE District Guide</h3>
+                    <p>Organization, budgets, and project types across all 38 districts. Know your customer.</p>
+                    <span class="coming-soon">Coming Soon</span>
+                </a>
+                
+                <a href="#" class="resource-card">
+                    <div class="resource-icon">🎯</div>
+                    <h3>Army OIB/DIB Landscape</h3>
+                    <p>The modernization landscape across organic and defense industrial base. Programs, facilities, and opportunities.</p>
+                    <span class="coming-soon">Coming Soon</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="veterans">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label gold">For Veterans</div>
+                <h2 class="section-title">Resources for Your Next Mission</h2>
+                <p class="section-intro">The transition from military to civilian life is one of the hardest things you'll do. These resources are built from real experience, not theory. If you're figuring out your next chapter, you're not alone.</p>
+            </div>
+            
+            <div class="veteran-grid">
+                <a href="#" class="veteran-card">
+                    <div class="resource-icon">🎖️</div>
+                    <h3>Translating Your Experience</h3>
+                    <p>How to communicate military accomplishments in language hiring managers understand. Rank translations, resume frameworks, and interview strategies.</p>
+                    <span class="coming-soon">Coming Soon</span>
+                </a>
+                
+                <a href="#" class="veteran-card">
+                    <div class="resource-icon">📋</div>
+                    <h3>Federal Contracting Careers</h3>
+                    <p>Your clearance and experience are valuable. Understanding GS scales, contractor roles, and how to position yourself for federal industry jobs.</p>
+                    <span class="coming-soon">Coming Soon</span>
+                </a>
+                
+                <a href="#" class="veteran-card">
+                    <div class="resource-icon">🏢</div>
+                    <h3>SDVOSB Certification Guide</h3>
+                    <p>Step-by-step process for Service-Disabled Veteran-Owned Small Business certification. Prerequisites, SAM.gov, and SBA VetCert walkthrough.</p>
+                    <span class="coming-soon">Coming Soon</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="learning">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Learning Resources</div>
+                <h2 class="section-title">Building New Skills</h2>
+            </div>
+            
+            <div class="learning-grid">
+                <a href="#" class="learning-card">
+                    <div class="resource-icon">🤖</div>
+                    <h3>AI for Professionals</h3>
+                    <p>Practical applications of AI tools in your daily work. Not hype, just useful techniques that save time and improve output.</p>
+                    <span class="coming-soon">Coming Soon</span>
+                </a>
+                
+                <a href="#" class="learning-card">
+                    <div class="resource-icon">⚡</div>
+                    <h3>Industrial Automation 101</h3>
+                    <p>PLCs, SCADA, safety systems explained for non-engineers. Understand the technology shaping modern manufacturing.</p>
+                    <span class="coming-soon">Coming Soon</span>
+                </a>
+                
+                <a href="#" class="learning-card">
+                    <div class="resource-icon">📈</div>
+                    <h3>Federal Sales Fundamentals</h3>
+                    <p>How government buying actually works. Capture management, specification selling, and building relationships that matter.</p>
+                    <span class="coming-soon">Coming Soon</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="connect">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Get in Touch</div>
+                <h2 class="section-title">Let's Connect</h2>
+            </div>
+            
+            <div class="connect-grid">
+                <div class="connect-content">
+                    <p>Whether you're exploring teaming opportunities, need help navigating federal procurement, or you're a veteran figuring out your transition, I'm always up for a conversation. The best partnerships start with a simple introduction.</p>
+                    
+                    <div class="connect-links">
+                        <a href="https://www.linkedin.com/in/jeremymbenton/" class="connect-btn" target="_blank">
+                            <span>Connect on LinkedIn</span>
+                            <span>→</span>
+                        </a>
+                        <a href="mailto:your.email@example.com" class="connect-btn">
+                            <span>Send an Email</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="connect-form-area">
+                    <h3>Currently Seeking</h3>
+                    <p>Active teaming discussions for Army and USACE opportunities. If you're positioned in these areas, let's explore how we can work together.</p>
+                    
+                    <div class="teaming-interests">
+                        <h4>Priority Areas</h4>
+                        <div class="interest-tags">
+                            <span class="interest-tag gold">Army OIB/DIB</span>
+                            <span class="interest-tag gold">USACE Dams & Hydro</span>
+                            <span class="interest-tag">Water Treatment</span>
+                            <span class="interest-tag">A&E Partnerships</span>
+                            <span class="interest-tag">System Integration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Jeremy Benton. Built with purpose. Built to Win.<a href="https://github.com/jbenton1/government-guide">View on GitHub</a></p>
+    </footer>
+</body>
+</html>
