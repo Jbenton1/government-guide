@@ -632,7 +632,7 @@
 
         .veteran-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
         }
 
@@ -643,6 +643,8 @@
             padding: 2rem;
             text-decoration: none;
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .veteran-card:hover {
@@ -1114,12 +1116,13 @@
             </div>
             
             <div class="veteran-grid">
-                <a href="#" class="veteran-card">
+                <div class="veteran-card" style="grid-column: span 2;">
                     <div class="resource-icon">🎖️</div>
                     <h3>Translating Your Experience</h3>
                     <p>How to communicate military accomplishments in language hiring managers understand. Rank translations, resume frameworks, and interview strategies.</p>
-                    <span class="coming-soon">Coming Soon</span>
-                </a>
+                    <p style="margin-top: 1rem;">There are numerous tools that can help you achieve fantastic results. One of the best I've seen and personally used is <a href="https://bestmilitaryresume.com/" target="_blank" style="color: var(--accent-gold); text-decoration: underline;">Best Military Resume</a>, Created by <a href="https://www.linkedin.com/in/bradtachi/" target="_blank" style="color: var(--accent-gold); text-decoration: underline;">Brad Tachi</a>. The platform allows you to enter data such as previous awards, Evals (OER & NCOER), and LoRs to customize cover letters and resumes that match your experience to your new career. There are also free tools to optimize your LinkedIn and a community of other veterans.</p>
+                    <p style="margin-top: 0.75rem; font-size: 0.75rem; color: var(--text-muted); font-style: italic;">*I am not endorsed for my opinion. Tools and resources are simply resources to help others.</p>
+                </div>
                 
                 <a href="#" class="veteran-card">
                     <div class="resource-icon">📋</div>
@@ -1128,11 +1131,10 @@
                     <span class="coming-soon">Coming Soon</span>
                 </a>
                 
-                <a href="#" class="veteran-card">
+                <a href="sdvosb-guide/" class="veteran-card">
                     <div class="resource-icon">🏢</div>
                     <h3>SDVOSB Certification Guide</h3>
                     <p>Step-by-step process for Service-Disabled Veteran-Owned Small Business certification. Prerequisites, SAM.gov, and SBA VetCert walkthrough.</p>
-                    <span class="coming-soon">Coming Soon</span>
                 </a>
             </div>
         </div>
@@ -1186,7 +1188,7 @@
                             <span>Connect on LinkedIn</span>
                             <span>→</span>
                         </a>
-                        <a href="mailto:your.email@example.com" class="connect-btn">
+                        <a href="mailto:jeremy.benton@siemens.com" class="connect-btn">
                             <span>Send an Email</span>
                             <span>→</span>
                         </a>
@@ -1213,7 +1215,7 @@
     </section>
 
     <footer>
-        <p>© 2025 Jeremy Benton. Built with purpose. Built to Win.<a href="https://github.com/jbenton1/government-guide">View on GitHub</a></p>
+        <p>© 2025 Jeremy Benton. Built with purpose. Built to win. <a href="https://github.com/jbenton1/government-guide">View on GitHub</a></p>
     </footer>
 </body>
 </html>
