@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business & Career Development | Veteran Career Resources</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --accent-teal: #00a6a6;
+            --accent-teal-dim: rgba(0, 166, 166, 0.15);
+            --accent-gold: #d4a574;
+            --accent-gold-dim: rgba(212, 165, 116, 0.15);
+            --accent-green: #16a34a;
+            --accent-green-dim: rgba(22, 163, 74, 0.15);
+            --accent-blue: #3b82f6;
+            --accent-blue-dim: rgba(59, 130, 246, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(0, 166, 166, 0.3);
+            --border-gold: rgba(212, 165, 116, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 166, 166, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 166, 166, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 15, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .nav-logo span { color: var(--accent-teal); }
+        .nav-back {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .nav-back:hover { color: var(--accent-teal); }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 8.5rem 2rem 4rem;
+        }
+        .page-header { margin-bottom: 2rem; }
+        .page-badge {
+            display: inline-flex;
+            padding: 0.5rem 1rem;
+            background: var(--accent-teal-dim);
+            border: 1px solid var(--border-accent);
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-teal);
+            margin-bottom: 1.5rem;
+        }
+        .page-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 750px;
+        }
+        .section { margin-bottom: 3rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-teal);
+        }
+        .section-line { flex: 1; height: 1px; background: var(--border-accent); }
+        .section-count {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+        .program-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .program-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-2px);
+        }
+        .program-card.featured {
+            border-color: var(--accent-gold);
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212, 165, 116, 0.08) 100%);
+        }
+        .program-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            gap: 0.5rem;
+        }
+        .program-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .program-card.featured .program-name { color: var(--accent-gold); }
+        .tag {
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.625rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .tag-free { background: var(--accent-green-dim); color: var(--accent-green); }
+        .tag-paid { background: var(--accent-gold-dim); color: var(--accent-gold); }
+        .tag-gi { background: var(--accent-blue-dim); color: var(--accent-blue); }
+        .tag-featured { background: var(--accent-gold); color: var(--bg-primary); }
+        .program-desc {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        .program-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            margin-bottom: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+        .meta-item {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .meta-item strong { color: var(--accent-teal); }
+        .program-link {
+            color: var(--accent-teal);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .program-link:hover { text-decoration: underline; }
+        .recruiter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .recruiter-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .recruiter-card:hover {
+            border-color: var(--border-accent);
+        }
+        .recruiter-card h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .recruiter-card p {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .recruiter-card a {
+            color: var(--accent-teal);
+            text-decoration: none;
+            font-size: 0.8125rem;
+        }
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 3rem;
+        }
+        footer p { color: var(--text-muted); font-size: 0.875rem; }
+        footer a { color: var(--accent-teal); text-decoration: none; }
+        @media (max-width: 768px) {
+            main { padding: 7.5rem 1.5rem 3rem; }
+            .program-grid { grid-template-columns: 1fr; }
+        }
+    
+        /* Category Navigation Bar */
+        .category-nav {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            padding: 0 2rem;
+            overflow-x: auto;
+        }
+        .category-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.25rem;
+        }
+        .category-link {
+            padding: 0.75rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .category-link:hover {
+            color: var(--accent-gold);
+            background: var(--accent-gold-dim);
+        }
+        .category-link.active {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+        @media (max-width: 768px) {
+            .category-nav { padding: 0 1rem; }
+            .category-link { padding: 0.625rem 0.75rem; font-size: 0.6875rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../" class="nav-logo">JEREMY<span>BENTON</span></a>
+                        <a href="index.html" class="nav-back">← Back to Directory</a>
+        </div>
+        <div class="category-nav">
+                        <div class="category-nav-inner">
+                <a href="index.html" class="category-link">🏠 Overview</a>
+                <a href="tech-training.html" class="category-link">💻 Tech</a>
+                <a href="trades-training.html" class="category-link">🔧 Trades</a>
+                <a href="business-careers.html" class="category-link active">📈 Business</a>
+                <a href="federal-employment.html" class="category-link">🏛️ Federal</a>
+                <a href="mental-health.html" class="category-link">🧠 Mental Health</a>
+                <a href="recreation.html" class="category-link">🎢 Recreation</a>
+                <a href="spouses.html" class="category-link">💜 Spouses</a>
+                <a href="education-benefits.html" class="category-link">🎓 Education</a>
+                <a href="leadership-cohorts.html" class="category-link">👔 Leadership</a>
+                <a href="transition-cohorts.html" class="category-link">👥 Transition</a>
+                <a href="timeline.html" class="category-link">📅 Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header class="page-header">
+            <div class="page-badge">Leadership & Business</div>
+            <h1 class="page-title">Business & Career Development</h1>
+            <p class="page-subtitle">Entrepreneurship training, mentorship programs, professional certifications, and recruiting resources. Translate your military leadership into civilian success.</p>
+        </header>
+
+        <!-- MENTORSHIP -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Mentorship & Networking</h2>
+                <div class="section-line"></div>
+                <span class="section-count">7 programs</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">American Corporate Partners (ACP)</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">Free 1-year mentorships pairing veterans with Fortune 500 professionals. Average post-mentorship salary $90,000+. 5,100+ active mentorships. 80% retention rate vs 56% national average.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 1 year</span>
+                        <span class="meta-item"><strong>Avg Salary:</strong> $90K+</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE</span>
+                    <a href="https://www.acp-usa.org/" target="_blank" class="program-link">Apply Now →</a>
+                </div>
+
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">MilMentor</span>
+                        <span class="tag tag-featured">NEW</span>
+                    </div>
+                    <p class="program-desc">Replaced Veterati (Jan 2025). On-demand mentorship with 750+ mentors from Fortune 500s. Phone/video calls scheduled directly. 3,000+ served in first 6 months.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Format:</strong> On-demand</span>
+                        <span class="meta-item"><strong>Mentors:</strong> 750+</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE</span>
+                    <a href="https://www.milmentor.com" target="_blank" class="program-link">Connect Now →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">FourBlock</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Multi-week career readiness connecting veterans with Fortune 500 employers. High-touch networking and coaching. 7,000+ alumni. Fall and Spring cohorts.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Cities:</strong> NYC, Chicago, Denver, Tampa +</span>
+                        <span class="meta-item"><strong>Alumni:</strong> 7,000+</span>
+                    </div>
+                    <a href="https://fourblock.org/" target="_blank" class="program-link">Apply →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">The Honor Foundation</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Premier 3-month executive transition for Special Operations Forces. 500+ executive mentors. NEW: Vector Accelerator (launched April 2025) is free and open to ALL service members.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Main:</strong> SOF only</span>
+                        <span class="meta-item"><strong>Vector:</strong> Open to all</span>
+                    </div>
+                    <a href="https://www.honor.org/" target="_blank" class="program-link">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Commit Foundation</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">High-touch transition support: 2-day workshops, 6-12 month coaching, "Pursue Your Purpose" online program. Stanford GSB Ignite Program scholarships.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Coaching:</strong> 6-12 months</span>
+                    </div>
+                    <a href="https://www.commitfoundation.org/" target="_blank" class="program-link">Apply →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Still Serving Veterans</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Personalized career counseling by veteran counselors. Resume dev, LinkedIn optimization, VA benefits help. Call of Duty Endowment grantee. Avg placement $72K.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Avg Placement:</strong> $72,351</span>
+                    </div>
+                    <a href="https://ssv.org/" target="_blank" class="program-link">Get Help →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Hiring Our Heroes</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">US Chamber initiative: hiring events, 12-week Corporate Fellowship (SkillBridge), small business grants ($10K-$25K), VET Roadmap for transition planning.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Grants:</strong> $10K-$25K</span>
+                    </div>
+                    <a href="https://www.hiringourheroes.org/" target="_blank" class="program-link">Explore Programs →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ENTREPRENEURSHIP -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Entrepreneurship</h2>
+                <div class="section-line"></div>
+                <span class="section-count">12 programs</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">Bunker Labs (IVMF)</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">Now part of Syracuse IVMF. Military Founders Lab (10-week virtual), Ambassador Program, CEOcircle for growth-stage companies. Strong network and funding connections.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Flagship:</strong> 10-week virtual</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE</span>
+                    <a href="https://ivmf.syracuse.edu/bunker-labs/" target="_blank" class="program-link">Apply Now →</a>
+                </div>
+
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">Patriot Boot Camp (DAV)</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">3-day tech entrepreneurship intensive with Techstars partnership. Mentorship, pitch competitions with cash prizes. 950+ alumni have raised $100M+ in venture capital.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Alumni Raised:</strong> $100M+</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE</span>
+                    <a href="https://patriotbootcamp.org/" target="_blank" class="program-link">Apply →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Boots to Business (SBA)</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Free 2-step entrepreneurship education during TAP. Covers business ownership, planning, and feasibility. Foundation for veteran business owners.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>When:</strong> During TAP</span>
+                    </div>
+                    <a href="https://www.sba.gov/boots-to-business" target="_blank" class="program-link">Enroll via TAP →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Boots to Business Reboot</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Extended version for all-era veterans (not just TAP). Available through 31 Veterans Business Outreach Centers nationwide.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>VBOCs:</strong> 31 nationwide</span>
+                    </div>
+                    <a href="https://www.sba.gov/business-guide/grow-your-business/veteran-owned-businesses" target="_blank" class="program-link">Find Your VBOC →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Dog Tag Inc Fellowship</span>
+                        <span class="tag tag-free">FREE + STIPEND</span>
+                    </div>
+                    <p class="program-desc">5-month intensive combining Georgetown University business certificate with hands-on bakery operations. Monthly stipend, all expenses covered. 16 fellows per cohort in DC.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 5 months</span>
+                        <span class="meta-item"><strong>Location:</strong> Washington DC</span>
+                    </div>
+                    <a href="https://www.dogtaginc.org/" target="_blank" class="program-link">Apply →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">V-WISE (Women Only)</span>
+                        <span class="tag tag-paid">$75</span>
+                    </div>
+                    <p class="program-desc">Premier women's entrepreneurship: 4-week online course + 3-day capstone conference. $75 covers course, 2 nights lodging, most meals. 2026: Online Mar 16-Apr 10, Capstone Apr 17-19 Atlanta.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>For:</strong> Women only</span>
+                    </div>
+                    <a href="https://ivmf.syracuse.edu/programs/entrepreneurship/start-up/v-wise/" target="_blank" class="program-link">Register →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">EBV (Entrepreneurship Bootcamp)</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Intensive training at top universities (Syracuse, Texas A&M, UCLA). For post-9/11 veterans launching businesses. Includes travel and lodging.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Universities:</strong> Multiple</span>
+                    </div>
+                    <a href="https://ivmf.syracuse.edu/programs/entrepreneurship/start-up/ebv/" target="_blank" class="program-link">Apply →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Rosie Network - Service2CEO</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">16-week college-accredited entrepreneurship training with mentorship matching and Rosie's List business directory.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 16 weeks</span>
+                    </div>
+                    <a href="https://www.therosienetwork.org/" target="_blank" class="program-link">Enroll →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">SCORE Mentorship</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Nation's largest network of 10,000+ volunteer business mentors. Free guidance on business plans, marketing, financing, and government contracting.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Mentors:</strong> 10,000+</span>
+                    </div>
+                    <a href="https://www.score.org/veteran-entrepreneurs" target="_blank" class="program-link">Find a Mentor →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Warrior Rising</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Warrior Academy training, 8-week Warrior University accelerator, Business Shower grants up to $20,000+.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Grants:</strong> Up to $20K+</span>
+                    </div>
+                    <a href="https://www.warriorrising.org/" target="_blank" class="program-link">Apply →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Second Service Foundation</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Grants, coaching, and Military Entrepreneur Challenge™ competition with $4,000-$15,000 awards.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Awards:</strong> $4K-$15K</span>
+                    </div>
+                    <a href="https://secondservicefoundation.org/" target="_blank" class="program-link">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Hivers & Strivers</span>
+                        <span class="tag tag-paid">EQUITY</span>
+                    </div>
+                    <p class="program-desc">Angel investment group investing exclusively in veteran-led scalable startups ($250K-$1M per round). 61% blended IRR since 2009. Prefers USMA graduates.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Investment:</strong> $250K-$1M</span>
+                    </div>
+                    <a href="https://hiversandstrivers.com/" target="_blank" class="program-link">Pitch Your Startup →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Professional Certifications</h2>
+                <div class="section-line"></div>
+                <span class="section-count">5 programs</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Agile for Patriots</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Free Professional Scrum Master (PSM) certification training. Includes 12-day practicum with real Scrum projects and two free exam attempts.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Cert:</strong> PSM</span>
+                        <span class="meta-item"><strong>Exams:</strong> 2 free attempts</span>
+                    </div>
+                    <a href="https://agileforpatriots.org/" target="_blank" class="program-link">Enroll Free →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Black Diamond Charities</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Free 3-Saturday PMP fundamentals course with pathway to CAPM and PMP certifications at no cost.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Format:</strong> 3 Saturdays</span>
+                        <span class="meta-item"><strong>Path:</strong> CAPM → PMP</span>
+                    </div>
+                    <a href="https://www.blackdiamondcharities.org/" target="_blank" class="program-link">Register →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Service to School (S2S)</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Peer-to-peer mentorship for MBA, law, and medical school applications. VetLink connects directly to admissions. Essay reviews and scholarship database.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Focus:</strong> MBA, Law, Med</span>
+                    </div>
+                    <a href="https://www.service2school.org/" target="_blank" class="program-link">Get Matched →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Warrior-Scholar Project</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">1-2 week academic boot camps at Ivy League schools. 90% of alumni complete degrees. For enlisted veterans without BA. 2026 applications open Feb 2.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Schools:</strong> Ivy League</span>
+                        <span class="meta-item"><strong>Success:</strong> 90% complete degrees</span>
+                    </div>
+                    <a href="https://www.warrior-scholar.org/apply/" target="_blank" class="program-link">Apply (Opens Feb 2) →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Vets2PM</span>
+                        <span class="tag tag-gi">GI BILL</span>
+                    </div>
+                    <p class="program-desc">Translates military orders into PM language for PMP application. Scholarships available; training is GI Bill reimbursable.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Cert:</strong> PMP</span>
+                    </div>
+                    <a href="https://www.vets2pm.com/" target="_blank" class="program-link">Learn More →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECRUITING FIRMS -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Veteran Recruiting Firms</h2>
+                <div class="section-line"></div>
+                <span class="section-count">All free for veterans</span>
+            </div>
+            <div class="recruiter-grid">
+                <div class="recruiter-card">
+                    <h4>VetJobs</h4>
+                    <p>2M+ positions database, RecruiterConnect</p>
+                    <a href="https://vetjobs.org/" target="_blank">Visit →</a>
+                </div>
+                <div class="recruiter-card">
+                    <h4>RecruitMilitary</h4>
+                    <p>100+ annual career fairs, AI job board</p>
+                    <a href="https://recruitmilitary.com/" target="_blank">Visit →</a>
+                </div>
+                <div class="recruiter-card">
+                    <h4>Orion Talent</h4>
+                    <p>70+ hiring conferences, 50%+ selection rate</p>
+                    <a href="https://www.oriontalent.com/" target="_blank">Visit →</a>
+                </div>
+                <div class="recruiter-card">
+                    <h4>Lucas Group / Korn Ferry</h4>
+                    <p>Executive placement for JMOs, NCOs</p>
+                    <a href="https://www.lucasgroup.com/military-transition/" target="_blank">Visit →</a>
+                </div>
+                <div class="recruiter-card">
+                    <h4>Bradley-Morris</h4>
+                    <p>Contingency recruiting for officers/NCOs</p>
+                    <a href="https://www.bradley-morris.com/" target="_blank">Visit →</a>
+                </div>
+            </div>
+        </section>
+
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 2rem;">Last verified: January 2026 · 24 programs + 5 recruiters</p>
+    </main>
+
+    <footer>
+        <p>© 2025 Jeremy Benton. <a href="index.html">Back to Directory</a> | <a href="../">Return to Home</a></p>
+    </footer>
+</body>
+</html>
