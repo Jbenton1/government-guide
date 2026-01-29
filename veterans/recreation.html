@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Military Spouse Resources | Veteran Career Resources</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --accent-teal: #00a6a6;
+            --accent-teal-dim: rgba(0, 166, 166, 0.15);
+            --accent-gold: #d4a574;
+            --accent-gold-dim: rgba(212, 165, 116, 0.15);
+            --accent-green: #16a34a;
+            --accent-green-dim: rgba(22, 163, 74, 0.15);
+            --accent-purple: #8b5cf6;
+            --accent-purple-dim: rgba(139, 92, 246, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(0, 166, 166, 0.3);
+            --border-purple: rgba(139, 92, 246, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(139, 92, 246, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 92, 246, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 15, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .nav-logo span { color: var(--accent-purple); }
+        .nav-back {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        .nav-back:hover { color: var(--accent-purple); }
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 8.5rem 2rem 4rem;
+        }
+        .page-header { margin-bottom: 2rem; }
+        .page-badge {
+            display: inline-flex;
+            padding: 0.5rem 1rem;
+            background: var(--accent-purple-dim);
+            border: 1px solid var(--border-purple);
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-purple);
+            margin-bottom: 1.5rem;
+        }
+        .page-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 2px solid var(--accent-purple);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .highlight-box h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+        }
+        .highlight-box .amount {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .highlight-box p {
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+        .highlight-box a {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent-purple);
+            color: var(--bg-primary);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .highlight-box a:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+        .section { margin-bottom: 3rem; }
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-teal);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-accent);
+        }
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+        .program-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .program-card:hover {
+            border-color: var(--border-purple);
+            transform: translateY(-2px);
+        }
+        .program-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .program-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .program-card .meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+            margin-bottom: 1rem;
+        }
+        .program-card .meta strong { color: var(--accent-purple); }
+        .tag {
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.625rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+        .tag-free { background: var(--accent-green-dim); color: var(--accent-green); }
+        .tag-benefit { background: var(--accent-purple-dim); color: var(--accent-purple); }
+        .program-card a {
+            color: var(--accent-teal);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .program-card a:hover { text-decoration: underline; }
+        .info-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .info-box h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.75rem;
+        }
+        .info-box p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+        .info-box a { color: var(--accent-teal); }
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 3rem;
+        }
+        footer p { color: var(--text-muted); font-size: 0.875rem; }
+        footer a { color: var(--accent-purple); text-decoration: none; }
+        @media (max-width: 768px) {
+            main { padding: 7.5rem 1.5rem 3rem; }
+            .program-grid { grid-template-columns: 1fr; }
+        }
+    
+        /* Category Navigation Bar */
+        .category-nav {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            padding: 0 2rem;
+            overflow-x: auto;
+        }
+        .category-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.25rem;
+        }
+        .category-link {
+            padding: 0.75rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .category-link:hover {
+            color: var(--accent-gold);
+            background: var(--accent-gold-dim);
+        }
+        .category-link.active {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+        @media (max-width: 768px) {
+            .category-nav { padding: 0 1rem; }
+            .category-link { padding: 0.625rem 0.75rem; font-size: 0.6875rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../" class="nav-logo">JEREMY<span>BENTON</span></a>
+                        <a href="index.html" class="nav-back">← Back to Directory</a>
+        </div>
+        <div class="category-nav">
+                        <div class="category-nav-inner">
+                <a href="index.html" class="category-link">🏠 Overview</a>
+                <a href="tech-training.html" class="category-link">💻 Tech</a>
+                <a href="trades-training.html" class="category-link">🔧 Trades</a>
+                <a href="business-careers.html" class="category-link">📈 Business</a>
+                <a href="federal-employment.html" class="category-link">🏛️ Federal</a>
+                <a href="mental-health.html" class="category-link">🧠 Mental Health</a>
+                <a href="recreation.html" class="category-link">🎢 Recreation</a>
+                <a href="spouses.html" class="category-link active">💜 Spouses</a>
+                <a href="education-benefits.html" class="category-link">🎓 Education</a>
+                <a href="leadership-cohorts.html" class="category-link">👔 Leadership</a>
+                <a href="transition-cohorts.html" class="category-link">👥 Transition</a>
+                <a href="timeline.html" class="category-link">📅 Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header class="page-header">
+            <div class="page-badge">Military Spouses</div>
+            <h1 class="page-title">Spouse-Specific Resources</h1>
+            <p class="page-subtitle">Programs designed specifically for military spouses. Note: Most programs throughout this directory also serve spouses—this page highlights spouse-primary resources.</p>
+        </header>
+
+        <div class="highlight-box">
+            <h2>MyCAA Scholarship</h2>
+            <div class="amount">$4,000</div>
+            <p>Free scholarship for licenses, certifications, or associate degrees. For spouses of E1-E5, W1-W2, O1-O2 service members.</p>
+            <a href="https://myseco.militaryonesource.mil/portal/article/my-career-advancement-account-scholarship" target="_blank">Apply Now →</a>
+        </div>
+
+        <!-- CAREER & TRAINING -->
+        <section class="section">
+            <h2 class="section-title">Career & Training Programs</h2>
+            <div class="program-grid">
+                <div class="program-card">
+                    <h3>Microsoft MSSA Spouse Program</h3>
+                    <p>Separate spouse track for the 17-week intensive in Cloud Development, Cloud Administration, or Cybersecurity Operations. Same quality as veteran program.</p>
+                    <div class="meta"><strong>Duration:</strong> 17 weeks</div>
+                    <span class="tag tag-free">FREE</span>
+                    <a href="https://military.microsoft.com/mssa/" target="_blank">Apply →</a>
+                </div>
+
+                <div class="program-card">
+                    <h3>Hiring Our Heroes Spouse Fellowship</h3>
+                    <p>SkillBridge-style corporate fellowship for military spouses. 12-week program at major companies.</p>
+                    <div class="meta"><strong>Duration:</strong> 12 weeks</div>
+                    <span class="tag tag-free">FREE</span>
+                    <a href="https://www.hiringourheroes.org/career-services/fellowships/" target="_blank">Apply →</a>
+                </div>
+
+                <div class="program-card">
+                    <h3>V-WISE (Women's Entrepreneurship)</h3>
+                    <p>Premier women's entrepreneurship training. 4-week online + 3-day capstone. Open to women spouses/partners. $75 covers course, 2 nights lodging, most meals.</p>
+                    <div class="meta"><strong>2026:</strong> Online Mar 16-Apr 10, Capstone Apr 17-19 Atlanta</div>
+                    <span class="tag" style="background:var(--accent-gold-dim);color:var(--accent-gold);">$75</span>
+                    <a href="https://ivmf.syracuse.edu/programs/entrepreneurship/start-up/v-wise/" target="_blank">Register →</a>
+                </div>
+
+                <div class="program-card">
+                    <h3>Blue Star Families Career Resources</h3>
+                    <p>Career support, networking, and resources specifically for military families. Community connection and employment assistance.</p>
+                    <div class="meta"><strong>Focus:</strong> Networking, support</div>
+                    <span class="tag tag-free">FREE</span>
+                    <a href="https://bluestarfam.org/" target="_blank">Join →</a>
+                </div>
+
+                <div class="program-card">
+                    <h3>MSCCN (Military Spouse Career Network)</h3>
+                    <p>Job placement and career resources specifically for military spouses. Resume help, job matching, employer connections.</p>
+                    <div class="meta"><strong>Focus:</strong> Job placement</div>
+                    <span class="tag tag-free">FREE</span>
+                    <a href="https://msccn.org/" target="_blank">Get Started →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- VA BENEFITS -->
+        <section class="section">
+            <h2 class="section-title">VA Education Benefits</h2>
+            <div class="program-grid">
+                <div class="program-card">
+                    <h3>Fry Scholarship</h3>
+                    <p>Same benefits as Post-9/11 GI Bill for children and spouses of service members who died in the line of duty after September 10, 2001.</p>
+                    <div class="meta"><strong>Benefit:</strong> Full tuition + housing + books</div>
+                    <span class="tag tag-benefit">VA BENEFIT</span>
+                    <a href="https://www.va.gov/family-and-caregiver-benefits/education-and-careers/fry-scholarship/" target="_blank">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <h3>DEA (Chapter 35)</h3>
+                    <p>Dependents Educational Assistance for spouses and children of veterans who are permanently and totally disabled or who died from service-connected conditions.</p>
+                    <div class="meta"><strong>Benefit:</strong> $1,574/month full-time</div>
+                    <span class="tag tag-benefit">VA BENEFIT</span>
+                    <a href="https://www.va.gov/family-and-caregiver-benefits/education-and-careers/dependents-education-assistance/" target="_blank">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <h3>Post-9/11 GI Bill Transfer</h3>
+                    <p>Service members with 6+ years of service and 4-year commitment can transfer GI Bill benefits to spouse or children.</p>
+                    <div class="meta"><strong>Benefit:</strong> Full GI Bill benefits</div>
+                    <span class="tag tag-benefit">VA BENEFIT</span>
+                    <a href="https://www.va.gov/education/transfer-post-9-11-gi-bill-benefits/" target="_blank">Learn More →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ALSO SERVE SPOUSES -->
+        <section class="section">
+            <h2 class="section-title">Programs That Also Serve Spouses</h2>
+            <div class="info-box">
+                <h3>Many Programs Welcome Spouses</h3>
+                <p>The following programs from other pages in this directory specifically include military spouses in their eligibility. Click through to those pages for full details.</p>
+            </div>
+            <div class="program-grid">
+                <div class="program-card">
+                    <h3>Tech Training</h3>
+                    <p>SANS VetSuccess, NPower, AWS re/Start, O2O, Google Certificates, CyberVetsUSA, IBM SkillsBuild, Cisco Veterans Program</p>
+                    <a href="tech-training.html">View Tech Programs →</a>
+                </div>
+                <div class="program-card">
+                    <h3>Business & Mentorship</h3>
+                    <p>ACP (Active-Duty Spouses, Surviving Spouses), FourBlock, Commit Foundation, Bunker Labs, SCORE</p>
+                    <a href="business-careers.html">View Business Programs →</a>
+                </div>
+                <div class="program-card">
+                    <h3>Mental Health</h3>
+                    <p>Cohen Veterans Network (full family), Headstrong, Give an Hour, Vet Centers (combat family counseling)</p>
+                    <a href="wellness-recreation.html">View Wellness Programs →</a>
+                </div>
+            </div>
+        </section>
+
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 2rem;">Last verified: January 2026</p>
+    </main>
+
+    <footer>
+        <p>© 2025 Jeremy Benton. <a href="index.html">Back to Directory</a> | <a href="../">Return to Home</a></p>
+    </footer>
+</body>
+</html>
