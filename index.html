@@ -653,6 +653,12 @@
             transform: translateY(-4px);
         }
 
+        .veteran-card.featured {
+            grid-column: span 2;
+            border-color: var(--accent-gold);
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212, 165, 116, 0.12) 100%);
+        }
+
         .veteran-card .resource-icon {
             background: var(--accent-gold-dim);
         }
@@ -674,6 +680,32 @@
         .veteran-card .coming-soon {
             background: var(--accent-gold-dim);
             color: var(--accent-gold);
+        }
+
+        .veteran-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-gold);
+        }
+
+        .veteran-stat {
+            text-align: center;
+        }
+
+        .veteran-stat-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .veteran-stat-label {
+            font-size: 0.6875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         /* Learning Section */
@@ -865,6 +897,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .veteran-card.featured {
+                grid-column: span 1;
+            }
+
             .nav-links {
                 display: none;
             }
@@ -876,6 +912,10 @@
 
             .hero-cta {
                 flex-direction: column;
+            }
+
+            .veteran-stats {
+                flex-wrap: wrap;
             }
         }
 
@@ -1116,8 +1156,33 @@
             </div>
             
             <div class="veteran-grid">
-                <div class="veteran-card" style="grid-column: span 2;">
+                <!-- NEW: Featured Veterans Career Resources Directory -->
+                <a href="veterans/" class="veteran-card featured">
                     <div class="resource-icon">🎖️</div>
+                    <h3 style="font-size: 1.375rem; color: var(--accent-gold);">Veteran Career Resources Directory</h3>
+                    <p style="font-size: 1rem;">Comprehensive directory of 134+ verified programs across tech, trades, federal employment, entrepreneurship, mental health, and recreation. Microsoft MSSA, SANS VetSuccess, Code Platoon, Hiring Our Heroes, VR&E, and more—organized by category with a transition timeline.</p>
+                    <div class="veteran-stats">
+                        <div class="veteran-stat">
+                            <div class="veteran-stat-number">134+</div>
+                            <div class="veteran-stat-label">Programs</div>
+                        </div>
+                        <div class="veteran-stat">
+                            <div class="veteran-stat-number">12</div>
+                            <div class="veteran-stat-label">Categories</div>
+                        </div>
+                        <div class="veteran-stat">
+                            <div class="veteran-stat-number">90%+</div>
+                            <div class="veteran-stat-label">Free</div>
+                        </div>
+                        <div class="veteran-stat">
+                            <div class="veteran-stat-number">Jan 2026</div>
+                            <div class="veteran-stat-label">Verified</div>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="veteran-card" style="grid-column: span 2;">
+                    <div class="resource-icon">📝</div>
                     <h3>Translating Your Experience</h3>
                     <p>How to communicate military accomplishments in language hiring managers understand. Rank translations, resume frameworks, and interview strategies.</p>
                     <p style="margin-top: 1rem;">There are numerous tools that can help you achieve fantastic results. One of the best I've seen and personally used is <a href="https://bestmilitaryresume.com/" target="_blank" style="color: var(--accent-gold); text-decoration: underline;">Best Military Resume</a>, Created by <a href="https://www.linkedin.com/in/bradtachi/" target="_blank" style="color: var(--accent-gold); text-decoration: underline;">Brad Tachi</a>. The platform allows you to enter data such as previous awards, Evals (OER & NCOER), and LoRs to customize cover letters and resumes that match your experience to your new career. There are also free tools to optimize your LinkedIn and a community of other veterans.</p>
