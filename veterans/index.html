@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veteran Career Resources | Jeremy Benton</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --bg-card-hover: #222d42;
+            --accent-teal: #00a6a6;
+            --accent-teal-dim: rgba(0, 166, 166, 0.15);
+            --accent-gold: #d4a574;
+            --accent-gold-dim: rgba(212, 165, 116, 0.15);
+            --accent-red: #dc2626;
+            --accent-red-dim: rgba(220, 38, 38, 0.15);
+            --accent-green: #16a34a;
+            --accent-green-dim: rgba(22, 163, 74, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(0, 166, 166, 0.3);
+            --border-gold: rgba(212, 165, 116, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(212, 165, 116, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 165, 116, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(10, 15, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .nav-top {
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-logo span { color: var(--accent-gold); }
+
+        .nav-back {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-back:hover { color: var(--accent-gold); }
+
+        /* Category Navigation Bar */
+        .category-nav {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            padding: 0 2rem;
+            overflow-x: auto;
+        }
+
+        .category-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .category-link {
+            padding: 0.875rem 1.25rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .category-link:hover {
+            color: var(--accent-gold);
+            background: var(--accent-gold-dim);
+        }
+
+        .category-link.active {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 3rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .page-badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Alert Boxes */
+        .alert-section {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .alert-box {
+            padding: 1.25rem 1.5rem;
+            border-radius: 0.75rem;
+            border-left: 4px solid;
+        }
+
+        .alert-box.warning {
+            background: var(--accent-red-dim);
+            border-color: var(--accent-red);
+        }
+
+        .alert-box.success {
+            background: var(--accent-green-dim);
+            border-color: var(--accent-green);
+        }
+
+        .alert-box h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-box p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .alert-box strong {
+            color: var(--text-primary);
+        }
+
+        /* Quick Wins */
+        .quick-wins {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .quick-wins h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .quick-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 0.75rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .quick-item:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .quick-icon {
+            font-size: 1.5rem;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-gold-dim);
+            border-radius: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .quick-item h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .quick-item p {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        .free-tag {
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            background: var(--accent-green);
+            color: white;
+            font-size: 0.625rem;
+            font-weight: 700;
+            border-radius: 0.25rem;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+
+        /* Category Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            border-color: var(--accent-teal);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 166, 166, 0.1);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .card-stat {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .card-stat strong {
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+
+        .card-arrow {
+            color: var(--accent-teal);
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 3rem;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            main { padding: 8rem 1.5rem 3rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .quick-grid { grid-template-columns: 1fr; }
+            .category-nav { padding: 0 1rem; }
+            .category-link { padding: 0.75rem 1rem; font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-top">
+            <a href="../" class="nav-logo">JEREMY<span>BENTON</span></a>
+            <a href="../#veterans" class="nav-back">← Back to Home</a>
+        </div>
+        <div class="category-nav">
+                        <div class="category-nav-inner">
+                <a href="index.html" class="category-link active">🏠 Overview</a>
+                <a href="tech-training.html" class="category-link">💻 Tech</a>
+                <a href="trades-training.html" class="category-link">🔧 Trades</a>
+                <a href="business-careers.html" class="category-link">📈 Business</a>
+                <a href="federal-employment.html" class="category-link">🏛️ Federal</a>
+                <a href="mental-health.html" class="category-link">🧠 Mental Health</a>
+                <a href="recreation.html" class="category-link">🎢 Recreation</a>
+                <a href="spouses.html" class="category-link">💜 Spouses</a>
+                <a href="education-benefits.html" class="category-link">🎓 Education</a>
+                <a href="leadership-cohorts.html" class="category-link">👔 Leadership</a>
+                <a href="transition-cohorts.html" class="category-link">👥 Transition</a>
+                <a href="timeline.html" class="category-link">📅 Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header class="page-header">
+            <div class="page-badge">134 Verified Programs</div>
+            <h1 class="page-title">Veteran Career Resources Directory</h1>
+            <p class="page-subtitle">Comprehensive, verified directory of career training, education, and wellness resources for Veterans, Transitioning Service Members, and Military Spouses. All programs verified active as of January 2026.</p>
+        </header>
+
+        <!-- Critical Alerts -->
+        <section class="alert-section">
+            <div class="alert-box warning">
+                <h3>⚠️ VET TEC 2.0 Status</h3>
+                <p>Reauthorized January 2025 but <strong>NOT YET OPERATIONAL</strong> as of January 2026. Apply for Certificate of Eligibility now but have backup training options ready. When operational: limited to 4,000 spots/year, requires partial GI Bill usage.</p>
+            </div>
+            <div class="alert-box success">
+                <h3>✓ VR&E (Chapter 31) Fully Operational</h3>
+                <p>FY2026 subsistence rates: $840-$3,439/month. If you have 10%+ service-connected disability, this should be your first stop.</p>
+            </div>
+        </section>
+
+        <!-- Quick Wins -->
+        <section class="quick-wins">
+            <h2>⚡ Quick Wins — High Value, Immediate Access</h2>
+            <div class="quick-grid">
+                <a href="https://socialimpact.linkedin.com/programs/veterans" target="_blank" class="quick-item">
+                    <div class="quick-icon">💼</div>
+                    <div>
+                        <h4>LinkedIn Premium <span class="free-tag">FREE</span></h4>
+                        <p>1-year Premium Career ($360 value) + 16,000 courses</p>
+                    </div>
+                </a>
+                <a href="https://www.milmentor.com" target="_blank" class="quick-item">
+                    <div class="quick-icon">🤝</div>
+                    <div>
+                        <h4>MilMentor <span class="free-tag">FREE</span></h4>
+                        <p>On-demand Fortune 500 mentorship (replaced Veterati)</p>
+                    </div>
+                </a>
+                <a href="https://www.nps.gov/planyourvisit/veterans-and-gold-star-families-free-access.htm" target="_blank" class="quick-item">
+                    <div class="quick-icon">🏞️</div>
+                    <div>
+                        <h4>National Parks Pass <span class="free-tag">LIFETIME</span></h4>
+                        <p>Free access to 2,000+ federal recreation sites</p>
+                    </div>
+                </a>
+                <a href="https://www.va.gov/careers-employment/vocational-rehabilitation/" target="_blank" class="quick-item">
+                    <div class="quick-icon">🎓</div>
+                    <div>
+                        <h4>VR&E Chapter 31 <span class="free-tag">FREE</span></h4>
+                        <p>Full tuition + $840-$3,439/mo (10%+ disability)</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Program Categories -->
+        <section>
+            <div class="section-header">
+                <div class="section-label">Browse by Category</div>
+                <h2 class="section-title">Career Training & Development</h2>
+            </div>
+            <div class="cards-grid">
+                <a href="tech-training.html" class="card">
+                    <div class="card-icon">💻</div>
+                    <h3>Technology & Cybersecurity</h3>
+                    <p>Microsoft MSSA, SANS VetSuccess, Code Platoon, AWS re/Start, Salesforce Military. Cloud, coding, and cyber pathways with 90%+ placement rates.</p>
+                    <div class="card-meta">
+                        <span class="card-stat"><strong>28</strong> Programs</span>
+                        <span class="card-stat"><strong>90%+</strong> Free</span>
+                    </div>
+                    <div class="card-arrow">Explore Programs →</div>
+                </a>
+                
+                <a href="trades-training.html" class="card">
+                    <div class="card-icon">🔧</div>
+                    <h3>Trades & Manufacturing</h3>
+                    <p>Rockwell Academy (PAID training), Workshops for Warriors, Helmets to Hardhats, VEEP. Hands-on skills with strong union pipelines.</p>
+                    <div class="card-meta">
+                        <span class="card-stat"><strong>11</strong> Programs</span>
+                        <span class="card-stat"><strong>$55-75K</strong> Starting</span>
+                    </div>
+                    <div class="card-arrow">Explore Programs →</div>
+                </a>
+                
+                <a href="business-careers.html" class="card">
+                    <div class="card-icon">📈</div>
+                    <h3>Business, Leadership & Entrepreneurship</h3>
+                    <p>FourBlock, Honor Foundation, Bunker Labs, Patriot Boot Camp, PMP certifications. Executive transition and business ownership pathways.</p>
+                    <div class="card-meta">
+                        <span class="card-stat"><strong>29</strong> Programs</span>
+                        <span class="card-stat"><strong>5</strong> Top Recruiters</span>
+                    </div>
+                    <div class="card-arrow">Explore Programs →</div>
+                </a>
+                
+                <a href="federal-employment.html" class="card">
+                    <div class="card-icon">🏛️</div>
+                    <h3>Federal Employment</h3>
+                    <p>USACE Veterans Curation Program, VRA, 30% Disabled Authority, Schedule A. Bypass USAJOBS with special hiring authorities.</p>
+                    <div class="card-meta">
+                        <span class="card-stat"><strong>10</strong> Resources</span>
+                        <span class="card-stat"><strong>⚠️</strong> 2-page resume req'd</span>
+                    </div>
+                    <div class="card-arrow">Explore Programs →</div>
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <div class="section-label">Support & Wellness</div>
+                <h2 class="section-title">Health, Recreation & Family</h2>
+            </div>
+            <div class="cards-grid">
+                <a href="mental-health.html" class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3>Mental Health & Wellness</h3>
+                    <p>Cohen Veterans Network, Headstrong, Warrior Care Network, Boulder Crest PATHH, Project Sanctuary, K9s For Warriors. Clinical care, retreats, and service dogs.</p>
+                    <div class="card-meta">
+                        <span class="card-stat"><strong>33</strong> Programs</span>
+                        <span class="card-stat"><strong>All</strong> Free</span>
+                    </div>
+                    <div class="card-arrow">Explore Programs →</div>
+                </a>
+                
+                <a href="recreation.html" class="card">
+                    <div class="card-icon">🎢</div>
+                    <h3>Recreation & Vacations</h3>
+                    <p>Shades of Green, Hale Koa, Disney/Universal military tickets, Vet Tix, National Parks Pass, Armed Forces Vacation Club.</p>
+                    <div class="card-meta">
+                        <span class="card-stat"><strong>18</strong> Programs</span>
+                        <span class="card-stat"><strong>Free</strong> or Discounted</span>
+                    </div>
+                    <div class="card-arrow">Explore Programs →</div>
+                </a>
+                
+                <a href="spouses.html" class="card">
+                    <div class="card-icon">💜</div>
+                    <h3>Military Spouses</h3>
+                    <p>SECO Fellowship (permanent 2026), MyCAA ($4K scholarship), Microsoft MSSA Spouse program, Hiring Our Heroes spouse track.</p>
+                    <div class="card-meta">
+                        <span class="card-stat"><strong>8</strong> Programs</span>
+                        <span class="card-stat"><strong>$4K+</strong> Available</span>
+                    </div>
+                    <div class="card-arrow">Explore Programs →</div>
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <div class="section-label">Planning & Education</div>
+                <h2 class="section-title">Benefits, Cohorts & Timeline</h2>
+            </div>
+            <div class="cards-grid">
+                <a href="education-benefits.html" class="card">
+                    <div class="card-icon">🎓</div>
+                    <h3>Education Benefits</h3>
+                    <p>GI Bill vs VR&E comparison, STEM Scholarship, Yellow Ribbon, state benefits (Texas Hazlewood = FREE tuition for dependents).</p>
+                    <div class="card-meta">
+                        <span class="card-stat"><strong>$100K+</strong> Value</span>
+                        <span class="card-stat"><strong>6</strong> Federal Programs</span>
+                    </div>
+                    <div class="card-arrow">Understand Benefits →</div>
+                </a>
+                
+                <a href="leadership-cohorts.html" class="card">
+                    <div class="card-icon">👔</div>
+                    <h3>Leadership Cohorts</h3>
+                    <p>Honor Foundation, Commit Foundation, Stanford GSB Ignite, Warrior-Scholar Project. Executive programs for senior leaders and SOF.</p>
+                    <div class="card-meta">
+                        <span class="card-stat"><strong>10</strong> Programs</span>
+                        <span class="card-stat"><strong>Elite</strong> Networks</span>
+                    </div>
+                    <div class="card-arrow">Explore Programs →</div>
+                </a>
+                
+                <a href="transition-cohorts.html" class="card">
+                    <div class="card-icon">👥</div>
+                    <h3>Transition Cohorts</h3>
+                    <p>FourBlock, Hiring Our Heroes, American Corporate Partners, SkillBridge hosts. Structured group programs with peer support.</p>
+                    <div class="card-meta">
+                        <span class="card-stat"><strong>14</strong> Programs</span>
+                        <span class="card-stat"><strong>5</strong> Recruiting Firms</span>
+                    </div>
+                    <div class="card-arrow">Explore Programs →</div>
+                </a>
+                
+                <a href="timeline.html" class="card">
+                    <div class="card-icon">📅</div>
+                    <h3>Transition Timeline</h3>
+                    <p>When to use each resource: 24 months out → 12 months → SkillBridge window → 90 days → Post-separation actions.</p>
+                    <div class="card-meta">
+                        <span class="card-stat"><strong>5</strong> Phases</span>
+                        <span class="card-stat"><strong>Key</strong> Deadlines</span>
+                    </div>
+                    <div class="card-arrow">Plan Your Timeline →</div>
+                </a>
+            </div>
+        </section>
+
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 2rem;">
+            Last verified: January 2026 | <a href="https://github.com/jbenton1/government-guide" style="color: var(--accent-teal);">Suggest an update</a>
+        </p>
+    </main>
+
+    <footer>
+        <p>© 2025 Jeremy Benton. Built with purpose. <a href="../">Return to Home</a></p>
+    </footer>
+</body>
+</html>
