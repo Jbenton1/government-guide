@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership Cohorts | Veteran Career Resources</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --accent-teal: #00a6a6;
+            --accent-teal-dim: rgba(0, 166, 166, 0.15);
+            --accent-gold: #d4a574;
+            --accent-gold-dim: rgba(212, 165, 116, 0.15);
+            --accent-green: #16a34a;
+            --accent-green-dim: rgba(22, 163, 74, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(0, 166, 166, 0.3);
+            --border-gold: rgba(212, 165, 116, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 15, 26, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); }
+        .nav-top { padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .nav-logo { font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 600; color: var(--text-primary); text-decoration: none; }
+        .nav-logo span { color: var(--accent-teal); }
+        .nav-back { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; }
+        .category-nav { background: var(--bg-secondary); border-top: 1px solid var(--border-subtle); padding: 0 2rem; overflow-x: auto; }
+        .category-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 0.25rem; }
+        .category-link { padding: 0.75rem 0.75rem; color: var(--text-secondary); text-decoration: none; font-size: 0.7rem; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s ease; }
+        .category-link:hover { color: var(--accent-gold); background: var(--accent-gold-dim); }
+        .category-link.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+        main { max-width: 1100px; margin: 0 auto; padding: 8.5rem 2rem 4rem; }
+        .page-header { margin-bottom: 2rem; }
+        .page-badge { display: inline-flex; padding: 0.5rem 1rem; background: var(--accent-gold-dim); border: 1px solid var(--border-gold); border-radius: 2rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 1.5rem; }
+        .page-title { font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; margin-bottom: 1rem; }
+        .page-subtitle { font-size: 1.125rem; color: var(--text-secondary); max-width: 750px; }
+        .section { margin-bottom: 3rem; }
+        .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .section-title { font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 600; color: var(--accent-teal); }
+        .section-line { flex: 1; height: 1px; background: var(--border-accent); }
+        .section-count { font-size: 0.75rem; color: var(--text-muted); background: var(--bg-secondary); padding: 0.25rem 0.75rem; border-radius: 1rem; }
+        .program-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.25rem; }
+        .program-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 0.75rem; padding: 1.5rem; transition: all 0.3s ease; }
+        .program-card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+        .program-card.featured { border-color: var(--accent-gold); background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212, 165, 116, 0.08) 100%); }
+        .program-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; gap: 0.5rem; }
+        .program-name { font-family: 'Oswald', sans-serif; font-size: 1.125rem; font-weight: 600; color: var(--text-primary); }
+        .program-card.featured .program-name { color: var(--accent-gold); }
+        .tag { display: inline-block; padding: 0.125rem 0.5rem; border-radius: 0.25rem; font-size: 0.625rem; font-weight: 700; text-transform: uppercase; }
+        .tag-free { background: var(--accent-green-dim); color: var(--accent-green); }
+        .tag-featured { background: var(--accent-gold); color: var(--bg-primary); }
+        .program-desc { color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1rem; }
+        .program-meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .program-meta strong { color: var(--accent-teal); }
+        .program-link { color: var(--accent-teal); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
+        .program-link:hover { text-decoration: underline; }
+        .highlight-box { background: var(--accent-gold-dim); border: 1px solid var(--border-gold); border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+        .highlight-box h3 { font-family: 'Oswald', sans-serif; font-size: 1rem; color: var(--accent-gold); margin-bottom: 0.5rem; }
+        .highlight-box p { color: var(--text-secondary); font-size: 0.9375rem; }
+        footer { padding: 2rem; text-align: center; border-top: 1px solid var(--border-subtle); margin-top: 3rem; }
+        footer p { color: var(--text-muted); font-size: 0.875rem; }
+        footer a { color: var(--accent-teal); text-decoration: none; }
+        @media (max-width: 768px) { main { padding: 7.5rem 1.5rem 3rem; } .program-grid { grid-template-columns: 1fr; } .category-link { padding: 0.625rem 0.5rem; font-size: 0.625rem; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-top">
+            <a href="../" class="nav-logo">JEREMY<span>BENTON</span></a>
+            <a href="index.html" class="nav-back">← Back to Directory</a>
+        </div>
+        <div class="category-nav">
+            <div class="category-nav-inner">
+                <a href="index.html" class="category-link">🏠 Overview</a>
+                <a href="tech-training.html" class="category-link">💻 Tech</a>
+                <a href="trades-training.html" class="category-link">🔧 Trades</a>
+                <a href="business-careers.html" class="category-link">📈 Business</a>
+                <a href="federal-employment.html" class="category-link">🏛️ Federal</a>
+                <a href="mental-health.html" class="category-link">🧠 Mental Health</a>
+                <a href="recreation.html" class="category-link">🎢 Recreation</a>
+                <a href="spouses.html" class="category-link">💜 Spouses</a>
+                <a href="education-benefits.html" class="category-link">🎓 Education</a>
+                <a href="leadership-cohorts.html" class="category-link active">👔 Leadership</a>
+                <a href="transition-cohorts.html" class="category-link">👥 Transition</a>
+                <a href="timeline.html" class="category-link">📅 Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header class="page-header">
+            <div class="page-badge">Executive Programs</div>
+            <h1 class="page-title">Leadership Cohorts & Executive Transition</h1>
+            <p class="page-subtitle">Elite executive-level programs for senior officers, SOF, and high-potential leaders. Stanford GSB, Honor Foundation, Commit Foundation, and more.</p>
+        </header>
+
+        <div class="highlight-box">
+            <h3>🎯 Who These Programs Are For</h3>
+            <p>These are curated, competitive programs designed for senior leaders (O-4+, E-8+, SOF). If you're earlier in your career, check out <a href="transition-cohorts.html" style="color: var(--accent-gold);">Transition Cohorts</a> for programs like FourBlock and Hiring Our Heroes that serve all ranks.</p>
+        </div>
+
+        <!-- ELITE EXECUTIVE PROGRAMS -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Elite Executive Programs</h2>
+                <div class="section-line"></div>
+                <span class="section-count">5 programs</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">The Honor Foundation</span>
+                        <span class="tag tag-featured">TOP</span>
+                    </div>
+                    <p class="program-desc">Premier 3-month executive transition program for U.S. Special Operations Forces. 500+ executive mentors from top companies. 97% of alumni report being "fulfilled" 90 days post-transition.</p>
+                    <div class="program-meta">
+                        <strong>Eligibility:</strong> U.S. Special Operations Forces<br>
+                        <strong>Format:</strong> 3-month intensive, cohort-based<br>
+                        <strong>NEW:</strong> Vector Accelerator—free for ALL service members
+                    </div>
+                    <span class="tag tag-free">FREE</span>
+                    <a href="https://www.honor.org/" target="_blank" class="program-link">Apply →</a>
+                </div>
+
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">Commit Foundation</span>
+                        <span class="tag tag-featured">TOP</span>
+                    </div>
+                    <p class="program-desc">High-touch transition support with 2-day Transition Mentoring Workshops, 6-12 month executive coaching, and "Pursue Your Purpose" online program. Partners with Stanford GSB for Ignite scholarships.</p>
+                    <div class="program-meta">
+                        <strong>Eligibility:</strong> Post-9/11 Veterans, TSMs, Military Spouses<br>
+                        <strong>Format:</strong> 2-day workshop + 6-12 month coaching<br>
+                        <strong>Partnership:</strong> Stanford GSB Ignite Program
+                    </div>
+                    <span class="tag tag-free">FREE</span>
+                    <a href="https://www.commitfoundation.org/" target="_blank" class="program-link">Apply →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Stanford Ignite (via Commit)</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Stanford Graduate School of Business executive education program. Veterans access through Commit Foundation partnership. Learn strategy, innovation, and entrepreneurship from Stanford faculty.</p>
+                    <div class="program-meta">
+                        <strong>Eligibility:</strong> Through Commit Foundation nomination<br>
+                        <strong>Format:</strong> Multi-week executive education<br>
+                        <strong>Value:</strong> $12,000+ program at no cost
+                    </div>
+                    <a href="https://www.commitfoundation.org/" target="_blank" class="program-link">Apply via Commit →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Service to School (S2S)</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Free peer-to-peer mentorship connecting veterans with MBA, law, and medical school students/alumni. Includes application guidance, essay reviews, and VetLink for admissions connections.</p>
+                    <div class="program-meta">
+                        <strong>Eligibility:</strong> Veterans, Transitioning Service Members<br>
+                        <strong>Focus:</strong> MBA, Law, Medical school applications<br>
+                        <strong>Feature:</strong> VetLink direct admissions connections
+                    </div>
+                    <a href="https://www.service2school.org/" target="_blank" class="program-link">Get Matched →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Warrior-Scholar Project (WSP)</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">1-2 week academic boot camps at Ivy League schools (Yale, Harvard, Georgetown, etc.) for enlisted veterans without degrees. 90% of alumni complete their degrees.</p>
+                    <div class="program-meta">
+                        <strong>Eligibility:</strong> Enlisted veterans, TSMs without BA<br>
+                        <strong>Format:</strong> 1-2 week intensive at elite universities<br>
+                        <strong>2026 Apps:</strong> Open February 2
+                    </div>
+                    <a href="https://www.warrior-scholar.org/apply/" target="_blank" class="program-link">Apply →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS & CREDENTIALS -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Leadership Certifications</h2>
+                <div class="section-line"></div>
+                <span class="section-count">3 programs</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Agile for Patriots</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Free Professional Scrum Master (PSM) certification training with 12-day practicum on real Scrum projects. Two free exam attempts included.</p>
+                    <div class="program-meta">
+                        <strong>Eligibility:</strong> Veterans, TSMs, Military Spouses<br>
+                        <strong>Certification:</strong> PSM I (Professional Scrum Master)<br>
+                        <strong>Value:</strong> $150+ certification at no cost
+                    </div>
+                    <a href="https://agileforpatriots.org/" target="_blank" class="program-link">Enroll →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Vets2PM</span>
+                        <span class="tag tag-free">SCHOLARSHIPS</span>
+                    </div>
+                    <p class="program-desc">Translates military experience into PM language for PMP certification applications. Training is GI Bill reimbursable. Scholarships available for veterans.</p>
+                    <div class="program-meta">
+                        <strong>Eligibility:</strong> Veterans<br>
+                        <strong>Focus:</strong> PMP certification preparation<br>
+                        <strong>Unique:</strong> Military-to-PM experience translation
+                    </div>
+                    <a href="https://www.vets2pm.com/" target="_blank" class="program-link">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">O2O Business Management Track</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Syracuse IVMF's Onward to Opportunity offers free PMP, Six Sigma, and HR certifications. Includes 5-day PMP bootcamp format with exam fee covered.</p>
+                    <div class="program-meta">
+                        <strong>Eligibility:</strong> TSMs, Veterans, Military Spouses<br>
+                        <strong>Certifications:</strong> PMP, Six Sigma, PHR/SHRM<br>
+                        <strong>Format:</strong> 5-day bootcamp or self-paced
+                    </div>
+                    <a href="https://ivmf.syracuse.edu/programs/career-training/" target="_blank" class="program-link">Enroll →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- MOAA / OFFICER SPECIFIC -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Officer-Focused Resources</h2>
+                <div class="section-line"></div>
+                <span class="section-count">2 resources</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">MOAA Transition Services</span>
+                        <span class="tag tag-free">BASIC FREE</span>
+                    </div>
+                    <p class="program-desc">Military Officers Association of America provides career transition training, Officer Placement Service, virtual career fairs, and ACP mentorship partnership.</p>
+                    <div class="program-meta">
+                        <strong>Eligibility:</strong> Commissioned Officers, Warrant Officers, families<br>
+                        <strong>Services:</strong> Career fairs, resume reviews, job board<br>
+                        <strong>Premium:</strong> Enhanced services with membership
+                    </div>
+                    <a href="https://www.moaa.org/content/benefits-and-discounts/transition-and-careers/transition-and-career/" target="_blank" class="program-link">Join →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Lucas Group Military Division</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Executive recruiting firm specializing in placing JMOs (Junior Military Officers), senior NCOs, and Navy Nuclear-trained officers. High-touch, white-glove service.</p>
+                    <div class="program-meta">
+                        <strong>Eligibility:</strong> JMOs, Senior NCOs, Navy Nuclear<br>
+                        <strong>Focus:</strong> Executive and management placements<br>
+                        <strong>Style:</strong> Contingency recruiting (free to candidates)
+                    </div>
+                    <a href="https://www.lucasgroup.com/military-transition/" target="_blank" class="program-link">Connect →</a>
+                </div>
+            </div>
+        </section>
+
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 2rem;">Last verified: January 2026 · 10 programs</p>
+    </main>
+
+    <footer>
+        <p>© 2025 Jeremy Benton. <a href="index.html">Back to Directory</a> | <a href="../">Return to Home</a></p>
+    </footer>
+</body>
+</html>
