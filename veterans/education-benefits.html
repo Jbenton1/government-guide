@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Benefits | Veteran Career Resources</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --accent-teal: #00a6a6;
+            --accent-teal-dim: rgba(0, 166, 166, 0.15);
+            --accent-gold: #d4a574;
+            --accent-gold-dim: rgba(212, 165, 116, 0.15);
+            --accent-green: #16a34a;
+            --accent-green-dim: rgba(22, 163, 74, 0.15);
+            --accent-red: #dc2626;
+            --accent-red-dim: rgba(220, 38, 38, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(0, 166, 166, 0.3);
+            --border-gold: rgba(212, 165, 116, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 15, 26, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle); }
+        .nav-top { padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .nav-logo { font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 600; color: var(--text-primary); text-decoration: none; }
+        .nav-logo span { color: var(--accent-teal); }
+        .nav-back { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; }
+        .category-nav { background: var(--bg-secondary); border-top: 1px solid var(--border-subtle); padding: 0 2rem; overflow-x: auto; }
+        .category-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 0.25rem; }
+        .category-link { padding: 0.75rem 0.75rem; color: var(--text-secondary); text-decoration: none; font-size: 0.7rem; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s ease; }
+        .category-link:hover { color: var(--accent-gold); background: var(--accent-gold-dim); }
+        .category-link.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+        main { max-width: 1100px; margin: 0 auto; padding: 8.5rem 2rem 4rem; }
+        .page-header { margin-bottom: 2rem; }
+        .page-badge { display: inline-flex; padding: 0.5rem 1rem; background: var(--accent-gold-dim); border: 1px solid var(--border-gold); border-radius: 2rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 1.5rem; }
+        .page-title { font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; margin-bottom: 1rem; }
+        .page-subtitle { font-size: 1.125rem; color: var(--text-secondary); max-width: 750px; }
+        .alert-box { padding: 1.25rem 1.5rem; border-radius: 0.75rem; border-left: 4px solid; margin-bottom: 1.5rem; }
+        .alert-box.warning { background: var(--accent-red-dim); border-color: var(--accent-red); }
+        .alert-box.success { background: var(--accent-green-dim); border-color: var(--accent-green); }
+        .alert-box h3 { font-family: 'Oswald', sans-serif; font-size: 1rem; margin-bottom: 0.5rem; }
+        .alert-box p { color: var(--text-secondary); font-size: 0.9375rem; }
+        .section { margin-bottom: 3rem; }
+        .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .section-title { font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 600; color: var(--accent-teal); }
+        .section-line { flex: 1; height: 1px; background: var(--border-accent); }
+        .section-count { font-size: 0.75rem; color: var(--text-muted); background: var(--bg-secondary); padding: 0.25rem 0.75rem; border-radius: 1rem; }
+        .benefit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem; }
+        .benefit-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 0.75rem; padding: 1.5rem; transition: all 0.3s ease; }
+        .benefit-card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+        .benefit-card.featured { border-color: var(--accent-gold); background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212, 165, 116, 0.08) 100%); }
+        .benefit-name { font-family: 'Oswald', sans-serif; font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .benefit-card.featured .benefit-name { color: var(--accent-gold); }
+        .benefit-value { font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--accent-teal); margin-bottom: 0.75rem; }
+        .benefit-desc { color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1rem; }
+        .benefit-meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle); }
+        .benefit-meta strong { color: var(--accent-teal); }
+        .benefit-link { color: var(--accent-teal); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
+        .state-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+        .state-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; }
+        .state-card h4 { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; color: var(--accent-gold); margin-bottom: 0.5rem; }
+        .state-card p { font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .state-card a { color: var(--accent-teal); text-decoration: none; font-size: 0.75rem; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.875rem; }
+        .comparison-table th { background: var(--bg-secondary); padding: 1rem; text-align: left; font-family: 'Oswald', sans-serif; font-weight: 600; color: var(--accent-teal); border-bottom: 2px solid var(--border-accent); }
+        .comparison-table td { padding: 1rem; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); }
+        footer { padding: 2rem; text-align: center; border-top: 1px solid var(--border-subtle); margin-top: 3rem; }
+        footer p { color: var(--text-muted); font-size: 0.875rem; }
+        footer a { color: var(--accent-teal); text-decoration: none; }
+        @media (max-width: 768px) { main { padding: 7.5rem 1.5rem 3rem; } .benefit-grid, .state-grid { grid-template-columns: 1fr; } .category-link { padding: 0.625rem 0.5rem; font-size: 0.625rem; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-top">
+            <a href="../" class="nav-logo">JEREMY<span>BENTON</span></a>
+            <a href="index.html" class="nav-back">← Back to Directory</a>
+        </div>
+        <div class="category-nav">
+            <div class="category-nav-inner">
+                <a href="index.html" class="category-link">🏠 Overview</a>
+                <a href="tech-training.html" class="category-link">💻 Tech</a>
+                <a href="trades-training.html" class="category-link">🔧 Trades</a>
+                <a href="business-careers.html" class="category-link">📈 Business</a>
+                <a href="federal-employment.html" class="category-link">🏛️ Federal</a>
+                <a href="mental-health.html" class="category-link">🧠 Mental Health</a>
+                <a href="recreation.html" class="category-link">🎢 Recreation</a>
+                <a href="spouses.html" class="category-link">💜 Spouses</a>
+                <a href="education-benefits.html" class="category-link active">🎓 Education</a>
+                <a href="leadership-cohorts.html" class="category-link">👔 Leadership</a>
+                <a href="transition-cohorts.html" class="category-link">👥 Transition</a>
+                <a href="timeline.html" class="category-link">📅 Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header class="page-header">
+            <div class="page-badge">Education Benefits</div>
+            <h1 class="page-title">VA Education Benefits & Scholarships</h1>
+            <p class="page-subtitle">GI Bill, VR&E, STEM Scholarship, Yellow Ribbon, and state education benefits. Don't leave $100K+ on the table—understand your options.</p>
+        </header>
+
+        <div class="alert-box warning">
+            <h3>⚠️ VET TEC 2.0 Status</h3>
+            <p>Reauthorized January 2025 but <strong>NOT YET OPERATIONAL</strong> as of January 2026. When operational: limited to 4,000 spots/year, requires partial GI Bill usage.</p>
+        </div>
+
+        <div class="alert-box success">
+            <h3>✓ Key Decision: GI Bill vs VR&E</h3>
+            <p>If you have 10%+ service-connected disability, <strong>VR&E (Chapter 31) is often better</strong>—covers MORE than GI Bill (tools, laptop, certifications) and doesn't consume your GI Bill months.</p>
+        </div>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Federal VA Education Benefits</h2>
+                <div class="section-line"></div>
+                <span class="section-count">6 programs</span>
+            </div>
+            <div class="benefit-grid">
+                <div class="benefit-card featured">
+                    <div class="benefit-name">Post-9/11 GI Bill (Chapter 33)</div>
+                    <div class="benefit-value">Full Tuition + $29,920/yr</div>
+                    <p class="benefit-desc">Full tuition at public schools, up to $29,920.95/year at private schools, plus Monthly Housing Allowance (E-5 with dependents BAH rate) and $1,000/year books stipend.</p>
+                    <div class="benefit-meta"><strong>Eligibility:</strong> 90+ days active duty post-9/11<br><strong>Duration:</strong> 36 months · Transferable to dependents</div>
+                    <a href="https://www.va.gov/education/about-gi-bill-benefits/post-9-11/" target="_blank" class="benefit-link">Check Eligibility →</a>
+                </div>
+                <div class="benefit-card featured">
+                    <div class="benefit-name">VR&E - Chapter 31</div>
+                    <div class="benefit-value">$840–$3,439/month</div>
+                    <p class="benefit-desc">Comprehensive employment program covering tuition, books, supplies, tools, certifications, and monthly subsistence. Often better than GI Bill—doesn't consume GI Bill months.</p>
+                    <div class="benefit-meta"><strong>Eligibility:</strong> 10%+ service-connected disability<br><strong>Covers:</strong> Tuition + laptop + tools + certifications</div>
+                    <a href="https://www.va.gov/careers-employment/vocational-rehabilitation/" target="_blank" class="benefit-link">Apply Now →</a>
+                </div>
+                <div class="benefit-card featured">
+                    <div class="benefit-name">Edith Nourse Rogers STEM Scholarship</div>
+                    <div class="benefit-value">Up to $30,000</div>
+                    <p class="benefit-desc">Additional 9 months or $30,000 for STEM degrees when exhausting GI Bill. 7,000+ veterans have used it. Annual budget: $100 million.</p>
+                    <div class="benefit-meta"><strong>Eligibility:</strong> Exhausting GI Bill in approved STEM field</div>
+                    <a href="https://www.va.gov/education/other-va-education-benefits/stem-scholarship/" target="_blank" class="benefit-link">Apply →</a>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-name">Yellow Ribbon Program</div>
+                    <div class="benefit-value">Unlimited Coverage</div>
+                    <p class="benefit-desc">School contributes funds, VA matches—covers tuition exceeding GI Bill cap. Enables access to Ivy League and expensive private schools.</p>
+                    <div class="benefit-meta"><strong>Eligibility:</strong> 100% Post-9/11 GI Bill tier</div>
+                    <a href="https://www.va.gov/education/about-gi-bill-benefits/post-9-11/yellow-ribbon-program/" target="_blank" class="benefit-link">Find Schools →</a>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-name">DEA - Chapter 35</div>
+                    <div class="benefit-value">$1,574/month</div>
+                    <p class="benefit-desc">Education benefits for dependents of veterans who are permanently and totally disabled or died in service.</p>
+                    <div class="benefit-meta"><strong>Eligibility:</strong> Dependents of 100% P&T disabled or deceased veterans</div>
+                    <a href="https://www.va.gov/education/survivor-dependent-benefits/dependents-education-assistance/" target="_blank" class="benefit-link">Learn More →</a>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-name">Fry Scholarship</div>
+                    <div class="benefit-value">Same as Post-9/11</div>
+                    <p class="benefit-desc">Full Post-9/11 GI Bill benefits for children and surviving spouses of those who died in line of duty after 9/11.</p>
+                    <div class="benefit-meta"><strong>Eligibility:</strong> Children/spouses of those who died in line of duty</div>
+                    <a href="https://www.va.gov/education/survivor-dependent-benefits/fry-scholarship/" target="_blank" class="benefit-link">Learn More →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">GI Bill vs VR&E Comparison</h2>
+                <div class="section-line"></div>
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="comparison-table">
+                    <thead><tr><th>Feature</th><th>Post-9/11 GI Bill</th><th>VR&E (Chapter 31)</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Eligibility</strong></td><td>90+ days post-9/11 service</td><td>10%+ service-connected disability</td></tr>
+                        <tr><td><strong>Tuition</strong></td><td>Full public / $29,920 private cap</td><td>Full tuition (no cap) ✓</td></tr>
+                        <tr><td><strong>Books/Supplies</strong></td><td>$1,000/year</td><td>All required materials covered ✓</td></tr>
+                        <tr><td><strong>Equipment</strong></td><td>Not covered</td><td>Laptop, tools, certifications ✓</td></tr>
+                        <tr><td><strong>Duration</strong></td><td>36 months</td><td>Up to 48 months</td></tr>
+                        <tr><td><strong>Transferable</strong></td><td>Yes (4-year commitment) ✓</td><td>No</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">State Education Benefits</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="state-grid">
+                <div class="state-card">
+                    <h4>🏆 Texas - Hazlewood Act</h4>
+                    <p>Most generous: FREE tuition at ALL public colleges for veterans AND transferable to dependents. Up to 150 credit hours.</p>
+                    <a href="https://www.tvc.texas.gov/education/hazlewood-act/" target="_blank">Details →</a>
+                </div>
+                <div class="state-card">
+                    <h4>California</h4>
+                    <p>Cal Vet Fee Waiver for dependents of 100% disabled/deceased. New $20K military retirement pay exemption (2025).</p>
+                    <a href="https://www.calvet.ca.gov/VetServices/Pages/College-Fee-Waiver.aspx" target="_blank">Details →</a>
+                </div>
+                <div class="state-card">
+                    <h4>Illinois</h4>
+                    <p>Illinois Veterans' Grant: Covers tuition and fees at ALL state-supported colleges. No credit hour limit.</p>
+                    <a href="https://www.isac.org/students/during-college/types-of-financial-aid/grants/illinois-veteran-grant.html" target="_blank">Details →</a>
+                </div>
+                <div class="state-card">
+                    <h4>New York</h4>
+                    <p>Veterans Tuition Awards: Up to $6,880/year at SUNY/CUNY schools.</p>
+                    <a href="https://www.hesc.ny.gov/pay-for-college/military-corner.html" target="_blank">Details →</a>
+                </div>
+                <div class="state-card">
+                    <h4>Florida</h4>
+                    <p>Purple Heart/Combat Recipients: Tuition waiver at state universities. Dependent waivers available.</p>
+                    <a href="https://www.floridavets.org/benefits-services/education/" target="_blank">Details →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Certification Reimbursement</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="benefit-card" style="max-width: 600px;">
+                <div class="benefit-name">GI Bill Test Fee Reimbursement</div>
+                <div class="benefit-value">Up to $2,000/exam</div>
+                <p class="benefit-desc">VA reimburses certification exam fees for 2,000+ approved tests: AWS, CompTIA, PMP, Cisco, Microsoft, welding, and more. Doesn't use GI Bill months.</p>
+                <div class="benefit-meta"><strong>How:</strong> Submit VA Form 22-0803 after passing</div>
+                <a href="https://www.va.gov/education/about-gi-bill-benefits/how-to-use-benefits/test-fees/" target="_blank" class="benefit-link">Get Reimbursed →</a>
+            </div>
+        </section>
+
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 2rem;">Last verified: January 2026</p>
+    </main>
+
+    <footer>
+        <p>© 2025 Jeremy Benton. <a href="index.html">Back to Directory</a> | <a href="../">Return to Home</a></p>
+    </footer>
+</body>
+</html>
