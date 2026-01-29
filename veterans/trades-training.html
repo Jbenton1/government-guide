@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trades & Manufacturing Training | Veteran Career Resources</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --bg-card-hover: #222d42;
+            --accent-teal: #00a6a6;
+            --accent-teal-dim: rgba(0, 166, 166, 0.15);
+            --accent-gold: #d4a574;
+            --accent-gold-dim: rgba(212, 165, 116, 0.15);
+            --accent-green: #16a34a;
+            --accent-green-dim: rgba(22, 163, 74, 0.15);
+            --accent-blue: #3b82f6;
+            --accent-blue-dim: rgba(59, 130, 246, 0.15);
+            --accent-orange: #f97316;
+            --accent-orange-dim: rgba(249, 115, 22, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(0, 166, 166, 0.3);
+            --border-gold: rgba(212, 165, 116, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(212, 165, 116, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 165, 116, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 15, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .nav-logo span { color: var(--accent-gold); }
+        .nav-back {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-back:hover { color: var(--accent-gold); }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 8.5rem 2rem 4rem;
+        }
+        .page-header { margin-bottom: 2rem; }
+        .page-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent-gold-dim);
+            border: 1px solid var(--border-gold);
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+        }
+        .page-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 750px;
+        }
+        .stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .section { margin-bottom: 3rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border-gold);
+        }
+        .section-count {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+        .program-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .program-card:hover {
+            border-color: var(--border-gold);
+            transform: translateY(-2px);
+        }
+        .program-card.featured {
+            border-color: var(--accent-gold);
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212, 165, 116, 0.08) 100%);
+        }
+        .program-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            gap: 0.5rem;
+        }
+        .program-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .program-card.featured .program-name { color: var(--accent-gold); }
+        .tag {
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.625rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .tag-free { background: var(--accent-green-dim); color: var(--accent-green); }
+        .tag-paid { background: var(--accent-orange-dim); color: var(--accent-orange); }
+        .tag-gi { background: var(--accent-blue-dim); color: var(--accent-blue); }
+        .tag-featured { background: var(--accent-gold); color: var(--bg-primary); }
+        .program-desc {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        .program-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            margin-bottom: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+        .meta-item {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .meta-item strong { color: var(--accent-gold); }
+        .program-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            color: var(--accent-teal);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .program-link:hover { text-decoration: underline; }
+        .highlight-box {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(0, 166, 166, 0.08) 100%);
+            border: 1px solid var(--border-accent);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .highlight-box h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent-teal);
+            margin-bottom: 0.75rem;
+        }
+        .highlight-box p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 3rem;
+        }
+        footer p { color: var(--text-muted); font-size: 0.875rem; }
+        footer a { color: var(--accent-gold); text-decoration: none; }
+        @media (max-width: 768px) {
+            main { padding: 7.5rem 1.5rem 3rem; }
+            .program-grid { grid-template-columns: 1fr; }
+            .stats-bar { justify-content: space-around; }
+        }
+    
+        /* Category Navigation Bar */
+        .category-nav {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            padding: 0 2rem;
+            overflow-x: auto;
+        }
+        .category-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.25rem;
+        }
+        .category-link {
+            padding: 0.75rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .category-link:hover {
+            color: var(--accent-gold);
+            background: var(--accent-gold-dim);
+        }
+        .category-link.active {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+        @media (max-width: 768px) {
+            .category-nav { padding: 0 1rem; }
+            .category-link { padding: 0.625rem 0.75rem; font-size: 0.6875rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../" class="nav-logo">JEREMY<span>BENTON</span></a>
+                        <a href="index.html" class="nav-back">← Back to Directory</a>
+        </div>
+        <div class="category-nav">
+                        <div class="category-nav-inner">
+                <a href="index.html" class="category-link">🏠 Overview</a>
+                <a href="tech-training.html" class="category-link">💻 Tech</a>
+                <a href="trades-training.html" class="category-link active">🔧 Trades</a>
+                <a href="business-careers.html" class="category-link">📈 Business</a>
+                <a href="federal-employment.html" class="category-link">🏛️ Federal</a>
+                <a href="mental-health.html" class="category-link">🧠 Mental Health</a>
+                <a href="recreation.html" class="category-link">🎢 Recreation</a>
+                <a href="spouses.html" class="category-link">💜 Spouses</a>
+                <a href="education-benefits.html" class="category-link">🎓 Education</a>
+                <a href="leadership-cohorts.html" class="category-link">👔 Leadership</a>
+                <a href="transition-cohorts.html" class="category-link">👥 Transition</a>
+                <a href="timeline.html" class="category-link">📅 Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header class="page-header">
+            <div class="page-badge">Skilled Trades</div>
+            <h1 class="page-title">Trades & Manufacturing Training</h1>
+            <p class="page-subtitle">Welding, CNC machining, electrical, industrial automation, and building trades. High-demand careers with $55K-$75K+ entry salaries—most programs free or paid during training.</p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value">$55-75K</div>
+                <div class="stat-label">Entry Salary Range</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">90%+</div>
+                <div class="stat-label">Avg Placement Rate</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">11</div>
+                <div class="stat-label">Verified Programs</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Completely Free</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h3>Why Trades?</h3>
+            <p>Manufacturing is experiencing a renaissance. The U.S. hasn't built new munitions facilities in 80 years. Semiconductor fabs are coming back. Infrastructure is being rebuilt. These programs lead to careers with strong job security, union benefits, and clear advancement paths—without the student debt of a 4-year degree.</p>
+        </div>
+
+        <!-- MANUFACTURING & AUTOMATION -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Manufacturing & Automation</h2>
+                <div class="section-line"></div>
+                <span class="section-count">5 programs</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">Academy of Advanced Manufacturing</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">Rockwell Automation's 12-week <strong>paid</strong> intensive in PLCs, industrial automation, and controls technology. Salary during training + room, board, per diem. 90% placement; $55K-$75K starting.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 12 weeks</span>
+                        <span class="meta-item"><strong>Locations:</strong> Milwaukee, Cleveland</span>
+                        <span class="meta-item"><strong>SkillBridge:</strong> Yes</span>
+                    </div>
+                    <span class="tag tag-paid" style="margin-bottom:0.75rem;width:fit-content;background:var(--accent-green-dim);color:var(--accent-green);">FREE + PAID SALARY</span>
+                    <a href="https://www.rockwellautomation.com/en-us/capabilities/academy-advanced-manufacturing.html" target="_blank" class="program-link">Apply Now →</a>
+                </div>
+
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">Heroes Make America</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">Manufacturing Institute's 6-16 week SkillBridge-approved training in Manufacturing Operations, Automation & Robotics, CNC Machining, Welding. GE Aerospace expanded $500K in Oct 2025. 92% placement.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 6-16 weeks</span>
+                        <span class="meta-item"><strong>Format:</strong> In-person + Virtual</span>
+                        <span class="meta-item"><strong>SkillBridge:</strong> Yes</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE</span>
+                    <a href="https://themanufacturinginstitute.org/heroes-make-america/training-program/" target="_blank" class="program-link">Apply Now →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Siemens PLM Veterans Initiative</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Free training in CAD/CAM/CAE software (NX, Teamcenter) at 22 Siemens facilities nationwide. Training valued up to $17,000 per veteran.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Software:</strong> NX, Teamcenter</span>
+                        <span class="meta-item"><strong>Locations:</strong> 22 facilities</span>
+                        <span class="meta-item"><strong>Value:</strong> $17,000</span>
+                    </div>
+                    <a href="https://training.plm.automation.siemens.com/country/en-ams/promos.shtml" target="_blank" class="program-link">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">FAME</span>
+                        <span class="tag tag-free">EMPLOYER PAID</span>
+                    </div>
+                    <p class="program-desc">Federation for Advanced Manufacturing Education. 2-year employer-led apprenticeship combining college + paid work. Earn $30,000+ during program. Debt-free graduation.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 2 years</span>
+                        <span class="meta-item"><strong>Earn During:</strong> $30K+</span>
+                    </div>
+                    <a href="https://fame-usa.com/" target="_blank" class="program-link">Find Programs →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">AJAC</span>
+                        <span class="tag tag-free">FREE + WAGES</span>
+                    </div>
+                    <p class="program-desc">Aerospace Joint Apprenticeship Committee. Washington State's leading advanced manufacturing apprenticeship: 13 registered programs in CNC, Industrial Maintenance, Automation. Includes Operation Next SkillBridge.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Programs:</strong> 13 registered</span>
+                        <span class="meta-item"><strong>Location:</strong> Washington State</span>
+                    </div>
+                    <a href="https://www.ajactraining.org/programs/military-pathways/" target="_blank" class="program-link">Explore Programs →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- WELDING -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Welding</h2>
+                <div class="section-line"></div>
+                <span class="section-count">3 programs</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">Workshops for Warriors</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">Nonprofit offering accelerated 16-week training in CNC Machining and Welding with NIMS, AWS, Mastercam certifications. $50M+ facility expansion to train 700 annually. <strong>94% job placement rate.</strong></p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 16 weeks</span>
+                        <span class="meta-item"><strong>Certs:</strong> NIMS, AWS, Mastercam</span>
+                        <span class="meta-item"><strong>Placement:</strong> 94%</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE (Also GI Bill/SkillBridge)</span>
+                    <a href="https://wfw.org/" target="_blank" class="program-link">Apply → Highly Competitive (9K applicants/240 seats)</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Lincoln Electric Welding School</span>
+                        <span class="tag tag-gi">GI BILL</span>
+                    </div>
+                    <p class="program-desc">Comprehensive 16-week programs at one of the world's oldest welding schools (since 1917). Earn AWS certifications. Veterans and dependents via GI Bill transfer.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 16 weeks</span>
+                        <span class="meta-item"><strong>Since:</strong> 1917</span>
+                        <span class="meta-item"><strong>Certs:</strong> AWS</span>
+                    </div>
+                    <a href="https://www.lincolnelectric.com/en/education/education-promotions/veteran" target="_blank" class="program-link">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">AWS Foundation Scholarships</span>
+                        <span class="tag tag-free">SCHOLARSHIPS</span>
+                    </div>
+                    <p class="program-desc">American Welding Society awards $2.7M+ annually. Includes Nancy & Barry Carlson Scholarship specifically for veterans. VA reimburses cert exams up to $2,000.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Awards:</strong> $1K-$10K+</span>
+                        <span class="meta-item"><strong>Annual Total:</strong> $2.7M+</span>
+                    </div>
+                    <a href="https://www.aws.org/career-resources/veterans/" target="_blank" class="program-link">Apply for Scholarships →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ELECTRICAL & BUILDING TRADES -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Electrical & Building Trades</h2>
+                <div class="section-line"></div>
+                <span class="section-count">2 programs</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">VEEP (Veterans Electrical Entry Program)</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">Free IBEW/NECA pre-apprenticeship with <strong>guaranteed entry</strong> into registered IBEW electrical apprenticeship programs nationwide. Lineworker bootcamp includes room, board, and wages. Choose your location after completion.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Outcome:</strong> Guaranteed IBEW apprenticeship</span>
+                        <span class="meta-item"><strong>SkillBridge:</strong> Yes</span>
+                        <span class="meta-item"><strong>Eligibility:</strong> Vets within 5 years</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE + WAGES</span>
+                    <a href="https://in2veep.com/" target="_blank" class="program-link">Apply Now →</a>
+                </div>
+
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">Helmets to Hardhats</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">3-5 year union apprenticeships in 16 building trades: electrical, plumbing, HVAC, carpentry, ironwork, and more. Earn-while-you-learn model with union wages from day one. <strong>36,000+ alumni.</strong></p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Trades:</strong> 16 options</span>
+                        <span class="meta-item"><strong>Duration:</strong> 3-5 year apprenticeships</span>
+                        <span class="meta-item"><strong>Experience:</strong> None required</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE + UNION WAGES</span>
+                    <a href="https://helmetstohardhats.org/" target="_blank" class="program-link">Find Your Trade →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- AUTOMOTIVE -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Automotive</h2>
+                <div class="section-line"></div>
+                <span class="section-count">1 program</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">GM Shifting Gears</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">12-week automotive technician training at Fort Hood. 1,000+ graduates since 2014 with 100% placement at GM dealerships. Earn World Class Technician certifications.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 12 weeks</span>
+                        <span class="meta-item"><strong>Location:</strong> Fort Hood, TX</span>
+                        <span class="meta-item"><strong>Placement:</strong> 100%</span>
+                    </div>
+                    <a href="https://www.gmstc.com/index.php/shifting-gears/" target="_blank" class="program-link">Learn More →</a>
+                </div>
+            </div>
+        </section>
+
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 2rem;">Last verified: January 2026 · 11 programs</p>
+    </main>
+
+    <footer>
+        <p>© 2025 Jeremy Benton. <a href="index.html">Back to Directory</a> | <a href="../">Return to Home</a></p>
+    </footer>
+</body>
+</html>
