@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Training | Veteran Career Resources</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --bg-card-hover: #222d42;
+            --accent-teal: #00a6a6;
+            --accent-teal-dim: rgba(0, 166, 166, 0.15);
+            --accent-gold: #d4a574;
+            --accent-gold-dim: rgba(212, 165, 116, 0.15);
+            --accent-green: #16a34a;
+            --accent-green-dim: rgba(22, 163, 74, 0.15);
+            --accent-blue: #3b82f6;
+            --accent-blue-dim: rgba(59, 130, 246, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(0, 166, 166, 0.3);
+            --border-gold: rgba(212, 165, 116, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 166, 166, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 166, 166, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 15, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .nav-logo span { color: var(--accent-teal); }
+        .nav-back {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-back:hover { color: var(--accent-teal); }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 8.5rem 2rem 4rem;
+        }
+        .page-header { margin-bottom: 2rem; }
+        .page-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent-teal-dim);
+            border: 1px solid var(--border-accent);
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-teal);
+            margin-bottom: 1.5rem;
+        }
+        .page-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 750px;
+        }
+        .alert-box {
+            background: var(--accent-gold-dim);
+            border: 1px solid var(--border-gold);
+            border-radius: 0.75rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+        .alert-box .icon { font-size: 1.25rem; }
+        .alert-box p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+        .alert-box strong { color: var(--accent-gold); }
+        .section { margin-bottom: 3rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-teal);
+        }
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border-accent);
+        }
+        .section-count {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+        .program-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .program-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-2px);
+        }
+        .program-card.featured {
+            border-color: var(--accent-gold);
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212, 165, 116, 0.08) 100%);
+        }
+        .program-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        .program-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .program-card.featured .program-name { color: var(--accent-gold); }
+        .tag {
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.625rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .tag-free { background: var(--accent-green-dim); color: var(--accent-green); }
+        .tag-gi { background: var(--accent-blue-dim); color: var(--accent-blue); }
+        .tag-paid { background: var(--accent-gold-dim); color: var(--accent-gold); }
+        .tag-featured { background: var(--accent-gold); color: var(--bg-primary); }
+        .program-desc {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        .program-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+        .meta-item {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .meta-item strong { color: var(--accent-teal); }
+        .program-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            color: var(--accent-teal);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .program-link:hover { text-decoration: underline; }
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 3rem;
+        }
+        footer p { color: var(--text-muted); font-size: 0.875rem; }
+        footer a { color: var(--accent-teal); text-decoration: none; }
+        @media (max-width: 768px) {
+            main { padding: 7.5rem 1.5rem 3rem; }
+            .program-grid { grid-template-columns: 1fr; }
+        }
+    
+        /* Category Navigation Bar */
+        .category-nav {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            padding: 0 2rem;
+            overflow-x: auto;
+        }
+        .category-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.25rem;
+        }
+        .category-link {
+            padding: 0.75rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .category-link:hover {
+            color: var(--accent-gold);
+            background: var(--accent-gold-dim);
+        }
+        .category-link.active {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+        @media (max-width: 768px) {
+            .category-nav { padding: 0 1rem; }
+            .category-link { padding: 0.625rem 0.75rem; font-size: 0.6875rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../" class="nav-logo">JEREMY<span>BENTON</span></a>
+            <a href="index.html" class="nav-back">← Back to Directory</a>
+        </div>
+        <div class="category-nav">
+                        <div class="category-nav-inner">
+                <a href="index.html" class="category-link">🏠 Overview</a>
+                <a href="tech-training.html" class="category-link active">💻 Tech</a>
+                <a href="trades-training.html" class="category-link">🔧 Trades</a>
+                <a href="business-careers.html" class="category-link">📈 Business</a>
+                <a href="federal-employment.html" class="category-link">🏛️ Federal</a>
+                <a href="mental-health.html" class="category-link">🧠 Mental Health</a>
+                <a href="recreation.html" class="category-link">🎢 Recreation</a>
+                <a href="spouses.html" class="category-link">💜 Spouses</a>
+                <a href="education-benefits.html" class="category-link">🎓 Education</a>
+                <a href="leadership-cohorts.html" class="category-link">👔 Leadership</a>
+                <a href="transition-cohorts.html" class="category-link">👥 Transition</a>
+                <a href="timeline.html" class="category-link">📅 Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header class="page-header">
+            <div class="page-badge">Technology Careers</div>
+            <h1 class="page-title">Tech Training Programs</h1>
+            <p class="page-subtitle">Cybersecurity, cloud computing, software development, IT certifications, and tech sales. 28 verified programs—most completely free.</p>
+        </header>
+
+        <div class="alert-box">
+            <span class="icon">⚠️</span>
+            <p><strong>VET TEC Status:</strong> Reauthorized January 2025 but NOT yet operational. Apply for Certificate of Eligibility now, but use these alternatives in the meantime.</p>
+        </div>
+
+        <!-- CYBERSECURITY -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Cybersecurity</h2>
+                <div class="section-line"></div>
+                <span class="section-count">7 programs</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">SANS VetSuccess Academy</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">World-class 3-5 month immersive training. 2-3 GIAC certifications (industry's most respected). 100% scholarship covers tuition, travel, lodging—valued at ~$30,000.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 3-5 months</span>
+                        <span class="meta-item"><strong>Format:</strong> Immersive</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE (100% Scholarship)</span>
+                    <a href="https://www.sans.org/cyber-academy/vetsuccess/" target="_blank" class="program-link">Apply → Highly Competitive</a>
+                </div>
+
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">Microsoft MSSA</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">17-week intensive in Cloud Dev, Cloud Admin, or Cybersecurity Ops. 94% graduation, 97% employment. Guaranteed interviews with Microsoft + 1,000 partners.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 17 weeks</span>
+                        <span class="meta-item"><strong>Next:</strong> Apr 7, 2026</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE (Keep Your GI Bill)</span>
+                    <a href="https://military.microsoft.com/mssa/" target="_blank" class="program-link">Apply Now →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">CyberVetsUSA</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Industry consortium (Cisco, AWS, Palo Alto, Fortinet, ISC²). 12-14 week primarily online training with certifications and career services.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 12-14 weeks</span>
+                        <span class="meta-item"><strong>Format:</strong> Online</span>
+                    </div>
+                    <a href="https://it.nc.gov/programs/cybersecurity-risk-management/cybervetsusa" target="_blank" class="program-link">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Palo Alto Networks Academy</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Entry-level to advanced curriculum preparing for PCCET certification. Partnership with VetsInTech to train 400 veterans over five years.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Cert:</strong> PCCET</span>
+                    </div>
+                    <a href="https://www.paloaltonetworks.com/services/education/academy" target="_blank" class="program-link">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Fortinet NSE</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Free network security training and certifications (NSE 1-4). Open to all—veterans encouraged. Great entry point for cyber careers.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Certs:</strong> NSE 1-4</span>
+                        <span class="meta-item"><strong>Format:</strong> Self-paced</span>
+                    </div>
+                    <a href="https://training.fortinet.com/" target="_blank" class="program-link">Start Free →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Cisco Veterans Program</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Networking Academy training for CCNA and CyberOps Associate. Includes VTIP (Veteran Talent Incubation Program) leading to Cisco engineering roles.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Certs:</strong> CCNA, CyberOps</span>
+                    </div>
+                    <a href="https://www.cisco.com/c/en/us/about/csr/impact/education/veterans-program.html" target="_blank" class="program-link">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">VetsinTech</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Only nonprofit 100% devoted to veterans in tech. Training, mentorship, entrepreneurship bootcamps, and new "Vets in AI" initiative. 115,000+ members.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Chapters:</strong> 24 nationwide</span>
+                    </div>
+                    <a href="https://vetsintech.co/" target="_blank" class="program-link">Join Free →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLOUD & IT CERTS -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Cloud & IT Certifications</h2>
+                <div class="section-line"></div>
+                <span class="section-count">9 programs</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">Onward to Opportunity (O2O)</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">Syracuse IVMF flagship with 40+ certification paths: CompTIA, AWS, Google IT Support, PMP, and new Semiconductor Hub. 100,000+ graduates. $7K-$13K avg salary boost.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Certs:</strong> 40+ options</span>
+                        <span class="meta-item"><strong>Wait:</strong> 2-3 months typical</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE (Exam Fees Covered)</span>
+                    <a href="https://ivmf.syracuse.edu/programs/career-training/" target="_blank" class="program-link">Apply Now →</a>
+                </div>
+
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">NPower</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">20-week Tech Fundamentals with Google IT Support + CompTIA certs. Includes laptop, materials, paid internships. 80% graduation, 100% certification rate.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 20 weeks</span>
+                        <span class="meta-item"><strong>Locations:</strong> 11 cities</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE (Laptop Included)</span>
+                    <a href="https://www.npower.org/apply-vet/" target="_blank" class="program-link">Apply Now →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">AWS re/Start</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">12-16 week classroom-based cloud computing training. Includes AWS Cloud Practitioner cert voucher. 90%+ connected to job interviews.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 12-16 weeks</span>
+                        <span class="meta-item"><strong>Cert:</strong> AWS CCP</span>
+                    </div>
+                    <a href="https://aws.amazon.com/training/restart/" target="_blank" class="program-link">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Cloud Veterans</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">100% volunteer-run nonprofit. Free AWS, Azure, Google Cloud training and certifications. Pluralsight 2025 Platinum Winner.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Certs:</strong> Multi-cloud</span>
+                    </div>
+                    <a href="https://www.cloudveterans.org" target="_blank" class="program-link">Join Free →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Google Career Certificates</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Self-paced programs in Data Analytics, IT Support, PM, UX, Cybersecurity. Free through Career Forward + SVA ($4M Google grant).</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Format:</strong> Self-paced</span>
+                        <span class="meta-item"><strong>Tracks:</strong> 6 options</span>
+                    </div>
+                    <a href="https://grow.google/expanding-opportunity/military-community/" target="_blank" class="program-link">Start Free →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Salesforce Military</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Free Salesforce Admin, Developer, Business Analyst certifications via Trailhead. Includes cert vouchers worth $4,000+. Relaunched 2025.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Value:</strong> $4,000+</span>
+                    </div>
+                    <a href="https://veterans.my.site.com/s/" target="_blank" class="program-link">Enroll Free →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">IBM SkillsBuild</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">1,000+ courses in cyber, data analytics, AI, and cloud. VA-administered with digital credentials and 1:1 coaching.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Courses:</strong> 1,000+</span>
+                    </div>
+                    <a href="https://www.va.gov/education/other-va-education-benefits/ibm-skillsbuild-program/" target="_blank" class="program-link">Enroll via VA →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">ACT Now Education</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">501(c)(3) with 40,000+ free resources: CompTIA Security+ prep, Coursera courses, PMP certification. Weekly Saturday orientations.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Community:</strong> 77K+ members</span>
+                    </div>
+                    <a href="https://actnoweducation.org/" target="_blank" class="program-link">Join Free →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">LinkedIn Premium</span>
+                        <span class="tag tag-free">FREE 1 YEAR</span>
+                    </div>
+                    <p class="program-desc">Free 1-year LinkedIn Premium Career with 16,000+ LinkedIn Learning courses, InMail, and military skills translator. One-time offer.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Value:</strong> ~$360</span>
+                    </div>
+                    <a href="https://socialimpact.linkedin.com/programs/veterans" target="_blank" class="program-link">Claim Now →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CODING BOOTCAMPS -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Coding Bootcamps</h2>
+                <div class="section-line"></div>
+                <span class="section-count">5 programs</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card featured">
+                    <div class="program-header">
+                        <span class="program-name">Code Platoon</span>
+                        <span class="tag tag-featured">TOP PICK</span>
+                    </div>
+                    <p class="program-desc">15-week full-time or 28-week part-time bootcamp. Full-Stack + DevOps/Cloud. Python, Django, React, AWS, AI. Ranked #1 Best Coding Bootcamp 2024. 74% placement, $85K median starting.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 15-28 weeks</span>
+                        <span class="meta-item"><strong>Salary:</strong> $85K median</span>
+                    </div>
+                    <span class="tag tag-free" style="margin-bottom:0.75rem;width:fit-content;">FREE / GI Bill / Scholarships</span>
+                    <a href="https://www.codeplatoon.org/" target="_blank" class="program-link">Apply Now →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Operation Code</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Nonprofit providing $1.2M+ in bootcamp scholarships, Slack community (19+ chapters), free conference tickets, and apprenticeship programs.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Type:</strong> Scholarships + Community</span>
+                    </div>
+                    <a href="https://www.operationcode.org/" target="_blank" class="program-link">Join Community →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Hack Reactor</span>
+                        <span class="tag tag-free">SCHOLARSHIP</span>
+                    </div>
+                    <p class="program-desc">Top-rated 16-19 week software engineering bootcamp. Veterans eligible for full-tuition "Represent Tech" scholarships.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 16-19 weeks</span>
+                        <span class="meta-item"><strong>Standard:</strong> $17,980</span>
+                    </div>
+                    <a href="https://www.hackreactor.com/" target="_blank" class="program-link">Apply for Scholarship →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Flatiron School</span>
+                        <span class="tag tag-gi">GI BILL</span>
+                    </div>
+                    <p class="program-desc">Bootcamps in Software Engineering, Data Science, Cybersecurity, Product Design. GI Bill approved at select campuses. $500-$1,000 military discount.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Tracks:</strong> 4 options</span>
+                    </div>
+                    <a href="https://flatironschool.com/" target="_blank" class="program-link">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">AWS Educate</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Free cloud learning platform. GI Bill reimburses ALL AWS certification exam fees (up to $2,000). Use Form 22-803.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Exam Reimbursement:</strong> Up to $2K</span>
+                    </div>
+                    <a href="https://aws.amazon.com/education/awseducate/" target="_blank" class="program-link">Start Learning →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECH SALES & AI -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Tech Sales & Emerging Tech</h2>
+                <div class="section-line"></div>
+                <span class="section-count">7 programs</span>
+            </div>
+            <div class="program-grid">
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Tech Qualled</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">7-week intensive for B2B technology sales careers (Account Executive roles). 100% online with hiring partners: MongoDB, Nutanix, Check Point.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 7 weeks</span>
+                        <span class="meta-item"><strong>Format:</strong> 100% Online</span>
+                    </div>
+                    <a href="https://qualled.com/" target="_blank" class="program-link">Apply Free →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Shift.org</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Connects transitioning service members with SkillBridge internships at high-growth tech, media, and defense-tech companies. Defense Ventures Fellowship.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Type:</strong> SkillBridge Placements</span>
+                    </div>
+                    <a href="https://www.shift.org/" target="_blank" class="program-link">Explore Opportunities →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">BreakLine Education</span>
+                        <span class="tag tag-paid">$475</span>
+                    </div>
+                    <p class="program-desc">Career transition into tech at PayPal, Airbnb, Salesforce, MuleSoft. Workshops, coaching, interview prep with 200+ partner companies.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Partners:</strong> 200+ companies</span>
+                    </div>
+                    <a href="https://breakline.org/" target="_blank" class="program-link">Learn More →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Google Launchpad AI</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Gen AI training and certification for veterans. Includes free exam voucher for Google Cloud AI certification.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Cert:</strong> Google Cloud AI</span>
+                    </div>
+                    <a href="https://cloud.google.com/blog/topics/training-certifications/register-for-the-gen-ai-training-and-certification-program-for-veterans" target="_blank" class="program-link">Register Free →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">Vets in AI (VetsinTech)</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Free AI training, certifications, and startup support developed with Microsoft, Google, Amazon. Launched February 2024.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Partners:</strong> MSFT, Google, Amazon</span>
+                    </div>
+                    <a href="https://vetsintech.co/" target="_blank" class="program-link">Join Initiative →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">MELT-VETT (SIU)</span>
+                        <span class="tag tag-free">FREE + STIPEND</span>
+                    </div>
+                    <p class="program-desc">NSF-funded 17-week AI/machine learning training for rural veterans. Includes stipend. Southern Illinois University.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Duration:</strong> 17 weeks</span>
+                    </div>
+                    <a href="/cdn-cgi/l/email-protection#8bf8e2fea5eeeffe" class="program-link">Contact SIU →</a>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-name">CompTIA (via Partners)</span>
+                        <span class="tag tag-free">FREE</span>
+                    </div>
+                    <p class="program-desc">Industry-leading IT certifications meeting DoD 8570/8140. Free through O2O, ACT Now, COOL programs, or GI Bill reimbursement.</p>
+                    <div class="program-meta">
+                        <span class="meta-item"><strong>Certs:</strong> A+, Security+, Network+</span>
+                    </div>
+                    <a href="https://help.comptia.org/hc/en-us/articles/13437663042324" target="_blank" class="program-link">Find Free Path →</a>
+                </div>
+            </div>
+        </section>
+
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 2rem;">Last verified: January 2026 · 28 programs</p>
+    </main>
+
+    <footer>
+        <p>© 2025 Jeremy Benton. <a href="index.html">Back to Directory</a> | <a href="../">Return to Home</a></p>
