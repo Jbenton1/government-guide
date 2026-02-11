@@ -1,0 +1,2099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Defense Conference & Industry Day Tracker | 2026</title>
+  <meta name="description" content="Comprehensive tracker of 130+ defense conferences, industry days, and symposiums for 2025-2027. Covers Army, Navy, Air Force, Space Force, USACE, and Joint events.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+/* ============================================================
+   CSS VARIABLES
+   ============================================================ */
+:root {
+  --bg-deep: #0a0f1a;
+  --bg: #0e1422;
+  --bg2: #131a2a;
+  --bg3: #1a2236;
+  --surface: #1f2940;
+  --surface2: #253049;
+
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.12);
+  --border-accent: rgba(0,166,166,0.3);
+
+  --text: #e8ecf2;
+  --text2: #9ca3af;
+  --text3: #6b7280;
+
+  --teal: #00a6a6;
+  --teal-bright: #00c4c4;
+  --teal-bg: rgba(0,166,166,0.08);
+  --teal-border: rgba(0,166,166,0.25);
+
+  --gold: #d4a574;
+  --gold-bright: #e8b888;
+  --gold-bg: rgba(212,165,116,0.08);
+  --gold-border: rgba(212,165,116,0.25);
+
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.35);
+  --red-glow: rgba(239,68,68,0.5);
+  --red-bg: rgba(239,68,68,0.08);
+
+  --green: #22c55e;
+  --green-bg: rgba(34,197,94,0.08);
+
+  --blue: #3b82f6;
+  --flag-blue: #3C5BA9;
+  --flag-blue-dim: rgba(60,91,169,0.4);
+  --flag-blue-glow: rgba(60,91,169,0.6);
+  --blue-bg: rgba(59,130,246,0.08);
+
+  --white-dim: rgba(255,255,255,0.35);
+  --white-glow: rgba(255,255,255,0.55);
+
+  --orange: #f59e0b;
+  --orange-bg: rgba(245,158,11,0.10);
+  --purple: #a855f7;
+
+  --max: 1440px;
+  --radius: 10px;
+  --radius-sm: 6px;
+
+  --font: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-head: 'Oswald', system-ui, sans-serif;
+  --mono: 'Space Mono', ui-monospace, monospace;
+
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* ============================================================
+   RESET & BASE — font bumped +1 (16px base)
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html { height: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0; font-family: var(--font);
+  background: var(--bg-deep); color: var(--text);
+  line-height: 1.6; font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,166,166,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,166,166,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none; z-index: -1;
+}
+a { color: var(--teal); text-decoration: none; }
+a:hover { text-decoration: underline; }
+::selection { background: rgba(0,166,166,0.25); color: #fff; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header {
+  position: sticky; top: 0; z-index: 2000;
+  background: rgba(10,15,26,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  max-width: var(--max); margin: 0 auto;
+  padding: 14px 24px;
+  display: flex; gap: 20px; align-items: center;
+}
+.brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.logo {
+  width: 46px; height: 46px; border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal-bright) 100%);
+  display: grid; place-items: center;
+  color: var(--bg-deep); font-weight: 700; font-size: 11px;
+  letter-spacing: 0.5px; font-family: var(--mono);
+  box-shadow: 0 2px 12px rgba(0,166,166,0.3);
+  flex-shrink: 0;
+}
+.brand-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.brand-text h1 {
+  margin: 0; font-size: 18px; font-weight: 700;
+  font-family: var(--font-head); letter-spacing: 0.02em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.brand-text .sub { font-size: 13px; color: var(--text3); white-space: nowrap; }
+
+/* Search — inline in filter bar */
+.search-wrap-inline { position: relative; min-width: 180px; max-width: 260px; }
+.search-wrap-inline input {
+  width: 100%; padding: 8px 12px 8px 32px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  color: var(--text); outline: none;
+  font-size: 13px; font-family: var(--font);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-wrap-inline input::placeholder { color: var(--text3); }
+.search-wrap-inline input:focus {
+  box-shadow: 0 0 0 2px rgba(0,166,166,0.25);
+  border-color: var(--teal-border);
+}
+.search-icon-sm {
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  color: var(--text3); font-size: 13px; pointer-events: none;
+}
+@media (max-width: 680px) {
+  .header-inner { padding: 10px 16px; gap: 12px; }
+  .brand-text { display: none; }
+}
+
+/* ============================================================
+   FILTER BAR — Two-row professional layout
+   ============================================================ */
+.filter-bar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+.filter-inner {
+  max-width: var(--max); margin: 0 auto;
+  padding: 12px 24px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+/* Row 1: Search + Status pills */
+.filter-row-1 {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+}
+.filter-row-1 .filter-label {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: #fff; margin-right: 2px; white-space: nowrap;
+}
+
+/* Row 2: Dropdowns — centered under status pill area */
+.filter-row-2 {
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  justify-content: center;
+  padding-left: 200px;
+  padding-right: 60px;
+}
+
+/* Search — compact pill in row 1 */
+.search-wrap-inline { position: relative; min-width: 160px; max-width: 220px; }
+.search-wrap-inline input {
+  width: 100%; padding: 7px 12px 7px 30px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  color: #fff; outline: none;
+  font-size: 13px; font-family: var(--font);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-wrap-inline input::placeholder { color: var(--text3); }
+.search-wrap-inline input:focus {
+  box-shadow: 0 0 0 2px rgba(0,166,166,0.25);
+  border-color: var(--teal-border);
+}
+.search-icon-sm {
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  color: var(--text3); font-size: 12px; pointer-events: none;
+}
+
+/* Status pills — kept as glowing pills (row 1) */
+.status-pills { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.filter-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 14px; border-radius: 999px;
+  background: var(--bg3);
+  color: #ffffff;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer; font-family: var(--font);
+  transition: all 0.25s ease; white-space: nowrap;
+  user-select: none; position: relative;
+  border: 1px solid transparent;
+}
+.filter-btn .count {
+  font-family: var(--mono); font-size: 10px;
+  padding: 1px 6px; border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.7);
+}
+
+/* Status pills: Red glow */
+.filter-btn.cat-status {
+  border-color: rgba(34,197,94,0.4);
+  box-shadow: 0 0 4px rgba(34,197,94,0.15);
+}
+.filter-btn.cat-status:hover {
+  border-color: rgba(34,197,94,0.8);
+  box-shadow: 0 0 12px rgba(34,197,94,0.4), 0 0 24px rgba(34,197,94,0.15);
+  transform: translateY(-1px);
+  background: rgba(34,197,94,0.08);
+}
+.filter-btn.cat-status.active {
+  border-color: rgba(34,197,94,0.9);
+  box-shadow: 0 0 14px rgba(34,197,94,0.5), 0 0 28px rgba(34,197,94,0.2);
+  background: rgba(34,197,94,0.12);
+}
+.filter-btn.cat-status.active .count {
+  background: rgba(34,197,94,0.25); color: #fff;
+}
+
+/* ── DROPDOWN SELECTORS (Row 2) ── */
+.filter-dropdown {
+  position: relative;
+}
+.dropdown-trigger {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 16px; border-radius: var(--radius-sm);
+  background: var(--bg3);
+  color: #fff; font-size: 13px; font-weight: 600;
+  cursor: pointer; font-family: var(--font);
+  transition: all 0.25s ease;
+  user-select: none; white-space: nowrap;
+}
+.dropdown-trigger .dd-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--text3);
+}
+.dropdown-trigger .dd-value { color: #fff; }
+.dropdown-trigger .dd-arrow {
+  font-size: 10px; color: var(--text3);
+  transition: transform 0.2s;
+}
+.dropdown-trigger .dd-count {
+  font-family: var(--mono); font-size: 10px;
+  padding: 1px 7px; border-radius: 999px;
+  font-weight: 700;
+  display: none;
+}
+.dropdown-trigger.has-filter .dd-count { display: inline; }
+.dropdown-trigger.has-filter .dd-value { display: none; }
+
+/* Branch dropdown: RED glow */
+.filter-dropdown.dd-branch .dropdown-trigger {
+  border: 1px solid rgba(239,68,68,0.4);
+  box-shadow: 0 0 4px rgba(239,68,68,0.12);
+}
+.filter-dropdown.dd-branch .dropdown-trigger:hover,
+.filter-dropdown.dd-branch .dropdown-trigger.open {
+  border-color: rgba(239,68,68,0.8);
+  box-shadow: 0 0 12px rgba(239,68,68,0.35), 0 0 24px rgba(239,68,68,0.12);
+}
+.filter-dropdown.dd-branch .dropdown-trigger.has-filter {
+  border-color: #ef4444;
+  box-shadow: 0 0 12px rgba(239,68,68,0.4);
+}
+.filter-dropdown.dd-branch .dropdown-trigger .dd-count {
+  background: rgba(239,68,68,0.25); color: #fff;
+}
+
+/* Type dropdown: WHITE glow */
+.filter-dropdown.dd-type .dropdown-trigger {
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 0 4px rgba(255,255,255,0.08);
+}
+.filter-dropdown.dd-type .dropdown-trigger:hover,
+.filter-dropdown.dd-type .dropdown-trigger.open {
+  border-color: rgba(255,255,255,0.8);
+  box-shadow: 0 0 12px rgba(255,255,255,0.3), 0 0 24px rgba(255,255,255,0.1);
+}
+.filter-dropdown.dd-type .dropdown-trigger.has-filter {
+  border-color: #fff;
+  box-shadow: 0 0 12px rgba(255,255,255,0.35);
+}
+.filter-dropdown.dd-type .dropdown-trigger .dd-count {
+  background: rgba(255,255,255,0.2); color: #fff;
+}
+
+/* Year dropdown: BLUE glow (American flag blue) */
+.filter-dropdown.dd-year .dropdown-trigger {
+  border: 1px solid rgba(60,91,169,0.4);
+  box-shadow: 0 0 4px rgba(60,91,169,0.12);
+}
+.filter-dropdown.dd-year .dropdown-trigger:hover,
+.filter-dropdown.dd-year .dropdown-trigger.open {
+  border-color: rgba(60,91,169,0.9);
+  box-shadow: 0 0 12px rgba(60,91,169,0.4), 0 0 24px rgba(60,91,169,0.15);
+}
+.filter-dropdown.dd-year .dropdown-trigger.has-filter {
+  border-color: var(--flag-blue);
+  box-shadow: 0 0 12px rgba(60,91,169,0.45);
+}
+.filter-dropdown.dd-year .dropdown-trigger .dd-count {
+  background: rgba(60,91,169,0.3); color: #fff;
+}
+
+/* Dropdown panel */
+.dropdown-panel {
+  display: none; position: absolute;
+  top: calc(100% + 6px); left: 0;
+  min-width: 200px; max-width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 10px;
+  box-shadow: var(--shadow-lg);
+  z-index: 3000;
+  animation: fadeIn 0.15s ease;
+}
+.dropdown-panel.visible { display: block; }
+.dropdown-panel .dp-items {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.dropdown-panel .dp-item {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 12px; border-radius: 999px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: #fff; font-size: 12px; font-weight: 600;
+  cursor: pointer; font-family: var(--font);
+  transition: all 0.2s; white-space: nowrap;
+}
+.dp-item .count {
+  font-family: var(--mono); font-size: 9px;
+  padding: 1px 5px; border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.6);
+}
+.dp-item:hover { background: var(--surface2); border-color: rgba(255,255,255,0.2); }
+.dp-item.selected { border-color: var(--teal); background: var(--teal-bg); color: var(--teal-bright); }
+.dp-item.selected .count { background: rgba(0,166,166,0.2); color: var(--teal); }
+
+/* Clear filters */
+.filter-clear {
+  margin-left: auto;
+  padding: 6px 14px; border-radius: 999px;
+  border: 1px solid var(--border2);
+  background: transparent; color: #fff;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer; font-family: var(--font);
+  transition: all 0.2s;
+}
+.filter-clear:hover { color: var(--red); border-color: var(--red); box-shadow: 0 0 8px rgba(239,68,68,0.3); }
+
+.filter-sep {
+  width: 1px; height: 28px;
+  background: var(--border2); margin: 0 2px;
+}
+
+@media (max-width: 680px) {
+  .filter-inner { padding: 10px 16px; gap: 8px; }
+  .filter-sep { display: none; }
+  .filter-btn { font-size: 12px; padding: 5px 10px; }
+  .search-wrap-inline { max-width: 100%; min-width: 0; flex: 1; }
+  .dropdown-panel { left: -20px; min-width: 280px; }
+  .filter-row-2 { padding-left: 0; padding-right: 0; justify-content: flex-start; }
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+main {
+  max-width: var(--max); margin: 0 auto;
+  padding: 24px; position: relative; z-index: 1;
+}
+
+/* ============================================================
+   STAT TILES — Outlined, glow + raise on hover
+   ============================================================ */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px; margin-bottom: 28px;
+}
+.stat-card {
+  background: var(--bg3);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 5px;
+  position: relative; overflow: hidden;
+  cursor: default;
+  transition: all 0.3s ease;
+}
+/* Thin colored outline for each stat */
+.stat-card.teal {
+  border: 1px solid var(--teal-border);
+  box-shadow: 0 0 6px rgba(0,166,166,0.12);
+}
+.stat-card.teal:hover {
+  border-color: var(--teal);
+  box-shadow: 0 0 16px rgba(0,166,166,0.35), 0 0 32px rgba(0,166,166,0.1);
+  transform: translateY(-4px);
+}
+.stat-card.gold {
+  border: 1px solid var(--gold-border);
+  box-shadow: 0 0 6px rgba(212,165,116,0.1);
+}
+.stat-card.gold:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 16px rgba(212,165,116,0.35), 0 0 32px rgba(212,165,116,0.1);
+  transform: translateY(-4px);
+}
+.stat-card.green {
+  border: 1px solid rgba(34,197,94,0.25);
+  box-shadow: 0 0 6px rgba(34,197,94,0.1);
+}
+.stat-card.green:hover {
+  border-color: var(--green);
+  box-shadow: 0 0 16px rgba(34,197,94,0.35), 0 0 32px rgba(34,197,94,0.1);
+  transform: translateY(-4px);
+}
+.stat-card.orange {
+  border: 1px solid rgba(245,158,11,0.25);
+  box-shadow: 0 0 6px rgba(245,158,11,0.1);
+}
+.stat-card.orange:hover {
+  border-color: var(--orange);
+  box-shadow: 0 0 16px rgba(245,158,11,0.35), 0 0 32px rgba(245,158,11,0.1);
+  transform: translateY(-4px);
+}
+.stat-card.blue {
+  border: 1px solid rgba(59,130,246,0.25);
+  box-shadow: 0 0 6px rgba(59,130,246,0.1);
+}
+.stat-card.blue:hover {
+  border-color: var(--blue);
+  box-shadow: 0 0 16px rgba(59,130,246,0.35), 0 0 32px rgba(59,130,246,0.1);
+  transform: translateY(-4px);
+}
+.stat-card.red {
+  border: 1px solid rgba(239,68,68,0.25);
+  box-shadow: 0 0 6px rgba(239,68,68,0.1);
+}
+.stat-card.red:hover {
+  border-color: var(--red);
+  box-shadow: 0 0 16px rgba(239,68,68,0.35), 0 0 32px rgba(239,68,68,0.1);
+  transform: translateY(-4px);
+}
+
+.stat-card .stat-num {
+  font-family: var(--mono); font-size: 30px; font-weight: 700;
+  line-height: 1;
+}
+.stat-card.teal .stat-num { color: var(--teal); }
+.stat-card.gold .stat-num { color: var(--gold); }
+.stat-card.green .stat-num { color: var(--green); }
+.stat-card.orange .stat-num { color: var(--orange); }
+.stat-card.blue .stat-num { color: var(--blue); }
+.stat-card.red .stat-num { color: var(--red); }
+.stat-card .stat-label {
+  font-size: 11px; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--text3); font-weight: 600;
+}
+
+/* ============================================================
+   TIMELINE / MONTH HEADERS
+   ============================================================ */
+.month-section { margin-bottom: 10px; }
+.month-header {
+  position: sticky; top: 74px; z-index: 100;
+  background: rgba(10,15,26,0.95);
+  backdrop-filter: blur(10px);
+  padding: 12px 0; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 12px;
+}
+.month-header h2 {
+  margin: 0; font-family: var(--font-head);
+  font-size: 20px; font-weight: 600;
+  letter-spacing: 0.04em; white-space: nowrap;
+}
+.month-header .month-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border2) 0%, transparent 80%);
+}
+.month-header .month-count {
+  font-family: var(--mono); font-size: 12px;
+  color: var(--text3); white-space: nowrap;
+}
+.month-header.past h2 { color: var(--text3); }
+.month-header.current h2 { color: var(--teal-bright); }
+
+/* ============================================================
+   EVENT CARDS — with outline glow + raise
+   ============================================================ */
+.event-list { display: flex; flex-direction: column; gap: 7px; }
+.event-card {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 18px; align-items: center;
+}
+.event-card:hover {
+  border-color: rgba(255,255,255,0.2);
+  background: var(--surface);
+  transform: translateY(-3px) translateX(2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Status-specific left borders & glow */
+.event-card.status-upcoming {
+  border-left-color: var(--green);
+}
+.event-card.status-upcoming:hover {
+  box-shadow: 0 0 12px rgba(34,197,94,0.2), 0 4px 20px rgba(0,0,0,0.3);
+}
+.event-card.status-past {
+  border-left-color: var(--text3); opacity: 0.6;
+}
+.event-card.status-past:hover { opacity: 0.85; }
+.event-card.status-projected {
+  border-left-color: var(--blue);
+}
+.event-card.status-projected:hover {
+  box-shadow: 0 0 12px rgba(59,130,246,0.2), 0 4px 20px rgba(0,0,0,0.3);
+}
+.event-card.status-needs-date {
+  border-left-color: var(--orange);
+}
+.event-card.status-needs-date:hover {
+  box-shadow: 0 0 12px rgba(245,158,11,0.2), 0 4px 20px rgba(0,0,0,0.3);
+}
+.event-card.priority-1 {
+  border-left-color: var(--gold) !important;
+  border-left-width: 4px;
+  background: linear-gradient(135deg, var(--bg3) 0%, rgba(212,165,116,0.04) 100%);
+}
+.event-card.priority-1:hover {
+  box-shadow: 0 0 16px rgba(212,165,116,0.25), 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Expanded card — bigger text */
+.event-card.expanded {
+  background: var(--surface);
+  border-color: rgba(255,255,255,0.2);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+}
+.event-card.expanded .event-name { font-size: 20px; }
+.event-card.expanded .event-dates .day { font-size: 26px; }
+.event-card.expanded .event-badge { font-size: 11px; padding: 3px 10px; }
+
+.event-dates {
+  font-family: var(--mono); font-size: 13px;
+  color: var(--text2); line-height: 1.4;
+  min-width: 0;
+}
+.event-dates .day { font-size: 22px; font-weight: 700; color: var(--text); line-height: 1; transition: font-size 0.2s; }
+.event-dates .month-year { font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text3); margin-top: 2px; }
+
+.event-info { min-width: 0; }
+.event-name {
+  font-family: var(--font-head); font-size: 17px;
+  font-weight: 600; letter-spacing: 0.01em;
+  margin-bottom: 5px; line-height: 1.3;
+  transition: font-size 0.2s;
+}
+.event-meta {
+  display: flex; gap: 8px; align-items: center;
+  flex-wrap: wrap; margin-top: 5px;
+}
+.event-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  border: 1px solid; transition: all 0.2s;
+}
+.badge-branch { background: var(--teal-bg); color: var(--teal); border-color: var(--teal-border); }
+.badge-type { background: var(--blue-bg); color: var(--blue); border-color: rgba(59,130,246,0.2); }
+.badge-priority { background: var(--gold-bg); color: var(--gold); border-color: var(--gold-border); }
+.badge-status-upcoming { background: var(--green-bg); color: var(--green); border-color: rgba(34,197,94,0.25); }
+.badge-status-past { background: rgba(107,114,128,0.1); color: var(--text3); border-color: rgba(107,114,128,0.2); }
+.badge-status-projected { background: var(--blue-bg); color: var(--blue); border-color: rgba(59,130,246,0.2); }
+.badge-status-needs-date { background: var(--orange-bg); color: var(--orange); border-color: rgba(245,158,11,0.25); }
+
+.event-right {
+  text-align: right; display: flex; flex-direction: column;
+  gap: 4px; align-items: flex-end; min-width: 120px;
+}
+.event-location-text { font-size: 13px; color: var(--text2); white-space: nowrap; }
+.event-link {
+  font-size: 12px; color: var(--teal); font-weight: 600;
+  display: inline-flex; align-items: center; gap: 4px;
+  opacity: 0; transition: opacity 0.2s;
+}
+.event-card:hover .event-link { opacity: 1; }
+
+/* Expanded detail panel */
+.event-detail {
+  display: none;
+  grid-column: 1 / -1;
+  padding: 18px 0 6px;
+  border-top: 1px solid var(--border);
+  margin-top: 14px;
+}
+.event-card.expanded .event-detail { display: block; }
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.detail-label {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 4px;
+}
+.detail-value {
+  font-size: 14px; color: var(--text2); line-height: 1.5;
+}
+.detail-value a { color: var(--teal); word-break: break-all; }
+.detail-full { grid-column: 1 / -1; }
+
+@media (max-width: 768px) {
+  .event-card { grid-template-columns: 1fr; gap: 10px; }
+  .event-dates { display: flex; gap: 8px; align-items: baseline; }
+  .event-dates .day { font-size: 18px; }
+  .event-right { align-items: flex-start; }
+  .event-link { opacity: 1; }
+  .detail-grid { grid-template-columns: 1fr; }
+  main { padding: 16px; }
+}
+
+/* No results */
+.no-results {
+  text-align: center; padding: 60px 20px;
+  color: var(--text3);
+}
+.no-results h3 {
+  font-family: var(--font-head); font-size: 24px;
+  color: var(--text2); margin-bottom: 8px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  max-width: var(--max); margin: 0 auto;
+  padding: 40px 24px;
+  border-top: 1px solid var(--border);
+  text-align: center; color: var(--text3);
+  font-size: 14px;
+}
+footer a { color: var(--teal); }
+footer .disclaimer {
+  margin-top: 10px; font-size: 12px; color: var(--text3);
+  max-width: 700px; margin-left: auto; margin-right: auto;
+}
+
+/* ============================================================
+   BACK TO TOP
+   ============================================================ */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--teal); color: var(--bg-deep);
+  border: none; cursor: pointer;
+  display: grid; place-items: center;
+  font-size: 20px; font-weight: 700;
+  box-shadow: var(--shadow-lg);
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.3s;
+  z-index: 999;
+}
+.back-to-top.visible { opacity: 1; transform: translateY(0); }
+.back-to-top:hover { background: var(--teal-bright); transform: translateY(-2px); box-shadow: 0 0 20px rgba(0,166,166,0.4); }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.event-card { animation: fadeIn 0.3s ease both; }
+
+/* ============================================================
+   CALENDAR HEATMAP
+   ============================================================ */
+.heatmap-container {
+  margin-bottom: 24px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 18px 20px 14px;
+}
+.heatmap-title {
+  font-family: var(--font-head); font-size: 13px;
+  font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text3);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.heatmap-title::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border2), transparent);
+}
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 6px;
+}
+.heatmap-cell {
+  border-radius: var(--radius-sm);
+  padding: 10px 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+  position: relative;
+}
+.heatmap-cell:hover {
+  transform: translateY(-3px);
+  z-index: 2;
+}
+.heatmap-cell.past-month { opacity: 0.45; }
+.heatmap-cell.current-month {
+  border-color: var(--teal);
+  box-shadow: 0 0 10px rgba(0,166,166,0.25);
+}
+.heatmap-month {
+  font-family: var(--mono); font-size: 11px;
+  font-weight: 700; letter-spacing: 0.5px;
+  text-transform: uppercase; color: var(--text2);
+  margin-bottom: 4px;
+}
+.heatmap-count {
+  font-family: var(--mono); font-size: 20px;
+  font-weight: 700; line-height: 1;
+}
+.heatmap-label {
+  font-size: 9px; color: var(--text3);
+  margin-top: 2px; text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+/* Heat levels — white boxes, black text */
+.heat-0 { background: rgba(255,255,255,0.85); }
+.heat-0 .heatmap-count { color: #9ca3af; }
+.heat-0 .heatmap-month { color: #6b7280; }
+.heat-0 .heatmap-label { color: #9ca3af; }
+.heat-1 { background: rgba(255,255,255,0.92); }
+.heat-1 .heatmap-count { color: #1a1a1a; }
+.heat-1 .heatmap-month { color: #374151; }
+.heat-1 .heatmap-label { color: #6b7280; }
+.heat-2 { background: rgba(255,255,255,0.95); }
+.heat-2 .heatmap-count { color: #111; }
+.heat-2 .heatmap-month { color: #374151; }
+.heat-2 .heatmap-label { color: #6b7280; }
+.heat-3 { background: #fff; }
+.heat-3 .heatmap-count { color: #000; }
+.heat-3 .heatmap-month { color: #1f2937; }
+.heat-3 .heatmap-label { color: #4b5563; }
+.heat-4 { background: #fff; box-shadow: 0 0 8px rgba(255,255,255,0.15); }
+.heat-4 .heatmap-count { color: #000; font-size: 22px; }
+.heat-4 .heatmap-month { color: #1f2937; }
+.heat-4 .heatmap-label { color: #4b5563; }
+.heatmap-cell:hover { border-color: var(--teal-border); box-shadow: 0 0 12px rgba(0,166,166,0.2); }
+@media (max-width: 768px) {
+  .heatmap-grid { grid-template-columns: repeat(6, 1fr); }
+}
+@media (max-width: 480px) {
+  .heatmap-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ============================================================
+   EXPORT BUTTON & MODAL
+   ============================================================ */
+.export-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; border-radius: var(--radius-sm);
+  background: var(--bg3);
+  border: 1px solid var(--teal-border);
+  color: var(--teal); font-size: 13px; font-weight: 600;
+  cursor: pointer; font-family: var(--font);
+  transition: all 0.25s;
+  box-shadow: 0 0 4px rgba(0,166,166,0.1);
+}
+.export-btn:hover {
+  background: var(--teal-bg);
+  border-color: var(--teal);
+  box-shadow: 0 0 14px rgba(0,166,166,0.3);
+  transform: translateY(-1px);
+}
+.export-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  z-index: 5000;
+  display: none; place-items: center;
+  animation: fadeInOverlay 0.2s ease;
+}
+.export-modal-overlay.visible { display: grid; }
+@keyframes fadeInOverlay { from { opacity: 0; } to { opacity: 1; } }
+.export-modal {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  width: 90%; max-width: 680px;
+  max-height: 85vh;
+  display: flex; flex-direction: column;
+  box-shadow: 0 16px 64px rgba(0,0,0,0.5);
+  animation: slideUp 0.25s ease;
+}
+@keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.export-modal-header {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.export-modal-header h3 {
+  margin: 0; font-family: var(--font-head);
+  font-size: 18px; font-weight: 600;
+}
+.export-close {
+  background: none; border: 1px solid var(--border2);
+  color: var(--text3); width: 32px; height: 32px;
+  border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center;
+  font-size: 16px; transition: all 0.2s;
+}
+.export-close:hover { color: var(--red); border-color: var(--red); }
+.export-modal-body {
+  padding: 20px 22px;
+  flex: 1; overflow-y: auto;
+}
+.export-preview {
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px; margin-bottom: 16px;
+  font-family: var(--mono); font-size: 12px;
+  color: var(--text2); line-height: 1.6;
+  max-height: 360px; overflow-y: auto;
+  white-space: pre-wrap; word-break: break-word;
+}
+.export-actions {
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+.export-action-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 20px; border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; font-family: var(--font);
+  transition: all 0.2s; border: none;
+}
+.export-action-btn.primary {
+  background: var(--teal); color: var(--bg-deep);
+}
+.export-action-btn.primary:hover { background: var(--teal-bright); transform: translateY(-1px); }
+.export-action-btn.secondary {
+  background: var(--bg3); color: var(--text);
+  border: 1px solid var(--border2);
+}
+.export-action-btn.secondary:hover { border-color: var(--text3); transform: translateY(-1px); }
+.export-branding {
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text3);
+}
+.export-branding a { color: var(--teal); }
+
+/* ============================================================
+   SEARCH HIGHLIGHTING
+   ============================================================ */
+mark.search-match {
+  background: rgba(0,166,166,0.25);
+  color: var(--text); padding: 0 3px;
+  border-radius: 3px; font-weight: inherit;
+}
+
+/* ============================================================
+   BACK TO SITE LINK
+   ============================================================ */
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: #ffffff; font-size: 13px; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+  white-space: nowrap;
+}
+.back-link:hover { color: var(--teal); text-decoration: none; }
+.back-link .arrow { font-size: 14px; }
+@media (max-width: 900px) { .back-link span:not(.arrow) { display: none; } }
+
+/* Print */
+@media print {
+  header, .filter-bar, .back-to-top, .heatmap-container, .export-btn, .export-modal-overlay { display: none; }
+  body { background: #fff; color: #000; font-size: 11px; }
+  .event-card { opacity: 1 !important; break-inside: avoid; border: 1px solid #ccc; }
+}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="https://jbenton1.github.io/government-guide/" class="back-link" title="Back to Government Guide"><span class="arrow">←</span> <span>Government Guide</span></a>
+    <div class="brand" style="flex:1;justify-content:center;">
+      <div class="logo">DCT</div>
+      <div class="brand-text">
+        <h1>Defense Conference Tracker</h1>
+        <span class="sub">2025–2027 · Updated Feb 2026</span>
+      </div>
+    </div>
+    <button class="export-btn" id="exportBtn">📋 Export</button>
+  </div>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <!-- Row 1: Search + Status pills -->
+    <div class="filter-row-1">
+      <div class="search-wrap-inline">
+        <span class="search-icon-sm">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search events..." autocomplete="off">
+      </div>
+      <div class="filter-sep"></div>
+      <span class="filter-label">Status</span>
+      <div class="status-pills" id="statusFilters"></div>
+      <button class="filter-clear" id="clearFilters" style="display:none">✕ Clear</button>
+    </div>
+    <!-- Row 2: Dropdown filters -->
+    <div class="filter-row-2">
+      <div class="filter-dropdown dd-branch" id="branchDropdown">
+        <div class="dropdown-trigger" id="branchTrigger">
+          <span class="dd-label">Branch</span>
+          <span class="dd-value">All</span>
+          <span class="dd-count"></span>
+          <span class="dd-arrow">▾</span>
+        </div>
+        <div class="dropdown-panel" id="branchPanel"><div class="dp-items"></div></div>
+      </div>
+      <div class="filter-dropdown dd-type" id="typeDropdown">
+        <div class="dropdown-trigger" id="typeTrigger">
+          <span class="dd-label">Type</span>
+          <span class="dd-value">All</span>
+          <span class="dd-count"></span>
+          <span class="dd-arrow">▾</span>
+        </div>
+        <div class="dropdown-panel" id="typePanel"><div class="dp-items"></div></div>
+      </div>
+      <div class="filter-dropdown dd-year" id="yearDropdown">
+        <div class="dropdown-trigger" id="yearTrigger">
+          <span class="dd-label">Year</span>
+          <span class="dd-value">All</span>
+          <span class="dd-count"></span>
+          <span class="dd-arrow">▾</span>
+        </div>
+        <div class="dropdown-panel" id="yearPanel"><div class="dp-items"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+  <div class="heatmap-container" id="heatmapContainer">
+    <div class="heatmap-title">2026 Event Density</div>
+    <div class="heatmap-grid" id="heatmapGrid"></div>
+  </div>
+  <div class="stats-row" id="statsRow"></div>
+  <div id="eventContainer"></div>
+  <div class="no-results" id="noResults" style="display:none">
+    <h3>No Events Match</h3>
+    <p>Try adjusting your filters or search query.</p>
+  </div>
+</main>
+
+<!-- EXPORT MODAL -->
+<div class="export-modal-overlay" id="exportOverlay">
+  <div class="export-modal">
+    <div class="export-modal-header">
+      <h3>📋 Export Current View</h3>
+      <button class="export-close" id="exportClose">✕</button>
+    </div>
+    <div class="export-modal-body">
+      <div class="export-preview" id="exportPreview"></div>
+      <div class="export-actions">
+        <button class="export-action-btn primary" id="exportCopy">📋 Copy to Clipboard</button>
+        <button class="export-action-btn secondary" id="exportDownload">⬇ Download .txt</button>
+        <button class="export-action-btn secondary" id="exportCSV">📊 Download .csv</button>
+        <button class="export-action-btn secondary" id="exportPDF" style="border-color:var(--red-dim);color:var(--red);">📄 Download PDF</button>
+      </div>
+      <div class="export-branding">
+        Every export includes source attribution — helping your team know where this data lives.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Jeremy Benton. Built with purpose. Built to win. <a href="https://github.com/jbenton1/government-guide" target="_blank">View on GitHub</a></p>
+  <div class="disclaimer">
+    Dates are subject to change. Check official event websites for the latest information. Events marked "Needs Date" are recurring conferences without confirmed 2026 dates. This tracker is maintained as a planning resource, not an official government document.
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" title="Back to top">↑</button>
+
+<!-- DATA + SCRIPT -->
+<script>
+const EVENTS = [
+  {name:'Future Indirect Fires Conference',dates:'Jan 14-15, 2025',location:'Austin, TX',branch:'Army',type:'Conference',focus:'US DoD programs: Self-Propelled Howitzer, IFPC Inc 2, Project LASSO, counter-UAS, C4ISR',status:'Past',year:2025,remarks:'Attended. Good conference, multiple contacts and future appts set up'},
+  {name:'AFCEA NOVA',dates:'Jan 17, 2025',location:'McLean/Tysons Corner, VA',branch:'Joint',type:'Conference',focus:'Speed dating: LMP, PEO EIS, CIO',status:'Past',year:2025,remarks:'Steve & Jim speed dating LMP and PEO EIS CIO - MENDIX LEAD'},
+  {name:'Military Aviation & Air Dominance Summit',dates:'Jan 22-23, 2025',location:'Huntsville, AL',branch:'Joint',type:'Conference',focus:'Senior experts, DoD, international partners, acquisition authorities, industry',status:'Past',year:2025,remarks:''},
+  {name:'SpaceCom / Space Congress',dates:'Jan 28-30, 2025',location:'Orlando, FL',branch:'Air Force / Space Force',type:'Conference',focus:'Industry leaders driving new space strategies, demand for innovation, policy',status:'Past',year:2025,remarks:'Haven\'t attended, no one planning to go'},
+  {name:'UAV Technology USA',dates:'Feb 3-4, 2025',location:'Arlington, VA',branch:'Joint',type:'Conference',focus:'Professionals in UAS: US military, international allies, industry partners',status:'Past',year:2025,remarks:''},
+  {name:'Military Additive Manufacturing Summit',dates:'Feb 11-13, 2025',location:'Tampa, FL',branch:'Air Force',type:'Conference',focus:'AM, Cold Spray, Welding, Robotics, Metal 3D Printing for defense',status:'Past',year:2025,remarks:'Attended w/ Zachary Gray. Small but intentional vendors.'},
+  {name:'Army Aviation - CCAD Depot Forum',dates:'Feb 11-12, 2025',location:'Corpus Christi, TX',branch:'Army',type:'Industry Day',focus:'Army Aviation depot sustainment',status:'Past',year:2025,remarks:'Mark Vitale, Matthew Bobbitt'},
+  {name:'NDIA Logistics Forum',dates:'Feb 11-13, 2025',location:'Orlando, FL',branch:'Joint',type:'Conference',focus:'Defense logistics community',status:'Past',year:2025,remarks:''},
+  {name:'National Summit on Uncrewed Aerial Vehicles',dates:'Feb 25-26, 2025',location:'San Diego, CA',branch:'Joint',type:'Conference',focus:'UAV technology, military, industry, policymakers',status:'Past',year:2025,remarks:''},
+  {name:'AFA Warfare Symposium 2025',dates:'Mar 3-5, 2025',location:'Aurora, CO',branch:'Air Force / Space Force',type:'Conference',focus:'USAF, USSF, joint force, aerospace & defense industry',status:'Past',year:2025,remarks:''},
+  {name:'Satellite Conference & Exposition (SATShow)',dates:'Mar 10-13, 2025',location:'Washington, DC',branch:'Joint',type:'Conference',focus:'Satellite & space communications',status:'Past',year:2025,remarks:'Not Attending (T&M)'},
+  {name:'SE Defense Procurement Conference',dates:'Mar 11-12, 2025',location:'Atlanta, GA',branch:'Army',type:'Conference',focus:'Defense contractors, program managers, contracting officers, small business',status:'Past',year:2025,remarks:''},
+  {name:'AUSA Global Force 2025',dates:'Mar 25-27, 2025',location:'Huntsville, AL',branch:'Army',type:'Conference',focus:'Army Modernization Strategy: R&D, acquisition, contracting, sustainment, OIB',status:'Past',year:2025,remarks:'Scheduled to attend'},
+  {name:'SASPO Robins Industry Day',dates:'Mar 27, 2025',location:'Warner Robins, GA',branch:'Air Force',type:'Industry Day',focus:'WR-ALC: C-130, C-5, F-15 sustainment',status:'Past',year:2025,remarks:''},
+  {name:'Sea-Air-Space 2025',dates:'Apr 6-9, 2025',location:'National Harbor, MD',branch:'Navy',type:'Conference',focus:'Navy League\'s global maritime exposition. CNO priorities.',status:'Past',year:2025,remarks:''},
+  {name:'Space Symposium 2025',dates:'Apr 7-10, 2025',location:'Colorado Springs, CO',branch:'Air Force / Space Force',type:'Conference',focus:'Space industry and military space programs',status:'Past',year:2025,remarks:''},
+  {name:'Army Aviation Mission Solutions Summit (Quad-A)',dates:'Apr 14-16, 2025',location:'Nashville, TN',branch:'Army',type:'Conference',focus:'PEO Aviation, FVL/FLRAA, sustainment, UAS, rotary wing modernization',status:'Past',year:2025,remarks:''},
+  {name:'Modern Day Marine 2025',dates:'Apr 29 - May 1, 2025',location:'Washington, DC',branch:'Marine Corps',type:'Conference',focus:'USMC modernization, expeditionary warfighting',status:'Past',year:2025,remarks:''},
+  {name:'SOFIC / SOF Week 2025',dates:'May 5-8, 2025',location:'Tampa, FL',branch:'Joint',type:'Conference',focus:'Special Operations Forces industry conference',status:'Past',year:2025,remarks:''},
+  {name:'AUVSI XPONENTIAL 2025',dates:'May 12-15, 2025',location:'Houston, TX',branch:'Joint',type:'Conference',focus:'Unmanned systems, robotics, autonomy',status:'Past',year:2025,remarks:''},
+  {name:'VETS25 Conference',dates:'May 13-16, 2025',location:'Orlando, FL',branch:'Joint',type:'Conference',focus:'Federal contracting: small business, large business teaming',status:'Past',year:2025,remarks:''},
+  {name:'Realize LIVE (Siemens)',dates:'Jun 2-4, 2025',location:'Detroit, MI',branch:'Industry',type:'Conference',focus:'Siemens users conference',status:'Past',year:2025,remarks:''},
+  {name:'MILSATCOM 2025',dates:'Jun 16-18, 2025',location:'Arlington, VA',branch:'Joint',type:'Conference',focus:'Military SATCOM: COMSATCOM, spectrum mgmt, naval & amphibious apps',status:'Past',year:2025,remarks:''},
+  {name:'CTMA Partners Meeting (NCMS)',dates:'Jun 16-18, 2025',location:'Jacksonville, FL',branch:'Joint',type:'Conference',focus:'DOD-wide maintenance & sustainment capabilities, warfighter readiness',status:'Past',year:2025,remarks:''},
+  {name:'Armored Vehicles Conference',dates:'Jun 24-25, 2025',location:'Detroit, MI',branch:'Army',type:'Conference',focus:'Modernizing the US Armored Force',status:'Past',year:2025,remarks:''},
+  {name:'Advanced Manufacturing for Defense Summit',dates:'Jun 24-26, 2025',location:'California',branch:'Joint',type:'Conference',focus:'Additive manufacturing supply chain, collaborative industrial research',status:'Past',year:2025,remarks:''},
+  {name:'Tinker AFB Airshow',dates:'Jun 28-29, 2025',location:'Oklahoma City, OK',branch:'Air Force',type:'Airshow',focus:'Public event / networking',status:'Past',year:2025,remarks:''},
+  {name:'AIAA Aviation 2025',dates:'Jul 21-25, 2025',location:'Las Vegas, NV',branch:'Joint',type:'Conference',focus:'Aviation technology and research',status:'Past',year:2025,remarks:'Not Attending (T&M)'},
+  {name:'Tinker and the Primes 2025',dates:'Aug 4-6, 2025',location:'Midwest City, OK',branch:'Air Force',type:'Conference',focus:'Sustainment, supply chain, innovation networking with Tinker AFB leadership',status:'Past',year:2025,remarks:''},
+  {name:'GVSETS 2025',dates:'Aug 11-13, 2025',location:'Novi, MI',branch:'Army',type:'Conference',focus:'Ground vehicle systems engineering & technology',status:'Past',year:2025,remarks:''},
+  {name:'Space & Missile Defense Symposium 2025',dates:'Aug 11-13, 2025',location:'Huntsville, AL',branch:'Army',type:'Conference',focus:'MDA partnership, SMDC briefings',status:'Past',year:2025,remarks:''},
+  {name:'AFCEA TechNet Augusta 2025',dates:'Aug 18-21, 2025',location:'Augusta, GA',branch:'Army',type:'Conference',focus:'Army Cyber Command, PEO offices',status:'Past',year:2025,remarks:''},
+  {name:'AFA Air, Space & Cyber Conference 2025',dates:'Sep 15-17, 2025',location:'National Harbor, MD',branch:'Air Force / Space Force',type:'Conference',focus:'AFA premier annual fall conference. SECAF keynote.',status:'Past',year:2025,remarks:'Massive expo.'},
+  {name:'TechConnect Innovation Summit 2025',dates:'Sep 22-25, 2025',location:'Oxon Hill, MD',branch:'Joint',type:'Conference',focus:'Defense tech innovators, military leaders, accelerating solutions',status:'Past',year:2025,remarks:''},
+  {name:'AFRL Classified Industry Day',dates:'Oct 8, 2025',location:'Wright-Patterson AFB, OH',branch:'Air Force',type:'Industry Day',focus:'Classified. AFRL R&D priorities shaping future programs of record.',status:'Past',year:2025,remarks:''},
+  {name:'AUSA Annual Meeting 2025',dates:'Oct 13-15, 2025',location:'Washington, DC',branch:'Army',type:'Conference',focus:'Army 2030 objectives, OIB modernization updates',status:'Past',year:2025,remarks:''},
+  {name:'Letterkenny Modernization Industry Day',dates:'Oct 15, 2025',location:'Chambersburg, PA',branch:'Army',type:'Industry Day',focus:'DB2B strategy, FY26 MILCON construction/modernization projects',status:'Past',year:2025,remarks:''},
+  {name:'ELC 25 (Imagine Nation)',dates:'Oct 26-28, 2025',location:'Hershey, PA',branch:'Joint',type:'Conference',focus:'Gov technology: practical solutions, innovative strategies',status:'Past',year:2025,remarks:''},
+  {name:'Pine Bluff Arsenal Industry Day',dates:'Nov 2025',location:'White Hall, AR',branch:'Army',type:'Industry Day',focus:'Assistant Secretaries of Army. Underused arsenal assets.',status:'Past',year:2025,remarks:''},
+  {name:'SAME SBC (Small Business Conference)',dates:'Nov 2025',location:'TBD',branch:'Joint / USACE',type:'Conference',focus:'Largest federal small business construction/engineering event',status:'Past',year:2025,remarks:''},
+  {name:'I/ITSEC 2025',dates:'Dec 1-5, 2025',location:'Orlando, FL',branch:'Joint',type:'Conference',focus:'Interservice training, simulation & education conference',status:'Past',year:2025,remarks:''},
+  {name:'Defense Maintenance & Logistics Exhibition 2025',dates:'Dec 9-11, 2025',location:'Louisville, KY',branch:'Joint',type:'Conference',focus:'Co-located w/ DoD Maintenance Symposium',status:'Past',year:2025,remarks:''},
+  {name:'Defense Manufacturing Conference 2025',dates:'Dec 17-20, 2025',location:'Atlanta, GA',branch:'Joint',type:'Conference',focus:'ManTech forum. Rescheduled to Mar 30 - Apr 2, 2026 in Orlando.',status:'Past',year:2025,remarks:'RESCHEDULED to Spring 2026'},
+  {name:'Letterkenny Pneumatic Component Assembly Industry Day',dates:'Jan 14, 2026',location:'Chambersburg, PA',branch:'Army',type:'Industry Day',focus:'Technical deep dive: Pneumatic Component Assembly',status:'Past',year:2026,remarks:''},
+  {name:'CES 2026',dates:'Jan 7-10, 2026',location:'Las Vegas, NV',branch:'Joint',type:'Conference',focus:'Global tech showcase; defense tech, autonomy, AI applications',status:'Past',year:2026,remarks:''},
+  {name:'SASPO Hill AFB Industry Day',dates:'Jan 15, 2026',location:'Hill AFB, UT',branch:'Air Force',type:'Industry Day',focus:'OO-ALC: landing gear, ICBM sustainment, avionics',status:'Past',year:2026,remarks:''},
+  {name:'JBLM Industry Day',dates:'Jan 21, 2026',location:'Joint Base Lewis-McChord, WA',branch:'Army / USACE',type:'Industry Day',focus:'USACE Seattle District, base operations support',status:'Past',year:2026,remarks:''},
+  {name:'Defense Maintenance & Logistics Exhibition 2026',dates:'Jan 21-23, 2026',location:'Phoenix, AZ',branch:'Joint',type:'Conference',focus:'DoD Maintenance Symposium co-location, weapon systems maintenance',status:'Past',year:2026,remarks:''},
+  {name:'LOGCAP VI Industry Day',dates:'Jan 22, 2026',location:'Rock Island, IL',branch:'Army',type:'Industry Day',focus:'LOGCAP VI follow-on logistics contract',status:'Past',year:2026,remarks:''},
+  {name:'PEO Enterprise MAPS Industry Day',dates:'Jan 28, 2026',location:'Ft. Belvoir, VA',branch:'Army',type:'Industry Day',focus:'$50B MAPS IDIQ. Massive acquisition vehicle for Army ERP/IT.',status:'Past',year:2026,remarks:''},
+  {name:'NDIA Logistics Forum 2026',dates:'Jan 28-29, 2026',location:'Arlington, VA',branch:'Joint',type:'Conference',focus:'National defense logistics planning and sustainment',status:'Past',year:2026,remarks:''},
+  {name:'Military Additive Manufacturing Summit 2026',dates:'Feb 3-5, 2026',location:'Tampa, FL',branch:'Joint',type:'Conference',focus:'AM, Cold Spray, Welding, Robotics, Metal 3D Printing for defense',status:'Past',year:2026,remarks:''},
+  {name:'DISC26 (Defense & Intelligence Space Conference)',dates:'Feb 9-11, 2026',location:'Reston, VA / NGA Springfield',branch:'Joint',type:'Conference',focus:'NSSA defense & intelligence space conference with classified sessions',status:'Past',year:2026,remarks:''},
+  {name:'DAF S&T Summit / Classified Industry Day',dates:'Feb 4-6, 2026',location:'Dayton, OH',branch:'Air Force',type:'Industry Day',focus:'DAF science & technology priorities, classified sessions',status:'Past',year:2026,remarks:''},
+  {name:'DISA AI Industry Day',dates:'Feb 2026',location:'JB Andrews, MD',branch:'Joint',type:'Industry Day',focus:'AI tools, automation, decision-support platforms for DISA',status:'Past',year:2026,remarks:''},
+  {name:'AAAA Best Drone Warfighter Competition',dates:'Feb 17-19, 2026',location:'Huntsville, AL',branch:'Army',type:'Conference',focus:'First-ever annual competition: Agile, Adaptive, Lethal',status:'Upcoming',year:2026,remarks:''},
+  {name:'AFA Warfare Symposium 2026',dates:'Feb 23-25, 2026',location:'Aurora, CO',branch:'Air Force / Space Force',type:'Conference',focus:'USAF & USSF senior leaders, force design, NGAD, CCA, space systems',status:'Upcoming',year:2026,remarks:'Major event - 4,000+ attendees'},
+  {name:'Robins Requirements Symposium',dates:'Mar 26, 2026',location:'Warner Robins, GA',branch:'Air Force',type:'Conference',focus:'WR-ALC requirements, sustainment pipeline',status:'Upcoming',year:2026,remarks:''},
+  {name:'CyberBay Summit',dates:'Mar 11-13, 2026',location:'Tampa, FL',branch:'Joint',type:'Conference',focus:'Cybersecurity/national security convergence, SOCOM & CENTCOM leadership',status:'Upcoming',year:2026,remarks:'Emerging event'},
+  {name:'AUSA Global Force 2026',dates:'Mar 24-26, 2026',location:'Huntsville, AL',branch:'Army',type:'Conference',focus:'Army modernization: R&D, acquisition, contracting, sustainment, OIB',status:'Upcoming',year:2026,remarks:'Premier Army event - must attend'},
+  {name:'QSECDEF World Symposium',dates:'Mar 24, 2026',location:'Paris, France',branch:'Joint',type:'Conference',focus:'Inaugural quantum security for defense, quantum-secure communications',status:'Upcoming',year:2026,remarks:''},
+  {name:'DEPS HEL Symposium',dates:'Mar-Apr 2026',location:'Tucson, AZ',branch:'Joint',type:'Conference',focus:'Directed energy, high energy lasers',status:'Upcoming',year:2026,remarks:''},
+  {name:'Defense Manufacturing Conference 2026',dates:'Mar 30 - Apr 2, 2026',location:'Caribe Royale Orlando, FL',branch:'Joint',type:'Conference',focus:'Nation\'s annual forum for defense manufacturing. 1,500+ attendees. JDMTP and ARCTOS. Engineers, managers, tech leaders, scientists, policymakers. Rescheduled from Dec 2025 due to gov shutdown.',status:'Upcoming',year:2026,remarks:'All paid registrations transferred. Hotel booking open.'},
+  {name:'Sea-Air-Space 2026',dates:'Apr 19-22, 2026',location:'National Harbor, MD',branch:'Navy',type:'Conference',focus:'Navy League global maritime exposition. CNO priorities, shipbuilding, undersea warfare',status:'Upcoming',year:2026,remarks:'Navy League\'s Global Maritime Exposition. Gaylord National Resort, National Harbor. 15,000+ attendees, 400+ exhibitors. STEM Expo Apr 19.'},
+  {name:'Space Symposium 2026',dates:'Apr 13-16, 2026',location:'Colorado Springs, CO',branch:'Air Force / Space Force',type:'Conference',focus:'Space industry, military space programs, USSF priorities',status:'Upcoming',year:2026,remarks:'41st Space Symposium. The Broadmoor & Cheyenne Mountain Resort. 12,000+ attendees from 60+ countries.'},
+  {name:'Army Aviation Mission Solutions Summit 2026 (Quad-A)',dates:'Apr 14-16, 2026',location:'Nashville, TN',branch:'Army',type:'Conference',focus:'PEO Aviation, FVL/FLRAA, sustainment, UAS, rotary wing modernization',status:'Upcoming',year:2026,remarks:''},
+  {name:'Modern Day Marine 2026',dates:'Apr 28-30, 2026',location:'Washington, DC',branch:'Marine Corps',type:'Conference',focus:'USMC modernization, expeditionary warfighting',status:'Upcoming',year:2026,remarks:''},
+  {name:'AUVSI XPONENTIAL 2026',dates:'May 11-14, 2026',location:'Detroit, MI',branch:'Joint',type:'Conference',focus:'8,500+ attendees. Co-located with NDIA MDEX. Unmanned systems, robotics, autonomy',status:'Upcoming',year:2026,remarks:'Co-located with MDEX'},
+  {name:'AUSA LANPAC 2026',dates:'May 12-14, 2026',location:'Honolulu, HI',branch:'Army',type:'Conference',focus:'Army Pacific theater engagement, Indo-Pacific strategy',status:'Upcoming',year:2026,remarks:''},
+  {name:'DEPS DE Test & Evaluation Conference',dates:'May 18-21, 2026',location:'Albuquerque, NM',branch:'Joint',type:'Conference',focus:'Directed energy test & evaluation, rescheduled from Feb',status:'Upcoming',year:2026,remarks:''},
+  {name:'SOF Week 2026',dates:'May 18-21, 2026',location:'Tampa, FL',branch:'Joint',type:'Conference',focus:'15,000-20,000 attendees, 600+ exhibitors. New: The Outpost at Peter O. Knight Airport',status:'Upcoming',year:2026,remarks:'Largest SOF event'},
+  {name:'SAME JETC 2026',dates:'May 19-21, 2026',location:'Portland, OR',branch:'Joint / USACE',type:'Conference',focus:'Innovate Forward theme, 2,700+ attendees. USACE engineering & construction',status:'Upcoming',year:2026,remarks:''},
+  {name:'Cyber Industry Day at Fort Eisenhower',dates:'May 19, 2026',location:'Fort Eisenhower, GA',branch:'Army',type:'Industry Day',focus:'Army Cyber Command industry engagement',status:'Upcoming',year:2026,remarks:''},
+  {name:'MSCoE Protection & Maneuver Support Industry Expo',dates:'May 19-21, 2026',location:'Fort Leonard Wood, MO',branch:'Army',type:'Industry Day',focus:'Maneuver Support Center of Excellence combined industry expo',status:'Upcoming',year:2026,remarks:''},
+  {name:'AFCEA TechNet Cyber',dates:'Jun 2-4, 2026',location:'Baltimore, MD',branch:'Joint',type:'Conference',focus:'U.S. Cyber Command, DISA, DoD CIO engagement',status:'Upcoming',year:2026,remarks:''},
+  {name:'NDIA Future Force Capabilities Conference',dates:'Jun 8-10, 2026',location:'Las Vegas, NV',branch:'Joint',type:'Conference',focus:'Combined armaments, robotics, munitions technology, FUZE, and EOD',status:'Upcoming',year:2026,remarks:''},
+  {name:'Eurosatory 2026',dates:'Jun 15-19, 2026',location:'Paris, France',branch:'Joint',type:'Conference',focus:'International defense expo, AUSA organizing USA pavilion',status:'Upcoming',year:2026,remarks:''},
+  {name:'TSIS (Training & Simulation Industry Symposium)',dates:'Jun 17-18, 2026',location:'Orlando, FL',branch:'Joint',type:'Conference',focus:'PEO STRI, NAWCTSD, training/simulation procurement',status:'Upcoming',year:2026,remarks:''},
+  {name:'SAME DC & NoVA Small Business Conference',dates:'Jul 7-8, 2026',location:'Washington, DC',branch:'Joint / USACE',type:'Conference',focus:'Federal small business construction/engineering',status:'Upcoming',year:2026,remarks:''},
+  {name:'Tinker and the Primes 2026',dates:'Aug 4-6, 2026',location:'Midwest City, OK',branch:'Air Force',type:'Conference',focus:'~2,000 attendees. Sustainment, supply chain, innovation with Tinker AFB leadership',status:'Upcoming',year:2026,remarks:''},
+  {name:'GVSETS 2026 (18th Annual)',dates:'Aug 11-13, 2026',location:'Novi, MI',branch:'Army',type:'Conference',focus:'~2,000 attendees. Ground vehicle systems engineering & technology. NDIA Michigan.',status:'Upcoming',year:2026,remarks:'Co-located with APBI'},
+  {name:'Space & Missile Defense Symposium 2026',dates:'Aug 11-13, 2026',location:'Huntsville, AL',branch:'Army',type:'Conference',focus:'7,000+ attendees. 28th year, MDA partnership',status:'Upcoming',year:2026,remarks:''},
+  {name:'AFCEA TechNet Augusta 2026',dates:'Aug 17-20, 2026',location:'Augusta, GA',branch:'Army',type:'Conference',focus:'Army Cyber Command, PEO offices, network modernization',status:'Upcoming',year:2026,remarks:''},
+  {name:'AFA Air, Space & Cyber Conference 2026',dates:'Sep 14-16, 2026',location:'National Harbor, MD',branch:'Air Force / Space Force',type:'Conference',focus:'~300 exhibitors. SECAF keynote, USAF/USSF leadership',status:'Upcoming',year:2026,remarks:'AFA\'s premier fall conference'},
+  {name:'Defense TechConnect Innovation Summit 2026',dates:'Sep 22-24, 2026',location:'National Harbor, MD',branch:'Joint',type:'Conference',focus:'Co-located w/ MOSA Summit & SBIR/STTR Conference. 1,000+ attendees',status:'Upcoming',year:2026,remarks:''},
+  {name:'MOSA Industry & Government Summit 2026',dates:'Sep 22-24, 2026',location:'National Harbor, MD',branch:'Joint',type:'Conference',focus:'Modular Open Systems Approach, co-located with TechConnect',status:'Upcoming',year:2026,remarks:'Growing event'},
+  {name:'AUSA Annual Meeting 2026',dates:'Oct 12-14, 2026',location:'Washington, DC',branch:'Army',type:'Conference',focus:'Army 2030 objectives, OIB modernization, acquisition updates',status:'Upcoming',year:2026,remarks:'Largest Army conference - must attend'},
+  {name:'SAME SBC 2026 (Small Business Conference)',dates:'Nov 4-6, 2026',location:'Charlotte, NC',branch:'Joint / USACE',type:'Conference',focus:'SAME National small business conference. Largest federal A/E/C small business event. All USACE SAD districts attend.',status:'Upcoming',year:2026,remarks:''},
+  {name:'I/ITSEC 2026',dates:'Nov 30 - Dec 4, 2026',location:'Orlando, FL',branch:'Joint',type:'Conference',focus:'Interservice training, simulation & education conference',status:'Upcoming',year:2026,remarks:'World\'s largest M&S/training conference. Orange County Convention Center. NTSA/NDIA. 16,000+ visitors.'},
+  {name:'DEPS Annual Directed Energy Symposium',dates:'Nov 2026',location:'Monterey, CA',branch:'Joint',type:'Conference',focus:'Directed energy systems, HEL, HPM',status:'Upcoming',year:2026,remarks:''},
+  {name:'DAFITC 2026',dates:'Late Aug 2026',location:'Montgomery, AL',branch:'Air Force',type:'Conference',focus:'DAF IT Conference. Call for Presentations opens Spring 2026.',status:'Projected',year:2026,remarks:''},
+  {name:'CCAD Depot Forum 2026',dates:'~Feb 2026 (est.)',location:'Corpus Christi, TX',branch:'Army',type:'Industry Day',focus:'Army Aviation depot sustainment, CCAD modernization',status:'Needs Date',year:2026,remarks:'2025 was Feb 11-12. No 2026 date announced.'},
+  {name:'SE Defense Procurement Conference 2026',dates:'~Mar 2026 (est.)',location:'Atlanta, GA',branch:'Army',type:'Conference',focus:'Defense contractors, program managers, contracting officers',status:'Needs Date',year:2026,remarks:'2025 was Mar 11-12. Check SAME Atlanta chapter.'},
+  {name:'AA&S Conference 2026',dates:'~May 2026 (est.)',location:'TBD',branch:'Army',type:'Conference',focus:'Army Acquisition & Sustainment',status:'Needs Date',year:2026,remarks:'Check ausa.org or Army acquisition sites.'},
+  {name:'Dayton Digital Transformation 2026',dates:'~May 2026 (est.)',location:'Dayton, OH',branch:'Air Force',type:'Conference',focus:'Digital engineering transformation for defense',status:'Needs Date',year:2026,remarks:'Check daytondefense.org'},
+  {name:'MILSATCOM 2026',dates:'~Jun 2026 (est.)',location:'Arlington, VA',branch:'Joint',type:'Conference',focus:'Military SATCOM, spectrum management',status:'Needs Date',year:2026,remarks:'2025 was Jun 16-18.'},
+  {name:'Armored Vehicles 2026',dates:'~Jun 2026 (est.)',location:'Detroit, MI',branch:'Army',type:'Conference',focus:'Modernizing the US Armored Force',status:'Needs Date',year:2026,remarks:'2025 was Jun 24-25. Check IDGA.'},
+  {name:'AIAA Aviation 2026',dates:'~Jul 2026 (est.)',location:'TBD',branch:'Joint',type:'Conference',focus:'Aviation technology and research',status:'Needs Date',year:2026,remarks:'2025 was Jul 21-25 in Las Vegas.'},
+  {name:'PEO Aviation UAS Industry Days 2026',dates:'~Jul-Aug 2026 (est.)',location:'Huntsville, AL',branch:'Army',type:'Industry Day',focus:'PEO Aviation UAS programs, FVL, FLRAA',status:'Needs Date',year:2026,remarks:'Announced on SAM.gov with short lead.'},
+  {name:'SASPO Robins AFB Industry Day 2026',dates:'TBD',location:'Warner Robins, GA',branch:'Air Force',type:'Industry Day',focus:'WR-ALC: C-130, C-5, F-15 sustainment',status:'Needs Date',year:2026,remarks:'2024 was Mar 29. No 2026 date announced.'},
+  {name:'AFLCMC Life Cycle Industry Days (LCID) 2026',dates:'TBD',location:'Dayton, OH',branch:'Air Force',type:'Industry Day',focus:'2,600+ attendees. Cancelled 2025 (EO 14222). Re-evaluating for 2026.',status:'Needs Date',year:2026,remarks:'Monitor aflcmc.af.mil/LCID'},
+  {name:'DoDIIS Worldwide Conference 2026',dates:'TBD',location:'TBD',branch:'Joint',type:'Conference',focus:'DoD/Intelligence Community IT and cyber conference',status:'Needs Date',year:2026,remarks:'Confirmed returning in 2026'},
+  {name:'AGC FedCon 2026',dates:'TBD',location:'TBD',branch:'Joint / USACE',type:'Conference',focus:'Federal construction industry. AGC website: \'Working on 2026 FedCon\'',status:'Needs Date',year:2026,remarks:''},
+  {name:'Autonomy in Defense 2026',dates:'TBD',location:'TBD',branch:'Joint',type:'Conference',focus:'Inaugural summit: human-machine teaming, ethical AI, JADC2',status:'Needs Date',year:2026,remarks:'Corinium Intelligence. Watch for announcement.'},
+  {name:'Hypersonic Technology & Systems Conference',dates:'Late Summer 2026 (est.)',location:'TBD',branch:'Joint',type:'Conference',focus:'Classified-capable (Secret/NOFORN). Propulsion, thermal, materials.',status:'Needs Date',year:2026,remarks:'Blue52 Productions. Monitor for announcement.'},
+  {name:'Future Indirect Fires Conference 2027',dates:'~Jan 2027',location:'TBD',branch:'Army',type:'Conference',focus:'Self-Propelled Howitzer, IFPC, counter-UAS, C4ISR',status:'Projected',year:2027,remarks:''},
+  {name:'AFA Warfare Symposium 2027',dates:'~Feb 2027',location:'Aurora, CO',branch:'Air Force / Space Force',type:'Conference',focus:'USAF/USSF annual warfare symposium',status:'Projected',year:2027,remarks:''},
+  {name:'AUSA Global Force 2027',dates:'~Mar 2027',location:'Huntsville, AL',branch:'Army',type:'Conference',focus:'Army modernization strategy',status:'Projected',year:2027,remarks:''},
+  {name:'Sea-Air-Space 2027',dates:'~Apr 2027',location:'National Harbor, MD',branch:'Navy',type:'Conference',focus:'Navy League maritime exposition',status:'Projected',year:2027,remarks:''},
+  {name:'AUSA Annual Meeting 2027',dates:'~Oct 2027',location:'Washington, DC',branch:'Army',type:'Conference',focus:'Largest Army conference',status:'Projected',year:2027,remarks:''},
+  {name:'Omaha District USACE Small Business Industry Day',dates:'Jan 13, 2026',location:'Bismarck, ND',branch:'USACE',type:'Industry Day',focus:'Contract opportunities in MT, ND, SD. Reoccurring services and small construction projects. National Energy Center of Excellence.',status:'Past',year:2026,remarks:'POC: matthew.d.hibbert@usace.army.mil'},
+  {name:'Portland District USACE Industry Day',dates:'Jan 22, 2026',location:'Portland, OR',branch:'USACE',type:'Industry Day',focus:'Government briefings, work forecast, Contracting Officer panels, capability presentations. Greater Oregon & SW Washington region.',status:'Past',year:2026,remarks:'Block 300 headquarters downtown Portland'},
+  {name:'SAME Tulsa Post Industry Day 2026',dates:'Feb 4-5, 2026',location:'Tulsa, OK',branch:'USACE',type:'Industry Day',focus:'USACE Tulsa District engagement, A/E/C federal contracting',status:'Past',year:2026,remarks:'Renaissance Tulsa Hotel & Convention Center'},
+  {name:'Louisville District USACE Industry Open House',dates:'Feb 4, 2026',location:'Louisville, KY',branch:'USACE',type:'Industry Day',focus:'Briefings from Louisville District leadership, networking with District staff. Primary NAICS: 236220, 541330, 562910.',status:'Past',year:2026,remarks:'Louisville Marriott Downtown. POC: SBO-LRL@usace.army.mil'},
+  {name:'Detroit District USACE Business Open House',dates:'Feb 23, 2026',location:'Detroit, MI',branch:'USACE',type:'Industry Day',focus:'Soo Locks 5-Year Major Work Outlay, Dredge Material Management breakout sessions. Lt. Col. Wallace Bandeff opening remarks.',status:'Upcoming',year:2026,remarks:'8:30am-noon. POC: brian.r.korzetz@usace.army.mil'},
+  {name:'SAME Mid-Atlantic Small Business Outreach + Industry Day',dates:'Feb 23-25, 2026',location:'Virginia Beach, VA',branch:'USACE',type:'Industry Day',focus:'Hampton Roads, Coastal Carolina, Virginia Peninsula, Central Virginia SAME Posts. Business opportunity sessions, exhibit hall, one-on-one meetings.',status:'Upcoming',year:2026,remarks:'Virginia Beach Convention Center. Contact: samehrpost757@gmail.com'},
+  {name:'USACE Albuquerque District Business Opportunities Open House',dates:'Feb 25, 2026',location:'Albuquerque, NM',branch:'USACE',type:'Industry Day',focus:'Albuquerque District business opportunities and contracting engagement',status:'Upcoming',year:2026,remarks:'Sid Cutter Pilot\'s Pavilion, 9am-12pm MST'},
+  {name:'SAME Charleston Post Industry Day 2026',dates:'Mar 18-19, 2026',location:'Charleston, SC',branch:'USACE',type:'Industry Day',focus:'USACE Charleston District. Day 1: Golf tournament + sunset boat cruise. Day 2: Full industry day with speakers, networking, happy hour.',status:'Upcoming',year:2026,remarks:'Charleston Marriott, 170 Lockwood Blvd. Boat cruise included with ticket.'},
+  {name:'Chicago District USACE Industry Outreach Open House',dates:'Apr 1, 2026',location:'Chicago, IL',branch:'USACE',type:'Industry Day',focus:'Chicago District contracting opportunities, Great Lakes & Ohio River Division',status:'Upcoming',year:2026,remarks:''},
+  {name:'SAME Fort Worth Post Industry Day 2026',dates:'Apr 14-15, 2026',location:'Fort Worth, TX',branch:'USACE',type:'Industry Day',focus:'Industry Government Engagement 2026. Day 1: Presentations at Round Up Inn. Day 2: One-on-One meetings at USACE Fort Worth District HQ.',status:'Upcoming',year:2026,remarks:'Primary presenter: USACE Fort Worth District. Fritz G. Lanham Federal Office Building (security checkpoint).'},
+  {name:'Southeast Region FEDCON USACE Summit',dates:'Apr 14-16, 2026',location:'Wilmington, NC',branch:'USACE',type:'Conference',focus:'Southeast region federal construction summit. NCMBC hosted. All USACE SAD districts attend.',status:'Upcoming',year:2026,remarks:''},
+  {name:'Sacramento District USACE Industry Day',dates:'Apr 16, 2026',location:'Sacramento, CA',branch:'USACE',type:'Industry Day',focus:'Sacramento District contracting opportunities, South Pacific Division',status:'Upcoming',year:2026,remarks:''},
+  {name:'Huntington District USACE Industry Outreach Open House',dates:'May 7, 2026',location:'Huntington, WV',branch:'USACE',type:'Industry Day',focus:'Huntington District opportunities, Great Lakes & Ohio River Division',status:'Upcoming',year:2026,remarks:''},
+  {name:'New Orleans District USACE Industry Day 2026',dates:'May 14, 2026',location:'New Orleans, LA',branch:'USACE',type:'Industry Day',focus:'Active projects: Comite River Diversion, West Shore Lake Pontchartrain, East Baton Rouge Flood Mgmt, MS River Levee, Morganza to Gulf, Atchafalaya Basin, SW Coastal, Locks & Structures, Dredging, A-E Outlook.',status:'Upcoming',year:2026,remarks:'USACE HQ District Assembly Room, 7400 Leake Ave. One-on-one breakout sessions, contractor presentations, vendor displays. Free.'},
+  {name:'SAME Savannah USACE Annual Program Review',dates:'Jun 24-26, 2026',location:'Savannah, GA',branch:'USACE',type:'Conference',focus:'USACE Savannah District annual program review, South Atlantic Division',status:'Upcoming',year:2026,remarks:''},
+  {name:'SAME Mobile Industry Day',dates:'Oct 7-9, 2025',location:'Mobile, AL',branch:'USACE',type:'Industry Day',focus:'USACE Mobile District, South Atlantic Division engagement',status:'Past',year:2025,remarks:''},
+  {name:'Tri-Regional JETS (SAME Jacksonville)',dates:'Oct 21-23, 2025',location:'Jacksonville, FL',branch:'USACE',type:'Conference',focus:'Joint Engineer Training & Symposium. All SAD districts attend.',status:'Past',year:2025,remarks:''},
+  {name:'Charleston District Half-Day Industry Day',dates:'Nov 13, 2025',location:'Charleston, SC',branch:'USACE',type:'Industry Day',focus:'Charleston District local industry engagement',status:'Past',year:2025,remarks:''},
+  {name:'SAME Jacksonville Industry Day',dates:'Dec 2025',location:'Jacksonville, FL',branch:'USACE',type:'Industry Day',focus:'USACE Jacksonville District engagement, SAD',status:'Past',year:2025,remarks:''},
+  {name:'National 8(a) Conference',dates:'Jan 26-28, 2026',location:'Nashville, TN',branch:'Joint',type:'Conference',focus:'8(a) Association conference, small business federal contracting',status:'Past',year:2026,remarks:''},
+  {name:'SAME San Juan Industry Day',dates:'Mar 2-6, 2026',location:'San Juan, PR',branch:'USACE',type:'Industry Day',focus:'SAME San Juan Post. All SAD districts attend. Caribbean, construction, A/E services.',status:'Upcoming',year:2026,remarks:''},
+  {name:'DoD Small Business Training Week',dates:'May 2026',location:'TBD',branch:'Joint',type:'Conference',focus:'DoD OSBP small business training and engagement',status:'Upcoming',year:2026,remarks:''},
+  {name:'US Women\'s Chamber Small Business Federal Summit',dates:'Jun 2026',location:'Charleston, SC',branch:'Joint',type:'Conference',focus:'Women-owned small business federal contracting summit',status:'Upcoming',year:2026,remarks:''},
+  {name:'USACE National Dredging Meeting',dates:'May 2026',location:'Atlanta, GA',branch:'USACE',type:'Conference',focus:'National dredging operations, all USACE divisions',status:'Upcoming',year:2026,remarks:''},
+  {name:'Dredging Summit and Expo 2026 (WEDA)',dates:'Jun-Jul 2026',location:'Las Vegas, NV',branch:'USACE',type:'Conference',focus:'Western Dredging Association annual summit and exposition',status:'Upcoming',year:2026,remarks:''},
+  {name:'National HUBZone Conference',dates:'Jul 2026',location:'Chantilly, VA',branch:'Joint',type:'Conference',focus:'SBA HUBZone program, small business federal contracting',status:'Upcoming',year:2026,remarks:''},
+  {name:'Power Up Energy Expo',dates:'Aug 2026',location:'Tyndall AFB, FL',branch:'Air Force',type:'Conference',focus:'Energy and resilience for military installations',status:'Upcoming',year:2026,remarks:'SAD districts attend'},
+  {name:'SATShow / SATELLITE 2026',dates:'Mar 23-26, 2026',location:'Washington, DC',branch:'Joint',type:'Conference',focus:'Satellite communications, space technology, GovMilSpace',status:'Upcoming',year:2026,remarks:'World\'s largest satellite/space communications event. 15,000+ registrants, 450+ exhibitors. Walter E. Washington Convention Center.'},
+  {name:'AFCEA NOVA Naval IT Day 2026',dates:'Mar 12, 2026',location:'Chantilly, VA',branch:'Navy',type:'Conference',focus:'Naval IT modernization, cybersecurity',status:'Upcoming',year:2026,remarks:'Westfields Marriott Washington Dulles. New date (rescheduled).'},
+  {name:'AFCEA NOVA Innovation IT Day 2026',dates:'Apr 27, 2026',location:'Reston, VA',branch:'Joint',type:'Conference',focus:'IT innovation showcase, emerging tech',status:'Upcoming',year:2026,remarks:'Carahsoft Technology HQ. 300+ expected registrants.'},
+  {name:'AFCEA NOVA Space Force IT Day 2026',dates:'May 12, 2026',location:'Chantilly, VA',branch:'AF / SF',type:'Conference',focus:'Space Force IT, digital transformation',status:'Upcoming',year:2026,remarks:'Westfields Marriott Washington Dulles. 530+ registrants in 2025.'},
+  {name:'GVSETS 2026',dates:'Aug 11-13, 2026',location:'Novi, MI',branch:'Army',type:'Conference',focus:'Ground vehicle systems engineering, modernization',status:'Upcoming',year:2026,remarks:'18th Annual. NDIA Michigan Chapter. Suburban Collection Showplace. Free to attend. Technical sessions with ESD/SAE.'},
+  {name:'Imagine Nation ELC 2026',dates:'Oct 25-27, 2026',location:'TBD',branch:'Joint',type:'Conference',focus:'Government technology, IT modernization, innovation',status:'Upcoming',year:2026,remarks:'ACT-IAC annual conference. 1,000+ government/industry executives. Was in Hershey, PA in 2025.'},
+  {name:'VETS Conference 2026',dates:'Est. May 2026',location:'TBD (Orlando, FL in 2025)',branch:'Joint',type:'Conference',focus:'Veterans in energy transition, clean energy workforce',status:'Needs Date',year:2026,remarks:'⚠️ Dates need verifying. Was May 13-16, 2025 in Orlando.'},
+  {name:'Realize LIVE 2026 (Siemens)',dates:'Est. Jun 2026',location:'TBD (Detroit, MI in 2025)',branch:'Industry',type:'Conference',focus:'Digital engineering, PLM, simulation, manufacturing',status:'Needs Date',year:2026,remarks:'⚠️ Dates need verifying. Was Jun 2-4, 2025 in Detroit.'},
+  {name:'CTMA Partners Meeting 2026 (NCMS)',dates:'Est. Jun 2026',location:'TBD (Jacksonville, FL in 2025)',branch:'Joint',type:'Conference',focus:'Condition-based maintenance, sustainment technology',status:'Needs Date',year:2026,remarks:'⚠️ Dates need verifying. Was Jun 16-18, 2025 in Jacksonville.'},
+  {name:'Advanced Manufacturing for Defense Summit 2026',dates:'Est. Jun 2026',location:'TBD (California in 2025)',branch:'Joint',type:'Conference',focus:'Additive manufacturing, advanced materials, DIB',status:'Needs Date',year:2026,remarks:'⚠️ Dates need verifying. Was Jun 24-26, 2025 in California.'},
+  {name:'AFRL Classified Industry Day 2026',dates:'Est. Oct 2026',location:'Wright-Patterson AFB, OH',branch:'AF / SF',type:'Industry Day',focus:'AFRL programs, classified briefings, S&T partnerships',status:'Needs Date',year:2026,remarks:'⚠️ Dates need verifying. Was Oct 8, 2025 at WPAFB.'},
+  {name:'Letterkenny Modernization Industry Day 2026',dates:'Est. Oct 2026',location:'Chambersburg, PA',branch:'Army',type:'Industry Day',focus:'Depot modernization, sustainment, ammunition',status:'Needs Date',year:2026,remarks:'⚠️ Dates need verifying. Was Oct 15, 2025 in Chambersburg.'},
+  {name:'Pine Bluff Arsenal Industry Day 2026',dates:'Est. Nov 2026',location:'White Hall, AR',branch:'Army',type:'Industry Day',focus:'Chemical/biological defense, smoke/obscurant munitions',status:'Needs Date',year:2026,remarks:'⚠️ Dates need verifying. Was Nov 2025 in White Hall.'},
+  {name:'Tri-Regional JETS 2026 (SAME Jacksonville)',dates:'Est. Oct 2026',location:'TBD (Jacksonville, FL in 2025)',branch:'USACE',type:'Conference',focus:'Joint engineer training, USACE multi-region collaboration',status:'Needs Date',year:2026,remarks:'⚠️ Dates need verifying. Was Oct 21-23, 2025 in Jacksonville.'},
+  {name:'SpaceCom / Space Congress 2027',dates:'Jan 11-14, 2027',location:'Orlando, FL',branch:'AF / SF',type:'Conference',focus:'Commercial space, space economy, government partnerships',status:'Projected',year:2027,remarks:'Orange County Convention Center. Expo Jan 12-14. Commercial Space Week.'}
+];
+
+const STATE = { search: '', filters: { status: [], branch: [], type: [], year: [] }, expandedId: null };
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+function normalizeStatus(s) {
+  if (!s) return 'unknown';
+  const l = s.toLowerCase().trim();
+  if (l.includes('past')) return 'past';
+  if (l.includes('upcoming')) return 'upcoming';
+  if (l.includes('projected')) return 'projected';
+  if (l.includes('needs')) return 'needs-date';
+  if (l === 'tbd') return 'needs-date';
+  return l;
+}
+function statusLabel(s) {
+  return {'past':'Past','upcoming':'Upcoming','projected':'Projected','needs-date':'Needs Date'}[s] || s;
+}
+function parseSortDate(evt) {
+  const d = evt.dates || '';
+  const mm = {jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+  const m = d.toLowerCase().match(/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/);
+  const dm = d.match(/(\d{1,2})/);
+  return new Date(evt.year||2026, m?mm[m[1]]-1:5, dm?parseInt(dm[1]):15);
+}
+function formatDateDisplay(evt) {
+  const d = evt.dates || 'TBD';
+  const mm = {jan:'JAN',feb:'FEB',mar:'MAR',apr:'APR',may:'MAY',jun:'JUN',jul:'JUL',aug:'AUG',sep:'SEP',oct:'OCT',nov:'NOV',dec:'DEC'};
+  const m = d.toLowerCase().match(/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/);
+  const dm = d.match(/\b(\d{1,2})\b/);
+  if (!m) return {day:'—',monthYear:evt.year||'TBD',full:d};
+  return {day:dm?dm[1]:'—', monthYear:mm[m[1]]+' '+(evt.year||''), full:d};
+}
+function getMonthKey(evt) {
+  const d = parseSortDate(evt);
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return `${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+function getBranchShort(b) {
+  if (!b) return 'Joint';
+  if (b === 'USACE') return 'USACE';
+  if (b.includes('USACE') && b.includes('Army')) return 'Army / USACE';
+  if (b.includes('USACE')) return 'USACE';
+  if (b.includes('Army')) return 'Army';
+  if (b.includes('Air Force') || b.includes('Space Force')) return 'AF / SF';
+  if (b.includes('Navy')) return 'Navy';
+  if (b.includes('Marine')) return 'USMC';
+  if (b.includes('Industry')) return 'Industry';
+  return 'Joint';
+}
+
+const processedEvents = EVENTS.map((e,i) => ({
+  ...e, id:i,
+  _status: normalizeStatus(e.status),
+  _branch: getBranchShort(e.branch),
+  _sortDate: parseSortDate(e),
+  _dateDisplay: formatDateDisplay(e)
+})).sort((a,b) => a._sortDate - b._sortDate);
+
+/* =========================================================
+   FILTERS with "All" buttons — no priority filter
+========================================================= */
+function buildFilters() {
+  const statuses = [...new Set(processedEvents.map(e => e._status))];
+  const branches = [...new Set(processedEvents.map(e => e._branch))].sort();
+  const types = [...new Set(processedEvents.map(e => e.type))].sort();
+  const years = [...new Set(processedEvents.map(e => e.year))].sort();
+
+  // ── STATUS PILLS (Row 1) ──
+  const statusContainer = document.getElementById('statusFilters');
+  statusContainer.innerHTML = '';
+
+  // All button
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn cat-status all-btn active';
+  allBtn.dataset.value = '__all__';
+  allBtn.textContent = 'All';
+  allBtn.addEventListener('click', () => {
+    STATE.filters.status = [];
+    statusContainer.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.value === '__all__');
+    });
+    updateClearButton(); render();
+  });
+  statusContainer.appendChild(allBtn);
+
+  statuses.forEach(item => {
+    const count = processedEvents.filter(e => e._status === item).length;
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn cat-status';
+    btn.dataset.value = item;
+    btn.innerHTML = `${statusLabel(item)} <span class="count">${count}</span>`;
+    btn.addEventListener('click', () => {
+      const arr = STATE.filters.status;
+      const idx = arr.indexOf(item);
+      if (idx >= 0) { arr.splice(idx, 1); btn.classList.remove('active'); }
+      else { arr.push(item); btn.classList.add('active'); }
+      const sAll = statusContainer.querySelector('.all-btn');
+      sAll.classList.toggle('active', arr.length === 0);
+      updateClearButton(); render();
+    });
+    statusContainer.appendChild(btn);
+  });
+
+  // ── DROPDOWN FILTERS (Row 2) ──
+  function buildDropdown(config) {
+    const { items, filterKey, mapKey, panelId, triggerId } = config;
+    const panel = document.querySelector(`#${panelId} .dp-items`);
+    const trigger = document.getElementById(triggerId);
+    panel.innerHTML = '';
+
+    items.forEach(item => {
+      const count = processedEvents.filter(e => e[mapKey] === item).length;
+      const pill = document.createElement('button');
+      pill.className = 'dp-item';
+      pill.dataset.value = filterKey === 'year' ? item : item;
+      pill.innerHTML = `${item} <span class="count">${count}</span>`;
+      pill.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const arr = STATE.filters[filterKey];
+        const val = filterKey === 'year' ? item : item;
+        const idx = arr.indexOf(val);
+        if (idx >= 0) { arr.splice(idx, 1); pill.classList.remove('selected'); }
+        else { arr.push(val); pill.classList.add('selected'); }
+        updateDropdownTrigger(triggerId, filterKey);
+        updateClearButton(); render();
+      });
+      panel.appendChild(pill);
+    });
+
+    // Toggle dropdown open/close
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const panel = document.getElementById(panelId);
+      const wasOpen = panel.classList.contains('visible');
+      // Close all panels first
+      document.querySelectorAll('.dropdown-panel').forEach(p => p.classList.remove('visible'));
+      document.querySelectorAll('.dropdown-trigger').forEach(t => t.classList.remove('open'));
+      if (!wasOpen) {
+        panel.classList.add('visible');
+        trigger.classList.add('open');
+      }
+    });
+  }
+
+  buildDropdown({ items: branches, filterKey: 'branch', mapKey: '_branch', panelId: 'branchPanel', triggerId: 'branchTrigger' });
+  buildDropdown({ items: types, filterKey: 'type', mapKey: 'type', panelId: 'typePanel', triggerId: 'typeTrigger' });
+  buildDropdown({ items: years, filterKey: 'year', mapKey: 'year', panelId: 'yearPanel', triggerId: 'yearTrigger' });
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown-panel').forEach(p => p.classList.remove('visible'));
+    document.querySelectorAll('.dropdown-trigger').forEach(t => t.classList.remove('open'));
+  });
+}
+
+function updateDropdownTrigger(triggerId, filterKey) {
+  const trigger = document.getElementById(triggerId);
+  const arr = STATE.filters[filterKey];
+  const valueEl = trigger.querySelector('.dd-value');
+  const countEl = trigger.querySelector('.dd-count');
+  if (arr.length === 0) {
+    trigger.classList.remove('has-filter');
+    valueEl.textContent = 'All';
+    countEl.textContent = '';
+  } else {
+    trigger.classList.add('has-filter');
+    countEl.textContent = `${arr.length} selected`;
+  }
+}
+
+function updateClearButton() {
+  const hasFilter = Object.values(STATE.filters).some(a => a.length > 0) || STATE.search;
+  $('#clearFilters').style.display = hasFilter ? '' : 'none';
+}
+
+/* =========================================================
+   RENDERING
+========================================================= */
+function getFilteredEvents() {
+  return processedEvents.filter(evt => {
+    if (STATE.filters.status.length && !STATE.filters.status.includes(evt._status)) return false;
+    if (STATE.filters.branch.length && !STATE.filters.branch.includes(evt._branch)) return false;
+    if (STATE.filters.type.length && !STATE.filters.type.includes(evt.type)) return false;
+    if (STATE.filters.year.length && !STATE.filters.year.includes(evt.year)) return false;
+    if (STATE.search) {
+      const q = STATE.search.toLowerCase();
+      const haystack = [evt.name,evt.branch,evt.location,evt.focus,evt.type,evt.remarks,evt.dates].join(' ').toLowerCase();
+      return haystack.includes(q);
+    }
+    return true;
+  });
+}
+
+function renderStats(events) {
+  const total = events.length;
+  const upcoming = events.filter(e => e._status==='upcoming').length;
+  const past = events.filter(e => e._status==='past').length;
+  const needsDate = events.filter(e => e._status==='needs-date').length;
+  const projected = events.filter(e => e._status==='projected').length;
+  const usace = events.filter(e => e._branch==='USACE' || e._branch==='Army / USACE').length;
+
+  $('#statsRow').innerHTML = `
+    <div class="stat-card teal"><div class="stat-num">${total}</div><div class="stat-label">Total Events</div></div>
+    <div class="stat-card green"><div class="stat-num">${upcoming}</div><div class="stat-label">Upcoming</div></div>
+    <div class="stat-card gold"><div class="stat-num">${usace}</div><div class="stat-label">USACE</div></div>
+    <div class="stat-card orange"><div class="stat-num">${needsDate}</div><div class="stat-label">Needs Date</div></div>
+    <div class="stat-card blue"><div class="stat-num">${projected}</div><div class="stat-label">Projected</div></div>
+    <div class="stat-card red"><div class="stat-num">${past}</div><div class="stat-label">Past</div></div>
+  `;
+}
+
+function renderEvents(events) {
+  const container = $('#eventContainer');
+  container.innerHTML = '';
+  if (!events.length) { $('#noResults').style.display=''; return; }
+  $('#noResults').style.display='none';
+
+  const groups = {};
+  events.forEach(evt => {
+    const key = getMonthKey(evt);
+    if (!groups[key]) groups[key]=[];
+    groups[key].push(evt);
+  });
+
+  const now = new Date();
+  const cM = now.getMonth(), cY = now.getFullYear();
+
+  Object.entries(groups).forEach(([monthKey, evts]) => {
+    const section = document.createElement('div');
+    section.className = 'month-section';
+    const sd = evts[0]._sortDate;
+    const isPast = sd < new Date(cY, cM, 1);
+    const isCurrent = sd.getMonth()===cM && sd.getFullYear()===cY;
+
+    section.innerHTML = `
+      <div class="month-header ${isPast?'past':''} ${isCurrent?'current':''}">
+        <h2>${isCurrent?'► ':''}${monthKey}</h2>
+        <div class="month-line"></div>
+        <span class="month-count">${evts.length} event${evts.length!==1?'s':''}</span>
+      </div>`;
+
+    const list = document.createElement('div');
+    list.className = 'event-list';
+
+    evts.forEach(evt => {
+      const dd = evt._dateDisplay;
+      const card = document.createElement('div');
+      card.className = `event-card status-${evt._status}${evt.priority==='1'?' priority-1':''}`;
+      card.dataset.id = evt.id;
+
+      // Highlight search matches
+      const hl = (text) => {
+        if (!STATE.search || !text) return text || '';
+        const q = STATE.search.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+        return text.replace(new RegExp(`(${q})`,'gi'), '<mark class="search-match">$1</mark>');
+      };
+
+      card.innerHTML = `
+        <div class="event-dates">
+          <div class="day">${dd.day}</div>
+          <div class="month-year">${dd.monthYear}</div>
+        </div>
+        <div class="event-info">
+          <div class="event-name">${hl(evt.name)}</div>
+          <div class="event-meta">
+            <span class="event-badge badge-branch">${evt._branch}</span>
+            <span class="event-badge badge-type">${evt.type}</span>
+            <span class="event-badge badge-status-${evt._status}">${statusLabel(evt._status)}</span>
+          </div>
+        </div>
+        <div class="event-right">
+          <span class="event-location-text">📍 ${hl(evt.location)||'TBD'}</span>
+          ${evt.website?'<span class="event-link">View Details →</span>':''}
+        </div>
+        <div class="event-detail">
+          <div class="detail-grid">
+            <div class="detail-item"><div class="detail-label">Dates</div><div class="detail-value">${evt.dates||'TBD'}</div></div>
+            <div class="detail-item"><div class="detail-label">Location</div><div class="detail-value">${evt.location||'TBD'}</div></div>
+            ${evt.website?`<div class="detail-item detail-full"><div class="detail-label">Website</div><div class="detail-value"><a href="${evt.website}" target="_blank" rel="noopener">${evt.website}</a></div></div>`:''}
+            ${evt.focus?`<div class="detail-item detail-full"><div class="detail-label">Key Focus / Target Audience</div><div class="detail-value">${hl(evt.focus)}</div></div>`:''}
+            ${evt.remarks?`<div class="detail-item detail-full"><div class="detail-label">Notes</div><div class="detail-value">${hl(evt.remarks)}</div></div>`:''}
+          </div>
+        </div>`;
+
+      card.addEventListener('click', e => {
+        if (e.target.closest('a')) return;
+        card.classList.toggle('expanded');
+      });
+      list.appendChild(card);
+    });
+
+    section.appendChild(list);
+    container.appendChild(section);
+  });
+}
+
+function render() {
+  const events = getFilteredEvents();
+  renderStats(events);
+  renderEvents(events);
+}
+
+/* =========================================================
+   CALENDAR HEATMAP
+========================================================= */
+function renderHeatmap() {
+  const grid = $('#heatmapGrid');
+  grid.innerHTML = '';
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const now = new Date();
+  const cM = now.getMonth();
+
+  // Count 2026 events per month
+  const events2026 = processedEvents.filter(e => e.year === 2026);
+  const counts = new Array(12).fill(0);
+  events2026.forEach(e => {
+    const m = e._sortDate.getMonth();
+    counts[m]++;
+  });
+  const maxCount = Math.max(...counts, 1);
+
+  months.forEach((m, i) => {
+    const count = counts[i];
+    const heat = count === 0 ? 0 : count <= 2 ? 1 : count <= 5 ? 2 : count <= 10 ? 3 : 4;
+    const isPast = i < cM;
+    const isCurrent = i === cM;
+    const cell = document.createElement('div');
+    cell.className = `heatmap-cell heat-${heat}${isPast?' past-month':''}${isCurrent?' current-month':''}`;
+    cell.innerHTML = `
+      <div class="heatmap-month">${m}</div>
+      <div class="heatmap-count">${count}</div>
+      <div class="heatmap-label">events</div>
+    `;
+    cell.addEventListener('click', () => {
+      // Clear existing filters and filter to this month
+      STATE.filters = {status:[],branch:[],type:[],year:[2026]};
+      STATE.search = m.toLowerCase();
+      $('#searchInput').value = m;
+      // Reset status pills to All
+      $$('#statusFilters .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.value==='__all__'));
+      // Reset dropdown pills and activate year 2026
+      $$('.dp-item').forEach(p => p.classList.remove('selected'));
+      $$('#yearPanel .dp-item').forEach(p => {
+        if (p.dataset.value == 2026) p.classList.add('selected');
+      });
+      updateDropdownTrigger('branchTrigger', 'branch');
+      updateDropdownTrigger('typeTrigger', 'type');
+      updateDropdownTrigger('yearTrigger', 'year');
+      updateClearButton();
+      render();
+    });
+    grid.appendChild(cell);
+  });
+}
+
+/* =========================================================
+   EXPORT with Jeremy Benton branding
+========================================================= */
+function buildExportText(events) {
+  const now = new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});
+  const activeFilters = [];
+  if (STATE.filters.status.length) activeFilters.push('Status: ' + STATE.filters.status.map(statusLabel).join(', '));
+  if (STATE.filters.branch.length) activeFilters.push('Branch: ' + STATE.filters.branch.join(', '));
+  if (STATE.filters.type.length) activeFilters.push('Type: ' + STATE.filters.type.join(', '));
+  if (STATE.filters.year.length) activeFilters.push('Year: ' + STATE.filters.year.join(', '));
+  if (STATE.search) activeFilters.push('Search: "' + STATE.search + '"');
+
+  let txt = '';
+  txt += '═══════════════════════════════════════════════════════════════\n';
+  txt += '  DEFENSE CONFERENCE & INDUSTRY DAY TRACKER\n';
+  txt += '  Curated by Jeremy Benton\n';
+  txt += '═══════════════════════════════════════════════════════════════\n\n';
+  txt += `  Exported: ${now}\n`;
+  txt += `  Events in this export: ${events.length}\n`;
+  if (activeFilters.length) txt += `  Filters: ${activeFilters.join(' | ')}\n`;
+  txt += '\n';
+  txt += '  🔗 Live Tracker:  https://jbenton1.github.io/government-guide/conference-tracker\n';
+  txt += '  🔗 LinkedIn:      https://www.linkedin.com/in/jeremymbenton/\n';
+  txt += '  🔗 GitHub:        https://github.com/jbenton1/government-guide\n';
+  txt += '\n';
+  txt += '───────────────────────────────────────────────────────────────\n\n';
+
+  // Group by month
+  const groups = {};
+  events.forEach(evt => {
+    const key = getMonthKey(evt);
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(evt);
+  });
+
+  Object.entries(groups).forEach(([monthKey, evts]) => {
+    txt += `▸ ${monthKey.toUpperCase()}\n`;
+    txt += '─'.repeat(40) + '\n';
+    evts.forEach(evt => {
+      const status = statusLabel(evt._status).toUpperCase();
+      txt += `  [${status}] ${evt.name}\n`;
+      txt += `    📅 ${evt.dates || 'TBD'}  📍 ${evt.location || 'TBD'}\n`;
+      txt += `    Branch: ${evt._branch}  |  Type: ${evt.type}\n`;
+      if (evt.focus) txt += `    Focus: ${evt.focus}\n`;
+      if (evt.website) txt += `    🔗 ${evt.website}\n`;
+      if (evt.remarks) txt += `    Notes: ${evt.remarks}\n`;
+      txt += '\n';
+    });
+  });
+
+  txt += '═══════════════════════════════════════════════════════════════\n';
+  txt += '  This tracker is maintained by Jeremy Benton as a free\n';
+  txt += '  resource for the defense industry community.\n\n';
+  txt += '  For corrections, additions, or teaming inquiries:\n';
+  txt += '  → https://www.linkedin.com/in/jeremymbenton/\n';
+  txt += '  → https://jbenton1.github.io/government-guide/\n';
+  txt += '═══════════════════════════════════════════════════════════════\n';
+
+  return txt;
+}
+
+function buildExportCSV(events) {
+  let csv = 'Status,Event Name,Type,Branch,Dates,Year,Location,Website,Key Focus,Notes\n';
+  events.forEach(evt => {
+    const esc = s => '"' + (s||'').replace(/"/g,'""') + '"';
+    csv += [
+      esc(statusLabel(evt._status)), esc(evt.name), esc(evt.type), esc(evt._branch),
+      esc(evt.dates), evt.year, esc(evt.location), esc(evt.website),
+      esc(evt.focus), esc(evt.remarks)
+    ].join(',') + '\n';
+  });
+  csv += '\n';
+  csv += '"","","","","","","","","",""\n';
+  csv += '"Source:","Defense Conference Tracker by Jeremy Benton","","","","","","","",""\n';
+  csv += '"Website:","https://jbenton1.github.io/government-guide/conference-tracker","","","","","","","",""\n';
+  csv += '"LinkedIn:","https://www.linkedin.com/in/jeremymbenton/","","","","","","","",""\n';
+  csv += '"GitHub:","https://github.com/jbenton1/government-guide","","","","","","","",""\n';
+  return csv;
+}
+
+function buildExportPDF(events) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
+  const W = doc.internal.pageSize.getWidth();
+  const H = doc.internal.pageSize.getHeight();
+  const margin = 18;
+  const contentW = W - margin * 2;
+  let y = 0;
+
+  // Colors
+  const teal = [0, 166, 166];
+  const gold = [212, 165, 116];
+  const darkBg = [14, 20, 34];
+  const darkSurface = [26, 34, 54];
+  const white = [255, 255, 255];
+  const gray = [156, 163, 175];
+  const green = [34, 197, 94];
+  const orange = [245, 158, 11];
+  const blue = [59, 130, 246];
+  const red = [239, 68, 68];
+
+  const statusColor = (s) => {
+    if (s === 'upcoming') return green;
+    if (s === 'past') return gray;
+    if (s === 'projected') return blue;
+    if (s === 'needs-date') return orange;
+    return gray;
+  };
+
+  function addPage() {
+    doc.addPage();
+    y = margin;
+    // Footer on every page
+    drawFooter();
+  }
+
+  function checkSpace(needed) {
+    if (y + needed > H - 22) addPage();
+  }
+
+  function drawFooter() {
+    const fy = H - 10;
+    doc.setDrawColor(...teal);
+    doc.setLineWidth(0.3);
+    doc.line(margin, fy - 4, W - margin, fy - 4);
+    doc.setFontSize(7);
+    doc.setTextColor(...gray);
+    doc.text('Defense Conference Tracker by Jeremy Benton', margin, fy);
+    doc.setTextColor(...teal);
+    doc.text('jbenton1.github.io/government-guide', W - margin, fy, { align: 'right' });
+    doc.setTextColor(...gray);
+    const pg = doc.internal.getNumberOfPages();
+    doc.text(`Page ${pg}`, W / 2, fy, { align: 'center' });
+  }
+
+  // ═══════════════════════════════════════
+  // COVER PAGE
+  // ═══════════════════════════════════════
+  doc.setFillColor(...darkBg);
+  doc.rect(0, 0, W, H, 'F');
+
+  // Top accent bar
+  doc.setFillColor(...teal);
+  doc.rect(0, 0, W, 4, 'F');
+
+  // Title block
+  y = 55;
+  doc.setFontSize(10);
+  doc.setTextColor(...teal);
+  doc.setFont('helvetica', 'bold');
+  doc.text('D E F E N S E', margin, y);
+  y += 12;
+  doc.setFontSize(36);
+  doc.setTextColor(...white);
+  doc.text('Conference &', margin, y);
+  y += 14;
+  doc.text('Industry Day', margin, y);
+  y += 14;
+  doc.setTextColor(...gold);
+  doc.text('Tracker', margin, y);
+
+  // Accent line
+  y += 8;
+  doc.setDrawColor(...teal);
+  doc.setLineWidth(0.8);
+  doc.line(margin, y, margin + 60, y);
+
+  // Subtitle
+  y += 12;
+  doc.setFontSize(12);
+  doc.setTextColor(...gray);
+  doc.setFont('helvetica', 'normal');
+  doc.text('2025 \u2013 2027  |  Updated February 2026', margin, y);
+
+  // Stats box
+  y += 20;
+  const statsBoxH = 30;
+  doc.setFillColor(...darkSurface);
+  doc.roundedRect(margin, y, contentW, statsBoxH, 3, 3, 'F');
+  doc.setDrawColor(...teal);
+  doc.setLineWidth(0.3);
+  doc.roundedRect(margin, y, contentW, statsBoxH, 3, 3, 'S');
+
+  const upcoming = events.filter(e => e._status === 'upcoming').length;
+  const past = events.filter(e => e._status === 'past').length;
+  const nd = events.filter(e => e._status === 'needs-date').length;
+  const proj = events.filter(e => e._status === 'projected').length;
+
+  const statItems = [
+    { label: 'TOTAL', val: events.length, color: teal },
+    { label: 'UPCOMING', val: upcoming, color: green },
+    { label: 'PAST', val: past, color: gray },
+    { label: 'NEEDS DATE', val: nd, color: orange },
+    { label: 'PROJECTED', val: proj, color: blue },
+  ];
+  const statW = contentW / statItems.length;
+  statItems.forEach((s, i) => {
+    const sx = margin + statW * i + statW / 2;
+    const sy = y + 12;
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(...s.color);
+    doc.text(String(s.val), sx, sy, { align: 'center' });
+    doc.setFontSize(6);
+    doc.setTextColor(...gray);
+    doc.setFont('helvetica', 'normal');
+    doc.text(s.label, sx, sy + 7, { align: 'center' });
+  });
+
+  // Branding block at bottom
+  const brandY = H - 55;
+  doc.setDrawColor(...gold);
+  doc.setLineWidth(0.3);
+  doc.line(margin, brandY, margin + 40, brandY);
+
+  doc.setFontSize(10);
+  doc.setTextColor(...white);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Jeremy Benton', margin, brandY + 8);
+  doc.setFontSize(8);
+  doc.setTextColor(...gray);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Built with purpose. Built to win.', margin, brandY + 14);
+  doc.setTextColor(...teal);
+  doc.text('linkedin.com/in/jeremymbenton', margin, brandY + 21);
+  doc.text('jbenton1.github.io/government-guide', margin, brandY + 27);
+  doc.text('github.com/jbenton1/government-guide', margin, brandY + 33);
+
+  // ═══════════════════════════════════════
+  // EVENT PAGES
+  // ═══════════════════════════════════════
+  doc.addPage();
+  y = margin;
+
+  // White background pages
+  doc.setFillColor(...white);
+  doc.rect(0, 0, W, H, 'F');
+
+  // Top bar
+  doc.setFillColor(...darkBg);
+  doc.rect(0, 0, W, 8, 'F');
+  doc.setFillColor(...teal);
+  doc.rect(0, 7.5, W, 0.8, 'F');
+
+  y = 14;
+  drawFooter();
+
+  // Group events by month
+  const groups = {};
+  events.forEach(evt => {
+    const key = getMonthKey(evt);
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(evt);
+  });
+
+  let firstMonth = true;
+  Object.entries(groups).forEach(([monthKey, evts]) => {
+    checkSpace(18);
+
+    // Each new page needs white bg and header
+    if (y <= margin + 2) {
+      doc.setFillColor(...white);
+      doc.rect(0, 0, W, H, 'F');
+      doc.setFillColor(...darkBg);
+      doc.rect(0, 0, W, 8, 'F');
+      doc.setFillColor(...teal);
+      doc.rect(0, 7.5, W, 0.8, 'F');
+      y = 14;
+      drawFooter();
+    }
+
+    // Month header
+    if (!firstMonth) y += 4;
+    firstMonth = false;
+
+    doc.setFillColor(...darkBg);
+    doc.roundedRect(margin, y, contentW, 9, 2, 2, 'F');
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(...white);
+    doc.text(monthKey.toUpperCase(), margin + 4, y + 6.2);
+    doc.setFontSize(7);
+    doc.setTextColor(...teal);
+    doc.text(`${evts.length} event${evts.length !== 1 ? 's' : ''}`, W - margin - 4, y + 6.2, { align: 'right' });
+    y += 13;
+
+    evts.forEach(evt => {
+      // Calculate row height
+      const nameLines = doc.splitTextToSize(evt.name, contentW - 50);
+      const rowH = Math.max(14, 6 + nameLines.length * 4.5);
+      checkSpace(rowH + 2);
+
+      if (y <= margin + 2) {
+        doc.setFillColor(...white);
+        doc.rect(0, 0, W, H, 'F');
+        doc.setFillColor(...darkBg);
+        doc.rect(0, 0, W, 8, 'F');
+        doc.setFillColor(...teal);
+        doc.rect(0, 7.5, W, 0.8, 'F');
+        y = 14;
+        drawFooter();
+      }
+
+      // Status color bar
+      const sc = statusColor(evt._status);
+      doc.setFillColor(...sc);
+      doc.rect(margin, y, 1.5, rowH, 'F');
+
+      // Light background
+      doc.setFillColor(248, 249, 250);
+      doc.rect(margin + 1.5, y, contentW - 1.5, rowH, 'F');
+
+      // Border
+      doc.setDrawColor(229, 231, 235);
+      doc.setLineWidth(0.2);
+      doc.rect(margin, y, contentW, rowH, 'S');
+
+      // Date
+      doc.setFontSize(7);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(107, 114, 128);
+      const dateStr = evt.dates || 'TBD';
+      doc.text(dateStr.substring(0, 18), margin + 4, y + 5);
+
+      // Location
+      doc.setFontSize(6);
+      doc.text(String(evt.location || 'TBD').substring(0, 25), margin + 4, y + 9);
+
+      // Name
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(17, 24, 39);
+      const nameX = margin + 42;
+      nameLines.forEach((line, li) => {
+        doc.text(line, nameX, y + 5 + li * 4.5);
+      });
+
+      // Branch + Type badges
+      const badgeY = y + 5 + nameLines.length * 4.5;
+      if (badgeY < y + rowH) {
+        doc.setFontSize(5.5);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(...teal);
+        doc.text(evt._branch, nameX, badgeY);
+        doc.setTextColor(...blue);
+        doc.text(evt.type, nameX + 25, badgeY);
+      }
+
+      // Status badge on right
+      doc.setFontSize(5.5);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(...sc);
+      doc.text(statusLabel(evt._status).toUpperCase(), W - margin - 3, y + 5, { align: 'right' });
+
+      y += rowH + 1.5;
+    });
+  });
+
+  // Final page — branding
+  checkSpace(40);
+  y += 8;
+  doc.setDrawColor(...teal);
+  doc.setLineWidth(0.5);
+  doc.line(margin, y, W - margin, y);
+  y += 6;
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(17, 24, 39);
+  doc.text('Defense Conference Tracker — Curated by Jeremy Benton', margin, y);
+  y += 5;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(7);
+  doc.setTextColor(107, 114, 128);
+  doc.text('Built with purpose. Built to win.', margin, y);
+  y += 4;
+  doc.setTextColor(...teal);
+  doc.text('Live Tracker: https://jbenton1.github.io/government-guide/conference-tracker', margin, y);
+  y += 4;
+  doc.text('LinkedIn: https://www.linkedin.com/in/jeremymbenton/', margin, y);
+  y += 4;
+  doc.text('GitHub: https://github.com/jbenton1/government-guide', margin, y);
+
+  // Save
+  const date = new Date().toISOString().slice(0, 10);
+  doc.save(`defense-conference-tracker_${date}.pdf`);
+}
+
+function downloadFile(filename, content, mime) {
+  const blob = new Blob([content], {type: mime});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function wireExport() {
+  const overlay = $('#exportOverlay');
+  const preview = $('#exportPreview');
+
+  $('#exportBtn').addEventListener('click', () => {
+    const events = getFilteredEvents();
+    const txt = buildExportText(events);
+    preview.textContent = txt;
+    overlay.classList.add('visible');
+  });
+
+  $('#exportClose').addEventListener('click', () => overlay.classList.remove('visible'));
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('visible'); });
+
+  $('#exportCopy').addEventListener('click', async () => {
+    const events = getFilteredEvents();
+    const txt = buildExportText(events);
+    try {
+      await navigator.clipboard.writeText(txt);
+      $('#exportCopy').innerHTML = '✓ Copied!';
+      setTimeout(() => { $('#exportCopy').innerHTML = '📋 Copy to Clipboard'; }, 2000);
+    } catch {
+      // Fallback
+      const ta = document.createElement('textarea');
+      ta.value = txt; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy');
+      ta.remove();
+      $('#exportCopy').innerHTML = '✓ Copied!';
+      setTimeout(() => { $('#exportCopy').innerHTML = '📋 Copy to Clipboard'; }, 2000);
+    }
+  });
+
+  $('#exportDownload').addEventListener('click', () => {
+    const events = getFilteredEvents();
+    const txt = buildExportText(events);
+    const date = new Date().toISOString().slice(0,10);
+    downloadFile(`defense-conference-tracker_${date}.txt`, txt, 'text/plain');
+  });
+
+  $('#exportCSV').addEventListener('click', () => {
+    const events = getFilteredEvents();
+    const csv = buildExportCSV(events);
+    const date = new Date().toISOString().slice(0,10);
+    downloadFile(`defense-conference-tracker_${date}.csv`, csv, 'text/csv');
+  });
+
+  // Escape to close
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('visible')) {
+      overlay.classList.remove('visible');
+    }
+  });
+
+  $('#exportPDF').addEventListener('click', () => {
+    const events = getFilteredEvents();
+    const btn = $('#exportPDF');
+    btn.innerHTML = '⏳ Generating...';
+    btn.disabled = true;
+    setTimeout(() => {
+      try {
+        buildExportPDF(events);
+        btn.innerHTML = '✓ Downloaded!';
+        setTimeout(() => { btn.innerHTML = '📄 Download PDF'; btn.disabled = false; }, 2000);
+      } catch (err) {
+        console.error('PDF export error:', err);
+        btn.innerHTML = '❌ Error';
+        setTimeout(() => { btn.innerHTML = '📄 Download PDF'; btn.disabled = false; }, 2000);
+      }
+    }, 100);
+  });
+}
+
+/* =========================================================
+   INIT — Default to Upcoming + Needs Date, jump to now
+========================================================= */
+buildFilters();
+
+// Set default filters: Upcoming + Needs Date
+STATE.filters.status = ['upcoming', 'needs-date'];
+$$('#statusFilters .filter-btn').forEach(b => {
+  if (b.dataset.value === 'upcoming' || b.dataset.value === 'needs-date') {
+    b.classList.add('active');
+  }
+  if (b.dataset.value === '__all__') b.classList.remove('active');
+});
+updateClearButton();
+
+render();
+renderHeatmap();
+wireExport();
+
+// Jump to current month after initial render
+requestAnimationFrame(() => {
+  const currentHeader = document.querySelector('.month-header.current');
+  if (currentHeader) {
+    currentHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    // If no current month visible (filters), scroll to first upcoming
+    const firstCard = document.querySelector('.event-card.status-upcoming');
+    if (firstCard) firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+
+$('#searchInput').addEventListener('input', e => {
+  STATE.search = e.target.value;
+  updateClearButton();
+  render();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key==='/' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) {
+    e.preventDefault(); $('#searchInput').focus();
+  }
+  if (e.key==='Escape' && !$('#exportOverlay').classList.contains('visible')) {
+    $('#searchInput').blur(); $('#searchInput').value=''; STATE.search='';
+    updateClearButton(); render();
+  }
+});
+
+$('#clearFilters').addEventListener('click', () => {
+  STATE.filters = {status:[],branch:[],type:[],year:[]};
+  STATE.search = '';
+  $('#searchInput').value = '';
+  // Reset status pills
+  $$('#statusFilters .filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.value === '__all__');
+  });
+  // Reset dropdown pills
+  $$('.dp-item').forEach(p => p.classList.remove('selected'));
+  // Reset triggers
+  updateDropdownTrigger('branchTrigger', 'branch');
+  updateDropdownTrigger('typeTrigger', 'type');
+  updateDropdownTrigger('yearTrigger', 'year');
+  updateClearButton();
+  render();
+});
+
+const btt = $('#backToTop');
+window.addEventListener('scroll', () => btt.classList.toggle('visible', window.scrollY>400), {passive:true});
+btt.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>
