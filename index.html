@@ -20,8 +20,8 @@
             --accent-red: #dc2626;
             --accent-red-dim: rgba(220, 38, 38, 0.15);
             --text-primary: #ffffff;
-            --text-secondary: #9ca3af;
-            --text-muted: #6b7280;
+            --text-secondary: #e0e0e0;
+            --text-muted: #c0c0c0;
             --border-subtle: rgba(255, 255, 255, 0.08);
             --border-accent: rgba(0, 166, 166, 0.3);
             --border-gold: rgba(212, 165, 116, 0.3);
@@ -935,6 +935,7 @@
         <div class="nav-container">
             <a href="#" class="nav-logo">JEREMY<span>BENTON</span></a>
             <ul class="nav-links">
+                <li><a href="conference-tracker" style="color: var(--accent-teal);">Conference Tracker</a></li>
                 <li><a href="#teaming">Teaming</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#resources">Resources</a></li>
@@ -1115,6 +1116,29 @@
             </div>
             
             <div class="resources-grid">
+                <a href="conference-tracker" class="resource-card featured" style="border-color: var(--accent-teal); background: linear-gradient(135deg, var(--bg-card) 0%, rgba(0, 166, 166, 0.10) 100%);">
+                    <div>
+                        <div class="resource-icon">📅</div>
+                        <h3 style="font-size: 1.375rem;">Defense Conference Tracker</h3>
+                        <p style="font-size: 1rem;">Interactive tracker covering 150+ defense conferences, industry days, and symposiums across all military branches. Filterable by status, branch, type, and year with calendar heatmap, search, and branded PDF/CSV export. Updated monthly.</p>
+                        <div style="display: flex; gap: 2rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border-accent);">
+                            <div style="text-align: center;">
+                                <div style="font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 600; color: var(--accent-teal);">152</div>
+                                <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">Events</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 600; color: var(--accent-teal);">7</div>
+                                <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">Branches</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 600; color: var(--accent-teal);">Feb 2026</div>
+                                <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">Updated</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resource-arrow">→</div>
+                </a>
+
                 <a href="colors-of-money/" class="resource-card featured">
                     <div>
                         <div class="resource-icon">💰</div>
@@ -1253,7 +1277,7 @@
                             <span>Connect on LinkedIn</span>
                             <span>→</span>
                         </a>
-                        <a href="mailto:jeremy.benton@siemens.com" class="connect-btn">
+                        <a href="/cdn-cgi/l/email-protection#761c1304131b0f5814131802191836051f131b1318055815191b" class="connect-btn">
                             <span>Send an Email</span>
                             <span>→</span>
                         </a>
@@ -1282,5 +1306,6 @@
     <footer>
         <p>© 2025 Jeremy Benton. Built with purpose. Built to win. <a href="https://github.com/jbenton1/government-guide">View on GitHub</a></p>
     </footer>
+
 </body>
 </html>
