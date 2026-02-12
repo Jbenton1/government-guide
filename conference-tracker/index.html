@@ -1721,6 +1721,28 @@ function ensureMapControls() {
   new ResetControl().addTo(MAP_STATE.map);
 }
 
+function enableModifierWheelZoom(map) {
+  if (!map) return;
+  const container = map.getContainer();
+  if (!container) return;
+
+  let lastZoomTs = 0;
+  container.addEventListener('wheel', (e) => {
+    // Zoom only when the user intentionally uses a modifier key.
+    // Windows/Linux: Ctrl + wheel; macOS: Cmd + wheel.
+    if (!(e.ctrlKey || e.metaKey)) return;
+
+    e.preventDefault();
+
+    const now = Date.now();
+    if (now - lastZoomTs < 90) return;
+    lastZoomTs = now;
+
+    const step = e.deltaY < 0 ? 1 : -1;
+    map.setZoom(map.getZoom() + step, { animate: false });
+  }, { passive: false });
+}
+
 async function initMap() {
   const el = document.getElementById('eventMap');
   if (!el || MAP_STATE.map) return;
@@ -1744,6 +1766,7 @@ async function initMap() {
     maxClusterRadius: 54,
   });
   MAP_STATE.map.addLayer(MAP_STATE.clusters);
+  enableModifierWheelZoom(MAP_STATE.map);
 
   ensureMapControls();
 
@@ -1865,7 +1888,7 @@ function renderMap(events) {
         <div class="map-popup-meta">${group.length} event(s) in current filter</div>
         <ul class="map-popup-list">${list}</ul>
         ${more}
-        <div class="map-popup-meta" style="margin-top:8px;">Tip: click a state to zoom. Right-click map to reset.</div>
+        <div class="map-popup-meta" style="margin-top:8px;">Tip: click a state to zoom. Hold Ctrl/Cmd + scroll to zoom. Right-click map to reset.</div>
       </div>
     `;
 
@@ -1875,7 +1898,7 @@ function renderMap(events) {
 
   const mappedLocs = locKeys.length;
   const total = events.length;
-  sub.textContent = `Mapped locations: ${mappedLocs} • Filtered events: ${total} • Unmapped: ${missing}. Click a state to zoom. Right-click map to reset.`;
+  sub.textContent = `Mapped locations: ${mappedLocs} • Filtered events: ${total} • Unmapped: ${missing}. Click a state to zoom. Hold Ctrl/Cmd + scroll to zoom. Right-click map to reset.`;
 
   // First render: keep US view (do not auto-fit and disorient). If you want, click "Fit results".
   if (!MAP_STATE.renderedOnce) {
