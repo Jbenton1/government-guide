@@ -8,6 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Map (Leaflet + clustering) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
 /* ============================================================
@@ -928,9 +936,140 @@ mark.search-match {
 .back-link .arrow { font-size: 14px; }
 @media (max-width: 900px) { .back-link span:not(.arrow) { display: none; } }
 
+/* ============================================================
+   MAP (Filtered Locations)
+   ============================================================ */
+.map-container {
+  max-width: var(--max);
+  margin: 18px auto 0;
+  padding: 18px 24px 22px;
+}
+.map-title {
+  font-family: var(--font-head);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.map-sub {
+  color: var(--text3);
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+#eventMap {
+  height: 460px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Leaflet chrome to match site */
+.leaflet-container { background: var(--bg); font-family: var(--font); }
+.leaflet-control-zoom a {
+  background: var(--bg3);
+  color: #fff;
+  border: 1px solid var(--border2);
+}
+.leaflet-control-zoom a:hover { background: var(--surface2); }
+.leaflet-control-attribution {
+  background: rgba(10,15,26,0.72);
+  color: var(--text3);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+}
+.leaflet-control-attribution a { color: var(--teal); }
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--bg2);
+  color: var(--text);
+  border: 1px solid var(--border2);
+}
+.leaflet-popup-content { margin: 10px 12px; }
+
+.map-popup-title {
+  font-family: var(--font-head);
+  letter-spacing: 0.02em;
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: #fff;
+}
+.map-popup-meta {
+  color: var(--text3);
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.map-popup-list { margin: 0; padding-left: 16px; color: var(--text2); }
+.map-popup-list li { margin: 4px 0; }
+
+/* Custom pins */
+.map-pin {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 2px solid var(--teal);
+  background: rgba(14,20,34,0.75);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 18px rgba(0, 166, 166, 0.25);
+}
+.map-pin .n {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+}
+.map-pin.upcoming { border-color: var(--green); box-shadow: 0 0 18px rgba(34,197,94,0.25); }
+.map-pin.needs-date { border-color: var(--orange); box-shadow: 0 0 18px rgba(245,158,11,0.25); }
+.map-pin.projected { border-color: var(--blue); box-shadow: 0 0 18px rgba(59,130,246,0.25); }
+.map-pin.past { border-color: var(--red); box-shadow: 0 0 18px rgba(239,68,68,0.18); }
+
+/* Cluster styling */
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
+  background: rgba(0, 166, 166, 0.12);
+}
+.marker-cluster-small div,
+.marker-cluster-medium div,
+.marker-cluster-large div {
+  background: rgba(0, 166, 166, 0.35);
+  color: #fff;
+  font-family: var(--mono);
+  border: 1px solid rgba(0, 166, 166, 0.45);
+}
+
+/* Map controls */
+.map-control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(10,15,26,0.88);
+  border: 1px solid var(--border2);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.map-control-btn:hover {
+  border-color: var(--teal-border);
+  box-shadow: 0 0 0 2px rgba(0,166,166,0.18);
+}
+
+@media (max-width: 680px) {
+  #eventMap { height: 420px; }
+  .map-container { padding: 14px 16px 18px; }
+}
+
 /* Print */
 @media print {
-  header, .filter-bar, .back-to-top, .heatmap-container, .export-btn, .export-modal-overlay { display: none; }
+  header, .filter-bar, .back-to-top, .heatmap-container, .export-btn, .export-modal-overlay, .map-container { display: none; }
   body { background: #fff; color: #000; font-size: 11px; }
   .event-card { opacity: 1 !important; break-inside: avoid; border: 1px solid #ccc; }
 }
@@ -1007,6 +1146,14 @@ mark.search-match {
     <div class="heatmap-grid" id="heatmapGrid"></div>
   </div>
   <div class="stats-row" id="statsRow"></div>
+
+  <!-- MAP: filtered locations -->
+  <div class="map-container" id="mapContainer">
+    <div class="map-title">Filtered Locations Map</div>
+    <div class="map-sub" id="mapSub">Loading map…</div>
+    <div id="eventMap" aria-label="Event locations map"></div>
+  </div>
+
   <div id="eventContainer"></div>
   <div class="no-results" id="noResults" style="display:none">
     <h3>No Events Match</h3>
@@ -1499,9 +1646,271 @@ function renderEvents(events) {
   });
 }
 
+/* =========================================================
+   MAP — Filtered Locations (clusters + state zoom)
+========================================================= */
+const MAP_STATE = {
+  map: null,
+  clusters: null,
+  coords: null,
+  coordsLoaded: false,
+  usStatesLoaded: false,
+  usBounds: [[24.396308, -125.0], [49.384358, -66.93457]],
+  renderedOnce: false,
+  lastEvents: null,
+};
+
+function mostUrgentStatus(eventsAtLoc) {
+  const s = new Set(eventsAtLoc.map(e => e._status));
+  if (s.has('upcoming')) return 'upcoming';
+  if (s.has('needs-date')) return 'needs-date';
+  if (s.has('projected')) return 'projected';
+  if (s.has('past')) return 'past';
+  return 'projected';
+}
+
+function pinIcon(count, status) {
+  const cls = status === 'needs-date' ? 'needs-date' : status;
+  return L.divIcon({
+    className: '',
+    html: `<div class="map-pin ${cls}"><div class="n">${count}</div></div>`,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    popupAnchor: [0, -14]
+  });
+}
+
+function ensureMapControls() {
+  if (!MAP_STATE.map) return;
+
+  const ResetControl = L.Control.extend({
+    options: { position: 'topright' },
+    onAdd: function() {
+      const div = L.DomUtil.create('div');
+      div.style.display = 'flex';
+      div.style.gap = '8px';
+      div.style.padding = '10px 10px 0 0';
+
+      const fitBtn = L.DomUtil.create('button', 'map-control-btn', div);
+      fitBtn.type = 'button';
+      fitBtn.textContent = 'Fit results';
+
+      const resetBtn = L.DomUtil.create('button', 'map-control-btn', div);
+      resetBtn.type = 'button';
+      resetBtn.textContent = 'Reset US';
+
+      L.DomEvent.disableClickPropagation(div);
+
+      fitBtn.addEventListener('click', () => {
+        if (!MAP_STATE.map || !MAP_STATE.clusters) return;
+        const bounds = MAP_STATE.clusters.getBounds();
+        if (bounds && bounds.isValid()) {
+          MAP_STATE.map.fitBounds(bounds.pad(0.18));
+        }
+      });
+
+      resetBtn.addEventListener('click', () => {
+        if (!MAP_STATE.map) return;
+        MAP_STATE.map.fitBounds(MAP_STATE.usBounds);
+      });
+
+      return div;
+    }
+  });
+
+  new ResetControl().addTo(MAP_STATE.map);
+}
+
+function enableModifierWheelZoom(map) {
+  if (!map) return;
+  const container = map.getContainer();
+  if (!container) return;
+
+  let lastZoomTs = 0;
+  container.addEventListener('wheel', (e) => {
+    // Zoom only when the user intentionally uses a modifier key.
+    // Windows/Linux: Ctrl + wheel; macOS: Cmd + wheel.
+    if (!(e.ctrlKey || e.metaKey)) return;
+
+    e.preventDefault();
+
+    const now = Date.now();
+    if (now - lastZoomTs < 90) return;
+    lastZoomTs = now;
+
+    const step = e.deltaY < 0 ? 1 : -1;
+    map.setZoom(map.getZoom() + step, { animate: false });
+  }, { passive: false });
+}
+
+async function initMap() {
+  const el = document.getElementById('eventMap');
+  if (!el || MAP_STATE.map) return;
+
+  MAP_STATE.map = L.map('eventMap', {
+    zoomControl: true,
+    scrollWheelZoom: false,
+    worldCopyJump: true,
+  });
+
+  // Dark basemap (no API key)
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    subdomains: 'abcd',
+    maxZoom: 18,
+    attribution: '&copy; OpenStreetMap &copy; CARTO'
+  }).addTo(MAP_STATE.map);
+
+  MAP_STATE.clusters = L.markerClusterGroup({
+    showCoverageOnHover: false,
+    spiderfyOnMaxZoom: true,
+    maxClusterRadius: 54,
+  });
+  MAP_STATE.map.addLayer(MAP_STATE.clusters);
+  enableModifierWheelZoom(MAP_STATE.map);
+
+  ensureMapControls();
+
+  // Default view: US
+  MAP_STATE.map.fitBounds(MAP_STATE.usBounds);
+
+  // Right click = reset view
+  MAP_STATE.map.on('contextmenu', () => {
+    MAP_STATE.map.fitBounds(MAP_STATE.usBounds);
+  });
+
+  // Load coordinates + states
+  try {
+    const r = await fetch('locations.json', { cache: 'no-store' });
+    const j = await r.json();
+    MAP_STATE.coords = (j && j.locations) ? j.locations : {};
+    MAP_STATE.coordsLoaded = true;
+  } catch {
+    MAP_STATE.coords = {};
+    MAP_STATE.coordsLoaded = false;
+    document.getElementById('mapSub').textContent = 'Map unavailable (failed to load locations.json).';
+  }
+
+  try {
+    // us-states.geojson source: https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json
+    const r = await fetch('us-states.geojson', { cache: 'force-cache' });
+    const gj = await r.json();
+
+    const baseStyle = {
+      color: 'rgba(0,166,166,0.35)',
+      weight: 1,
+      fillColor: 'rgba(0,166,166,0.04)',
+      fillOpacity: 0.08,
+    };
+
+    const hoverStyle = {
+      color: 'rgba(0,196,196,0.85)',
+      weight: 2,
+      fillOpacity: 0.12,
+    };
+
+    L.geoJSON(gj, {
+      style: () => baseStyle,
+      onEachFeature: (feature, layer) => {
+        layer.on('mouseover', () => {
+          layer.setStyle(hoverStyle);
+          layer.bindTooltip(feature?.properties?.name || 'State', { sticky: true, direction: 'top', opacity: 0.9 }).openTooltip();
+        });
+        layer.on('mouseout', () => {
+          layer.setStyle(baseStyle);
+          layer.closeTooltip();
+        });
+        layer.on('click', () => {
+          const b = layer.getBounds();
+          if (b && b.isValid()) MAP_STATE.map.fitBounds(b.pad(0.12));
+        });
+      }
+    }).addTo(MAP_STATE.map);
+
+    MAP_STATE.usStatesLoaded = true;
+  } catch {
+    MAP_STATE.usStatesLoaded = false;
+  }
+
+  // Render once resources are loaded
+  if (MAP_STATE.lastEvents) renderMap(MAP_STATE.lastEvents);
+}
+
+function renderMap(events) {
+  MAP_STATE.lastEvents = events;
+
+  const sub = document.getElementById('mapSub');
+  if (!sub) return;
+
+  if (!MAP_STATE.map || !MAP_STATE.clusters) {
+    sub.textContent = 'Loading map…';
+    return;
+  }
+  if (!MAP_STATE.coordsLoaded || !MAP_STATE.coords) {
+    sub.textContent = 'Loading location index…';
+    return;
+  }
+
+  const byLoc = {};
+  let missing = 0;
+
+  events.forEach(evt => {
+    const loc = (evt.location || '').trim();
+    if (!loc) return;
+    if (!MAP_STATE.coords[loc]) { missing++; return; }
+    if (!byLoc[loc]) byLoc[loc] = [];
+    byLoc[loc].push(evt);
+  });
+
+  MAP_STATE.clusters.clearLayers();
+
+  const locKeys = Object.keys(byLoc);
+  locKeys.forEach(loc => {
+    const group = byLoc[loc];
+    const c = MAP_STATE.coords[loc];
+    if (!c) return;
+    const status = mostUrgentStatus(group);
+
+    const m = L.marker([c.lat, c.lng], { icon: pinIcon(group.length, status) });
+
+    const list = group
+      .slice(0, 10)
+      .map(e => {
+        const st = statusLabel(e._status);
+        return `<li><span class="event-badge badge-status-${e._status}">${st}</span> <strong>${e.name}</strong><br><span style="color:var(--text3);font-size:12px;">${e.dates || 'TBD'}</span></li>`;
+      })
+      .join('');
+
+    const more = group.length > 10 ? `<div class="map-popup-meta">+${group.length - 10} more…</div>` : '';
+
+    const html = `
+      <div>
+        <div class="map-popup-title">${loc}</div>
+        <div class="map-popup-meta">${group.length} event(s) in current filter</div>
+        <ul class="map-popup-list">${list}</ul>
+        ${more}
+        <div class="map-popup-meta" style="margin-top:8px;">Tip: click a state to zoom. Hold Ctrl/Cmd + scroll to zoom. Right-click map to reset.</div>
+      </div>
+    `;
+
+    m.bindPopup(html, { maxWidth: 420 });
+    MAP_STATE.clusters.addLayer(m);
+  });
+
+  const mappedLocs = locKeys.length;
+  const total = events.length;
+  sub.textContent = `Mapped locations: ${mappedLocs} • Filtered events: ${total} • Unmapped: ${missing}. Click a state to zoom. Hold Ctrl/Cmd + scroll to zoom. Right-click map to reset.`;
+
+  // First render: keep US view (do not auto-fit and disorient). If you want, click "Fit results".
+  if (!MAP_STATE.renderedOnce) {
+    MAP_STATE.map.fitBounds(MAP_STATE.usBounds);
+    MAP_STATE.renderedOnce = true;
+  }
+}
+
 function render() {
   const events = getFilteredEvents();
   renderStats(events);
+  renderMap(events);
   renderEvents(events);
 }
 
@@ -2029,6 +2438,7 @@ function wireExport() {
 /* =========================================================
    INIT — Default to Upcoming + Needs Date, jump to now
 ========================================================= */
+initMap();
 buildFilters();
 
 // Set default filters: Upcoming + Needs Date

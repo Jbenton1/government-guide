@@ -1,0 +1,623 @@
+{
+  "errors": [],
+  "generated_at": "2026-02-12T04:05:43Z",
+  "locations": {
+    "Albuquerque, NM": {
+      "country": "US",
+      "label": "Albuquerque, Bernalillo County, New Mexico, 87102, United States",
+      "lat": 35.0841034,
+      "lng": -106.650985,
+      "query": "Albuquerque, NM",
+      "source": "nominatim",
+      "state": "NM"
+    },
+    "Arlington, VA": {
+      "country": "US",
+      "label": "Arlington County, Virginia, United States",
+      "lat": 38.8769326,
+      "lng": -77.0893094,
+      "query": "Arlington, VA",
+      "source": "nominatim",
+      "state": "VA"
+    },
+    "Atlanta, GA": {
+      "country": "US",
+      "label": "Atlanta, Fulton County, Georgia, United States",
+      "lat": 33.7544657,
+      "lng": -84.3898151,
+      "query": "Atlanta, GA",
+      "source": "nominatim",
+      "state": "GA"
+    },
+    "Augusta, GA": {
+      "country": "US",
+      "label": "Augusta, Richmond County, Georgia, United States",
+      "lat": 33.4709714,
+      "lng": -81.9748429,
+      "query": "Augusta, GA",
+      "source": "nominatim",
+      "state": "GA"
+    },
+    "Aurora, CO": {
+      "country": "US",
+      "label": "Aurora, Adams County, Colorado, United States",
+      "lat": 39.7405111,
+      "lng": -104.830994,
+      "query": "Aurora, CO",
+      "source": "nominatim",
+      "state": "CO"
+    },
+    "Austin, TX": {
+      "country": "US",
+      "label": "Austin, Travis County, Texas, United States",
+      "lat": 30.2711286,
+      "lng": -97.7436995,
+      "query": "Austin, TX",
+      "source": "nominatim",
+      "state": "TX"
+    },
+    "Baltimore, MD": {
+      "country": "US",
+      "label": "Baltimore, Maryland, United States",
+      "lat": 39.2908816,
+      "lng": -76.610759,
+      "query": "Baltimore, MD",
+      "source": "nominatim",
+      "state": "MD"
+    },
+    "Bismarck, ND": {
+      "country": "US",
+      "label": "Bismarck, Burleigh County, North Dakota, United States",
+      "lat": 46.808327,
+      "lng": -100.783739,
+      "query": "Bismarck, ND",
+      "source": "nominatim",
+      "state": "ND"
+    },
+    "California": {
+      "country": "US",
+      "label": "California, USA",
+      "lat": 36.7783,
+      "lng": -119.4179,
+      "source": "manual",
+      "state": "CA"
+    },
+    "Caribe Royale Orlando, FL": {
+      "country": "US",
+      "label": "Caribe Royale Orlando, 8101, World Center Drive, Orlando, Orange County, Florida, 32821, United States",
+      "lat": 28.3600587,
+      "lng": -81.4934624,
+      "query": "Caribe Royale Orlando, FL",
+      "source": "nominatim",
+      "state": "FL"
+    },
+    "Chambersburg, PA": {
+      "country": "US",
+      "label": "Chambersburg, Franklin County, Pennsylvania, United States",
+      "lat": 39.9375112,
+      "lng": -77.6612586,
+      "query": "Chambersburg, PA",
+      "source": "nominatim",
+      "state": "PA"
+    },
+    "Chantilly, VA": {
+      "country": "US",
+      "label": "Chantilly, Fairfax County, Virginia, United States",
+      "lat": 38.885219,
+      "lng": -77.4486772,
+      "query": "Chantilly, VA",
+      "source": "nominatim",
+      "state": "VA"
+    },
+    "Charleston, SC": {
+      "country": "US",
+      "label": "Charleston, Charleston County, South Carolina, United States",
+      "lat": 32.7884363,
+      "lng": -79.9399309,
+      "query": "Charleston, SC",
+      "source": "nominatim",
+      "state": "SC"
+    },
+    "Charlotte, NC": {
+      "country": "US",
+      "label": "Charlotte, Mecklenburg County, North Carolina, United States",
+      "lat": 35.2272086,
+      "lng": -80.8430827,
+      "query": "Charlotte, NC",
+      "source": "nominatim",
+      "state": "NC"
+    },
+    "Chicago, IL": {
+      "country": "US",
+      "label": "Chicago, South Chicago Township, Cook County, Illinois, United States",
+      "lat": 41.8755616,
+      "lng": -87.6244212,
+      "query": "Chicago, IL",
+      "source": "nominatim",
+      "state": "IL"
+    },
+    "Colorado Springs, CO": {
+      "country": "US",
+      "label": "Colorado Springs, El Paso County, Colorado, United States",
+      "lat": 38.8339578,
+      "lng": -104.825348,
+      "query": "Colorado Springs, CO",
+      "source": "nominatim",
+      "state": "CO"
+    },
+    "Corpus Christi, TX": {
+      "country": "US",
+      "label": "Corpus Christi, Nueces County, Texas, United States",
+      "lat": 27.7635302,
+      "lng": -97.4033191,
+      "query": "Corpus Christi, TX",
+      "source": "nominatim",
+      "state": "TX"
+    },
+    "Dayton, OH": {
+      "country": "US",
+      "label": "Dayton, Montgomery County, Ohio, United States",
+      "lat": 39.7589478,
+      "lng": -84.1916069,
+      "query": "Dayton, OH",
+      "source": "nominatim",
+      "state": "OH"
+    },
+    "Detroit, MI": {
+      "country": "US",
+      "label": "Detroit, Wayne County, Michigan, United States",
+      "lat": 42.3315509,
+      "lng": -83.0466403,
+      "query": "Detroit, MI",
+      "source": "nominatim",
+      "state": "MI"
+    },
+    "Fort Eisenhower, GA": {
+      "country": "US",
+      "label": "Fort Gordon, Augusta, Richmond County, Georgia, 30905, United States",
+      "lat": 33.3578877,
+      "lng": -82.2402132,
+      "query": "Fort Eisenhower, GA",
+      "source": "nominatim",
+      "state": "GA"
+    },
+    "Fort Leonard Wood, MO": {
+      "country": "US",
+      "label": "Fort Leonard Wood, Pulaski County, Missouri, 65473, United States",
+      "lat": 37.70114,
+      "lng": -92.1693303,
+      "query": "Fort Leonard Wood, MO",
+      "source": "nominatim",
+      "state": "MO"
+    },
+    "Fort Worth, TX": {
+      "country": "US",
+      "label": "Fort Worth, Tarrant County, Texas, United States",
+      "lat": 32.753177,
+      "lng": -97.3327459,
+      "query": "Fort Worth, TX",
+      "source": "nominatim",
+      "state": "TX"
+    },
+    "Ft. Belvoir, VA": {
+      "country": "US",
+      "label": "Fort Belvoir, Fairfax County, Virginia, 22060, United States",
+      "lat": 38.710797,
+      "lng": -77.1436907,
+      "query": "Fort Belvoir, VA",
+      "source": "nominatim",
+      "state": "VA"
+    },
+    "Hershey, PA": {
+      "country": "US",
+      "label": "Hershey, Derry Township, Dauphin County, Pennsylvania, United States",
+      "lat": 40.2850285,
+      "lng": -76.6534662,
+      "query": "Hershey, PA",
+      "source": "nominatim",
+      "state": "PA"
+    },
+    "Hill AFB, UT": {
+      "country": "US",
+      "label": "Hill Air Force Base, Wherry Road, Eastridge Estates, Davis County, Utah, 84040, United States",
+      "lat": 41.1237635,
+      "lng": -111.9739844,
+      "query": "Hill Air Force Base, UT",
+      "source": "nominatim",
+      "state": "UT"
+    },
+    "Honolulu, HI": {
+      "country": "US",
+      "label": "Honolulu, Honolulu County, Hawaii, United States",
+      "lat": 21.304547,
+      "lng": -157.855676,
+      "query": "Honolulu, HI",
+      "source": "nominatim",
+      "state": "HI"
+    },
+    "Houston, TX": {
+      "country": "US",
+      "label": "Houston, Harris County, Texas, United States",
+      "lat": 29.7589382,
+      "lng": -95.3676974,
+      "query": "Houston, TX",
+      "source": "nominatim",
+      "state": "TX"
+    },
+    "Huntington, WV": {
+      "country": "US",
+      "label": "Huntington, Cabell County, West Virginia, United States",
+      "lat": 38.4192496,
+      "lng": -82.445154,
+      "query": "Huntington, WV",
+      "source": "nominatim",
+      "state": "WV"
+    },
+    "Huntsville, AL": {
+      "country": "US",
+      "label": "Huntsville, Madison County, Alabama, United States",
+      "lat": 34.729847,
+      "lng": -86.5859011,
+      "query": "Huntsville, AL",
+      "source": "nominatim",
+      "state": "AL"
+    },
+    "JB Andrews, MD": {
+      "country": "US",
+      "label": "Joint Base Andrews, South Dakota Avenue, Camp Springs, Prince George's County, Maryland, 20762, United States",
+      "lat": 38.8057469,
+      "lng": -76.8774165,
+      "query": "JB Andrews, MD",
+      "source": "nominatim",
+      "state": "MD"
+    },
+    "Jacksonville, FL": {
+      "country": "US",
+      "label": "Jacksonville, Duval County, Florida, United States",
+      "lat": 30.3262247,
+      "lng": -81.6579179,
+      "query": "Jacksonville, FL",
+      "source": "nominatim",
+      "state": "FL"
+    },
+    "Joint Base Lewis-McChord, WA": {
+      "country": "US",
+      "label": "Joint Base Lewis-McChord, Pierce County, Washington, United States",
+      "lat": 47.0308343,
+      "lng": -122.5074136,
+      "query": "Joint Base Lewis-McChord, WA",
+      "source": "nominatim",
+      "state": "WA"
+    },
+    "Las Vegas, NV": {
+      "country": "US",
+      "label": "Las Vegas, Clark County, Nevada, United States",
+      "lat": 36.1674263,
+      "lng": -115.1484131,
+      "query": "Las Vegas, NV",
+      "source": "nominatim",
+      "state": "NV"
+    },
+    "Louisville, KY": {
+      "country": "US",
+      "label": "Louisville, Jefferson County, Kentucky, United States",
+      "lat": 38.2542376,
+      "lng": -85.759407,
+      "query": "Louisville, KY",
+      "source": "nominatim",
+      "state": "KY"
+    },
+    "McLean/Tysons Corner, VA": {
+      "country": "US",
+      "label": "Dulles Toll Road, Lewinsville, McLean, Fairfax County, Virginia, 22043, United States",
+      "lat": 38.929865,
+      "lng": -77.2049136,
+      "query": "McLean/Tysons Corner, VA",
+      "source": "nominatim",
+      "state": "VA"
+    },
+    "Midwest City, OK": {
+      "country": "US",
+      "label": "Midwest City, Oklahoma County, Oklahoma, United States",
+      "lat": 35.4495097,
+      "lng": -97.3967025,
+      "query": "Midwest City, OK",
+      "source": "nominatim",
+      "state": "OK"
+    },
+    "Mobile, AL": {
+      "country": "US",
+      "label": "Mobile, Mobile County, Alabama, United States",
+      "lat": 30.6913462,
+      "lng": -88.0437509,
+      "query": "Mobile, AL",
+      "source": "nominatim",
+      "state": "AL"
+    },
+    "Monterey, CA": {
+      "country": "US",
+      "label": "Monterey County, California, United States",
+      "lat": 36.2231079,
+      "lng": -121.387742,
+      "query": "Monterey, CA",
+      "source": "nominatim",
+      "state": "CA"
+    },
+    "Montgomery, AL": {
+      "country": "US",
+      "label": "Montgomery, Montgomery County, Alabama, United States",
+      "lat": 32.3777111,
+      "lng": -86.3090775,
+      "query": "Montgomery, AL",
+      "source": "nominatim",
+      "state": "AL"
+    },
+    "Nashville, TN": {
+      "country": "US",
+      "label": "Nashville, Davidson County, Middle Tennessee, Tennessee, United States",
+      "lat": 36.1622767,
+      "lng": -86.7742984,
+      "query": "Nashville, TN",
+      "source": "nominatim",
+      "state": "TN"
+    },
+    "National Harbor, MD": {
+      "country": "US",
+      "label": "National Harbor, Potomac Vista, National Harbor, Prince George's County, Maryland, 20745, United States",
+      "lat": 38.783342,
+      "lng": -77.0148285,
+      "query": "National Harbor, MD",
+      "source": "nominatim",
+      "state": "MD"
+    },
+    "New Orleans, LA": {
+      "country": "US",
+      "label": "New Orleans, Orleans Parish, Louisiana, United States",
+      "lat": 29.9561422,
+      "lng": -90.0733934,
+      "query": "New Orleans, LA",
+      "source": "nominatim",
+      "state": "LA"
+    },
+    "Novi, MI": {
+      "country": "US",
+      "label": "Novi, Oakland County, Michigan, United States",
+      "lat": 42.48059,
+      "lng": -83.4754913,
+      "query": "Novi, MI",
+      "source": "nominatim",
+      "state": "MI"
+    },
+    "Oklahoma City, OK": {
+      "country": "US",
+      "label": "Oklahoma City, Oklahoma County, Oklahoma, United States",
+      "lat": 35.4729886,
+      "lng": -97.5170536,
+      "query": "Oklahoma City, OK",
+      "source": "nominatim",
+      "state": "OK"
+    },
+    "Orlando, FL": {
+      "country": "US",
+      "label": "Orlando, Orange County, Florida, United States",
+      "lat": 28.5421218,
+      "lng": -81.379045,
+      "query": "Orlando, FL",
+      "source": "nominatim",
+      "state": "FL"
+    },
+    "Oxon Hill, MD": {
+      "country": "US",
+      "label": "Oxon Hill, Prince George's County, Maryland, 20745, United States",
+      "lat": 38.803384,
+      "lng": -76.9896507,
+      "query": "Oxon Hill, MD",
+      "source": "nominatim",
+      "state": "MD"
+    },
+    "Paris, France": {
+      "country": null,
+      "label": "Paris, \u00cele-de-France, France m\u00e9tropolitaine, France",
+      "lat": 48.8534951,
+      "lng": 2.3483915,
+      "query": "Paris, France",
+      "source": "nominatim",
+      "state": null
+    },
+    "Phoenix, AZ": {
+      "country": "US",
+      "label": "Phoenix, Maricopa County, Arizona, United States",
+      "lat": 33.4484367,
+      "lng": -112.074141,
+      "query": "Phoenix, AZ",
+      "source": "nominatim",
+      "state": "AZ"
+    },
+    "Portland, OR": {
+      "country": "US",
+      "label": "Portland, Multnomah County, Oregon, United States",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "query": "Portland, OR",
+      "source": "nominatim",
+      "state": "OR"
+    },
+    "Reston, VA": {
+      "country": "US",
+      "label": "Reston, Fairfax County, Virginia, United States",
+      "lat": 38.953282,
+      "lng": -77.3464516,
+      "query": "Reston, VA",
+      "source": "nominatim",
+      "state": "VA"
+    },
+    "Reston, VA / NGA Springfield": {
+      "country": "US",
+      "label": "Reston, Fairfax County, Virginia, United States",
+      "lat": 38.953282,
+      "lng": -77.3464516,
+      "query": "Reston, VA",
+      "source": "nominatim",
+      "state": "VA"
+    },
+    "Rock Island, IL": {
+      "country": "US",
+      "label": "Rock Island County, Illinois, United States",
+      "lat": 41.4411786,
+      "lng": -90.5766144,
+      "query": "Rock Island, IL",
+      "source": "nominatim",
+      "state": "IL"
+    },
+    "Sacramento, CA": {
+      "country": "US",
+      "label": "Sacramento, Sacramento County, California, United States",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "query": "Sacramento, CA",
+      "source": "nominatim",
+      "state": "CA"
+    },
+    "San Diego, CA": {
+      "country": "US",
+      "label": "San Diego, San Diego County, California, United States",
+      "lat": 32.7174202,
+      "lng": -117.162772,
+      "query": "San Diego, CA",
+      "source": "nominatim",
+      "state": "CA"
+    },
+    "San Juan, PR": {
+      "country": "US",
+      "label": "San Juan, Puerto Rico, United States",
+      "lat": 18.465299,
+      "lng": -66.116666,
+      "query": "San Juan, PR",
+      "source": "nominatim",
+      "state": "PR"
+    },
+    "Savannah, GA": {
+      "country": "US",
+      "label": "Savannah, Chatham County, Georgia, United States",
+      "lat": 32.0790074,
+      "lng": -81.0921335,
+      "query": "Savannah, GA",
+      "source": "nominatim",
+      "state": "GA"
+    },
+    "TBD (Detroit, MI in 2025)": {
+      "country": "US",
+      "label": "Detroit, MI, USA",
+      "lat": 42.3314,
+      "lng": -83.0458,
+      "source": "manual",
+      "state": "MI"
+    },
+    "TBD (Jacksonville, FL in 2025)": {
+      "country": "US",
+      "label": "Jacksonville, FL, USA",
+      "lat": 30.3322,
+      "lng": -81.6557,
+      "source": "manual",
+      "state": "FL"
+    },
+    "TBD (Orlando, FL in 2025)": {
+      "country": "US",
+      "label": "Orlando, FL, USA",
+      "lat": 28.5383,
+      "lng": -81.3792,
+      "source": "manual",
+      "state": "FL"
+    },
+    "Tampa, FL": {
+      "country": "US",
+      "label": "Tampa, Hillsborough County, Florida, United States",
+      "lat": 27.9449854,
+      "lng": -82.4583107,
+      "query": "Tampa, FL",
+      "source": "nominatim",
+      "state": "FL"
+    },
+    "Tucson, AZ": {
+      "country": "US",
+      "label": "Tucson, Pima County, Arizona, United States",
+      "lat": 32.2228765,
+      "lng": -110.974847,
+      "query": "Tucson, AZ",
+      "source": "nominatim",
+      "state": "AZ"
+    },
+    "Tulsa, OK": {
+      "country": "US",
+      "label": "Tulsa, Oklahoma, United States",
+      "lat": 36.1563122,
+      "lng": -95.9927516,
+      "query": "Tulsa, OK",
+      "source": "nominatim",
+      "state": "OK"
+    },
+    "Tyndall AFB, FL": {
+      "country": "US",
+      "label": "Tyndall Air Force Base, Minnesota Avenue, Bay County, Florida, 32403, United States",
+      "lat": 30.0691172,
+      "lng": -85.5772755,
+      "query": "Tyndall Air Force Base, FL",
+      "source": "nominatim",
+      "state": "FL"
+    },
+    "Virginia Beach, VA": {
+      "country": "US",
+      "label": "Virginia Beach, Virginia, United States",
+      "lat": 36.8496579,
+      "lng": -75.9760751,
+      "query": "Virginia Beach, VA",
+      "source": "nominatim",
+      "state": "VA"
+    },
+    "Warner Robins, GA": {
+      "country": "US",
+      "label": "Warner Robins, Houston County, Georgia, United States",
+      "lat": 32.6200973,
+      "lng": -83.606568,
+      "query": "Warner Robins, GA",
+      "source": "nominatim",
+      "state": "GA"
+    },
+    "Washington, DC": {
+      "country": "US",
+      "label": "Washington, District of Columbia, United States",
+      "lat": 38.8950368,
+      "lng": -77.0365427,
+      "query": "Washington, DC",
+      "source": "nominatim",
+      "state": "DC"
+    },
+    "White Hall, AR": {
+      "country": "US",
+      "label": "White Hall, Jefferson County, Arkansas, 71602, United States",
+      "lat": 34.2752744,
+      "lng": -92.0917001,
+      "query": "White Hall, AR",
+      "source": "nominatim",
+      "state": "AR"
+    },
+    "Wilmington, NC": {
+      "country": "US",
+      "label": "Wilmington, New Hanover County, North Carolina, United States",
+      "lat": 34.2352853,
+      "lng": -77.9487284,
+      "query": "Wilmington, NC",
+      "source": "nominatim",
+      "state": "NC"
+    },
+    "Wright-Patterson AFB, OH": {
+      "country": "US",
+      "label": "Wright-Patterson Air Force Base, Bath Township, Greene County, Ohio, 45433, United States",
+      "lat": 39.8219053,
+      "lng": -84.0495886,
+      "query": "Wright-Patterson Air Force Base, OH",
+      "source": "nominatim",
+      "state": "OH"
+    }
+  }
+}
