@@ -1768,6 +1768,7 @@ async function initMap() {
   }
 
   try {
+    // us-states.geojson source: https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json
     const r = await fetch('us-states.geojson', { cache: 'force-cache' });
     const gj = await r.json();
 
